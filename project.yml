@@ -12,7 +12,12 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "15.0"
-    scheme: {}
+    scheme:
+      testTargets:
+        - name: IronRoadForChildrenTests
+          randomExecutionOrder: true
+        - name: IronRoadForChildrenUITests
+          randomExecutionOrder: true
     sources:
       - IronRoadForChildren
     settings:
@@ -40,3 +45,26 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+
+  IronRoadForChildrenTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - IronRoadForChildrenTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+
+  IronRoadForChildrenUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - IronRoadForChildrenUITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+        TEST_TARGET_NAME: "IronRoadForChildren"

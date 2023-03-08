@@ -3,34 +3,42 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253C598A59F931D647C5B34B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B06B3B18CA80DA2FE034521 /* Preview Assets.xcassets */; };
+		2C0C68A072E614E9C7CBE347 /* IronRoadForChildrenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A94EBE7E0FA9CD584B39DB7 /* IronRoadForChildrenUITestsLaunchTests.swift */; };
 		3E20D991F505D5692F046DCC /* IronRoadForChildrenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CECD64319BA71BA02AE11EB /* IronRoadForChildrenApp.swift */; };
-		597228A347F6D8F7B659EFB9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 537B5F574E9C3905FDE4DDBE /* Preview Assets.xcassets */; };
-		79321634DD653C4CC69E2E6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7E7A834CA74F0CC9B9D16E /* Assets.xcassets */; };
 		B6387437F53CB83EE45A1366 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59602789ECFBD59884004C18 /* ContentView.swift */; };
+		B7D3F8802791146935497638 /* IronRoadForChildrenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2A87AC266FCC8DCBA2F9C /* IronRoadForChildrenUITests.swift */; };
+		D7B28ADCE86DB0E4FEC3BE39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87D24EDBA99A5E604DD09B4 /* Assets.xcassets */; };
+		FF49F29EDA2C97A1944634BC /* IronRoadForChildrenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8B05C53FBAAD48B12367D8 /* IronRoadForChildrenTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0767BF277A0C09F031A0DAE7 /* IronRoadForChildrenTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = IronRoadForChildrenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D8B05C53FBAAD48B12367D8 /* IronRoadForChildrenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenTests.swift; sourceTree = "<group>"; };
+		1A94EBE7E0FA9CD584B39DB7 /* IronRoadForChildrenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1CECD64319BA71BA02AE11EB /* IronRoadForChildrenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenApp.swift; sourceTree = "<group>"; };
 		4E6A9565DBCE893532B91C25 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		537B5F574E9C3905FDE4DDBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		59602789ECFBD59884004C18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		678C7EE54D3C9BEAECA8103A /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
+		79504EB6C2F6306B5E396636 /* IronRoadForChildrenUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = IronRoadForChildrenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B06B3B18CA80DA2FE034521 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7CB2A87AC266FCC8DCBA2F9C /* IronRoadForChildrenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenUITests.swift; sourceTree = "<group>"; };
 		895F651FDA249E378A3C2651 /* IronRoadForChildren.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IronRoadForChildren.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B26A316DA96746AC6523FD42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BE7E7A834CA74F0CC9B9D16E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F87D24EDBA99A5E604DD09B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		03D8F5D4DED2C981E392DAED /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				E6B459912D5CF9D2736A0CB5 /* Preview Content */,
-				BE7E7A834CA74F0CC9B9D16E /* Assets.xcassets */,
+				F87D24EDBA99A5E604DD09B4 /* Assets.xcassets */,
 				B26A316DA96746AC6523FD42 /* Info.plist */,
+				20D594A76274E3FBDCDF3F3D /* Preview Content */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -39,8 +47,35 @@
 			isa = PBXGroup;
 			children = (
 				895F651FDA249E378A3C2651 /* IronRoadForChildren.app */,
+				0767BF277A0C09F031A0DAE7 /* IronRoadForChildrenTests.xctest */,
+				79504EB6C2F6306B5E396636 /* IronRoadForChildrenUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		20D594A76274E3FBDCDF3F3D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7B06B3B18CA80DA2FE034521 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6BF0DC6A436168522577F5EE /* IronRoadForChildrenTests */ = {
+			isa = PBXGroup;
+			children = (
+				0D8B05C53FBAAD48B12367D8 /* IronRoadForChildrenTests.swift */,
+			);
+			path = IronRoadForChildrenTests;
+			sourceTree = "<group>";
+		};
+		9ADF9AD10909BDCB19A0EFC6 /* IronRoadForChildrenUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7CB2A87AC266FCC8DCBA2F9C /* IronRoadForChildrenUITests.swift */,
+				1A94EBE7E0FA9CD584B39DB7 /* IronRoadForChildrenUITestsLaunchTests.swift */,
+			);
+			path = IronRoadForChildrenUITests;
 			sourceTree = "<group>";
 		};
 		9CC4D06A5A32CAE3E197F160 = {
@@ -49,6 +84,8 @@
 				678C7EE54D3C9BEAECA8103A /* project.yml */,
 				4E6A9565DBCE893532B91C25 /* README.md */,
 				BB935C1B1DC16AB31FDE1876 /* IronRoadForChildren */,
+				6BF0DC6A436168522577F5EE /* IronRoadForChildrenTests */,
+				9ADF9AD10909BDCB19A0EFC6 /* IronRoadForChildrenUITests */,
 				0B675E8C80DE9D6C831EC3CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,14 +98,6 @@
 				03D8F5D4DED2C981E392DAED /* SupportingFiles */,
 			);
 			path = IronRoadForChildren;
-			sourceTree = "<group>";
-		};
-		E6B459912D5CF9D2736A0CB5 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				537B5F574E9C3905FDE4DDBE /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +119,36 @@
 			productReference = 895F651FDA249E378A3C2651 /* IronRoadForChildren.app */;
 			productType = "com.apple.product-type.application";
 		};
+		44C684BDCF3B5631A74E8EBB /* IronRoadForChildrenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9973B11B77CEC0A892E3B7F3 /* Build configuration list for PBXNativeTarget "IronRoadForChildrenTests" */;
+			buildPhases = (
+				AC2B1412C60D7B2D34CC40DF /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IronRoadForChildrenTests;
+			productName = IronRoadForChildrenTests;
+			productReference = 0767BF277A0C09F031A0DAE7 /* IronRoadForChildrenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		96337E5A9987C4FE5D824768 /* IronRoadForChildrenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10006DC852007D9BF34F09EC /* Build configuration list for PBXNativeTarget "IronRoadForChildrenUITests" */;
+			buildPhases = (
+				18CD330D5E526104110569FE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IronRoadForChildrenUITests;
+			productName = IronRoadForChildrenUITests;
+			productReference = 79504EB6C2F6306B5E396636 /* IronRoadForChildrenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +156,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					96337E5A9987C4FE5D824768 = {
+						TestTargetID = 1624A10C98DFE435EBA6C65B;
+					};
+				};
 			};
 			buildConfigurationList = BF38E1A8EFF1FAE7ADB48AC9 /* Build configuration list for PBXProject "IronRoadForChildren" */;
 			compatibilityVersion = "Xcode 11.0";
@@ -111,6 +175,8 @@
 			projectRoot = "";
 			targets = (
 				1624A10C98DFE435EBA6C65B /* IronRoadForChildren */,
+				44C684BDCF3B5631A74E8EBB /* IronRoadForChildrenTests */,
+				96337E5A9987C4FE5D824768 /* IronRoadForChildrenUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -120,14 +186,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79321634DD653C4CC69E2E6F /* Assets.xcassets in Resources */,
-				597228A347F6D8F7B659EFB9 /* Preview Assets.xcassets in Resources */,
+				D7B28ADCE86DB0E4FEC3BE39 /* Assets.xcassets in Resources */,
+				253C598A59F931D647C5B34B /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		18CD330D5E526104110569FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7D3F8802791146935497638 /* IronRoadForChildrenUITests.swift in Sources */,
+				2C0C68A072E614E9C7CBE347 /* IronRoadForChildrenUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2B1412C60D7B2D34CC40DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF49F29EDA2C97A1944634BC /* IronRoadForChildrenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D30E5415C92B223599DE7EBD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -140,6 +223,24 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		0BDA2800E6A5BED6F598229F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IronRoadForChildren/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.fhj.irfc;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IronRoadForChildren;
+			};
+			name = Debug;
+		};
 		17241DDE47099BDD6D42E943 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -150,6 +251,41 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.fhj.irfc;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3BA7ADF1A0951DFD9D0E207B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IronRoadForChildren/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.fhj.irfc;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IronRoadForChildren;
+			};
+			name = Release;
+		};
+		53036D45460A6B9EB4297EDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IronRoadForChildren/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = at.fhj.irfc;
 				SDKROOT = iphoneos;
@@ -274,6 +410,23 @@
 			};
 			name = Release;
 		};
+		D24BCBCBDA31B06E1D12DDC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IronRoadForChildren/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = at.fhj.irfc;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		ECBE091AF7D209C7D0E2DF85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -299,6 +452,24 @@
 			buildConfigurations = (
 				ECBE091AF7D209C7D0E2DF85 /* Debug */,
 				17241DDE47099BDD6D42E943 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		10006DC852007D9BF34F09EC /* Build configuration list for PBXNativeTarget "IronRoadForChildrenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BDA2800E6A5BED6F598229F /* Debug */,
+				3BA7ADF1A0951DFD9D0E207B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9973B11B77CEC0A892E3B7F3 /* Build configuration list for PBXNativeTarget "IronRoadForChildrenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24BCBCBDA31B06E1D12DDC5 /* Debug */,
+				53036D45460A6B9EB4297EDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -39,6 +39,28 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "44C684BDCF3B5631A74E8EBB"
+               BuildableName = "IronRoadForChildrenTests.xctest"
+               BlueprintName = "IronRoadForChildrenTests"
+               ReferencedContainer = "container:IronRoadForChildren.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "96337E5A9987C4FE5D824768"
+               BuildableName = "IronRoadForChildrenUITests.xctest"
+               BlueprintName = "IronRoadForChildrenUITests"
+               ReferencedContainer = "container:IronRoadForChildren.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

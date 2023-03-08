@@ -1,0 +1,42 @@
+name: IronRoadForChildren
+
+fileGroups:
+  - project.yml
+  - README.md
+
+options:
+  bundleIdPrefix: at.fhj
+
+targets:
+  IronRoadForChildren:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    scheme: {}
+    sources:
+      - IronRoadForChildren
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+    info:
+      path: "IronRoadForChildren/SupportingFiles/Info.plist"
+      properties:
+        CFBundleShortVersionString: "0.0.1"
+        CFBundleVersion: "1"
+        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
+        CFBundleDisplayName: "IRFC"
+        CFBundleExecutable: "$(EXECUTABLE_NAME)"
+        CFBundleIdentifier: "at.fhj.irfc"
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: "IRFC"
+        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight

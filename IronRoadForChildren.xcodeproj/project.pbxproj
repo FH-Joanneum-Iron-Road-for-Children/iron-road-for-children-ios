@@ -10,6 +10,7 @@
 		253C598A59F931D647C5B34B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B06B3B18CA80DA2FE034521 /* Preview Assets.xcassets */; };
 		2C0C68A072E614E9C7CBE347 /* IronRoadForChildrenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A94EBE7E0FA9CD584B39DB7 /* IronRoadForChildrenUITestsLaunchTests.swift */; };
 		3E20D991F505D5692F046DCC /* IronRoadForChildrenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CECD64319BA71BA02AE11EB /* IronRoadForChildrenApp.swift */; };
+		8677E443CCA690FE7326F8FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45EE764440505EFC1A29B998 /* LaunchScreen.storyboard */; };
 		B6387437F53CB83EE45A1366 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59602789ECFBD59884004C18 /* ContentView.swift */; };
 		B7D3F8802791146935497638 /* IronRoadForChildrenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2A87AC266FCC8DCBA2F9C /* IronRoadForChildrenUITests.swift */; };
 		D7B28ADCE86DB0E4FEC3BE39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87D24EDBA99A5E604DD09B4 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		0D8B05C53FBAAD48B12367D8 /* IronRoadForChildrenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenTests.swift; sourceTree = "<group>"; };
 		1A94EBE7E0FA9CD584B39DB7 /* IronRoadForChildrenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1CECD64319BA71BA02AE11EB /* IronRoadForChildrenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronRoadForChildrenApp.swift; sourceTree = "<group>"; };
+		45EE764440505EFC1A29B998 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E6A9565DBCE893532B91C25 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		59602789ECFBD59884004C18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		678C7EE54D3C9BEAECA8103A /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				59602789ECFBD59884004C18 /* ContentView.swift */,
 				1CECD64319BA71BA02AE11EB /* IronRoadForChildrenApp.swift */,
+				45EE764440505EFC1A29B998 /* LaunchScreen.storyboard */,
 				03D8F5D4DED2C981E392DAED /* SupportingFiles */,
 			);
 			path = IronRoadForChildren;
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B28ADCE86DB0E4FEC3BE39 /* Assets.xcassets in Resources */,
+				8677E443CCA690FE7326F8FC /* LaunchScreen.storyboard in Resources */,
 				253C598A59F931D647C5B34B /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

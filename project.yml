@@ -37,7 +37,13 @@ targets:
         CFBundleInfoDictionaryVersion: "6.0"
         CFBundleName: "IRFC"
         CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        LSRequiresIPhoneOS: true
         ITSAppUsesNonExemptEncryption: false
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+
+        UIRequiredDeviceCapabilities:
+          - armv7
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UISupportedInterfaceOrientations~ipad:
@@ -45,6 +51,7 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+        UILaunchStoryboardName: LaunchScreen.storyboard
 
   IronRoadForChildrenTests:
     type: bundle.unit-test

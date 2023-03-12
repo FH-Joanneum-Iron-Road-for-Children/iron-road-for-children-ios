@@ -27,8 +27,19 @@ targets:
       testTargets:
         - name: IronRoadForChildrenTests
           randomExecutionOrder: true
+          parallelizable: true
         - name: IronRoadForChildrenUITests
           randomExecutionOrder: true
+          parallelizable: true
+        - package: CoreUI/CoreUITests
+          randomExecutionOrder: true
+          parallelizable: true
+        - package: Networking/NetworkingTests
+          randomExecutionOrder: true
+          parallelizable: true
+        - package: ExampleMVVM/ExampleMVVMTests
+          randomExecutionOrder: true
+          parallelizable: true
     sources:
       - IronRoadForChildren
     dependencies:

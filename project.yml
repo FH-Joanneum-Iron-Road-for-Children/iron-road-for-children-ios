@@ -7,6 +7,14 @@ fileGroups:
   - Gemfile.lock
   - fastlane
 
+packages:
+  CoreUI: 
+    path: ./Packages/CoreUI
+  ExampleMVVM:
+    path: ./Packages/ExampleMVVM
+  Networking:
+    path: ./Packages/Networking
+
 options:
   bundleIdPrefix: at.fhj
 
@@ -23,6 +31,9 @@ targets:
           randomExecutionOrder: true
     sources:
       - IronRoadForChildren
+    dependencies:
+      - package: CoreUI
+      - package: ExampleMVVM
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"

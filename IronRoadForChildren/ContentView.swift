@@ -6,17 +6,12 @@
 //
 
 import SwiftUI
+import ExampleMVVM
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-            }
-            .padding()
+        VStack {
+            ExampleView()
         }
     }
 }

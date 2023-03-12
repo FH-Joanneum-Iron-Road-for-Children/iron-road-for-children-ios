@@ -1,0 +1,77 @@
+name: IronRoadForChildren
+
+fileGroups:
+  - project.yml
+  - README.md
+
+options:
+  bundleIdPrefix: at.fhj
+
+targets:
+  IronRoadForChildren:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    scheme:
+      testTargets:
+        - name: IronRoadForChildrenTests
+          randomExecutionOrder: true
+        - name: IronRoadForChildrenUITests
+          randomExecutionOrder: true
+    sources:
+      - IronRoadForChildren
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+    info:
+      path: "IronRoadForChildren/SupportingFiles/Info.plist"
+      properties:
+        CFBundleShortVersionString: "0.0.1"
+        CFBundleVersion: "1"
+        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
+        CFBundleDisplayName: "IRFC"
+        CFBundleExecutable: "$(EXECUTABLE_NAME)"
+        CFBundleIdentifier: "at.fhj.irfc"
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: "IRFC"
+        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        LSRequiresIPhoneOS: true
+        ITSAppUsesNonExemptEncryption: false
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+
+        UIRequiredDeviceCapabilities:
+          - armv7
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UILaunchStoryboardName: LaunchScreen.storyboard
+
+  IronRoadForChildrenTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - IronRoadForChildrenTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+
+  IronRoadForChildrenUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - IronRoadForChildrenUITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+        TEST_TARGET_NAME: "IronRoadForChildren"

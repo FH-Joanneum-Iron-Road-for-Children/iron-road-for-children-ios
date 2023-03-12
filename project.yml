@@ -3,6 +3,9 @@ name: IronRoadForChildren
 fileGroups:
   - project.yml
   - README.md
+  - Gemfile
+  - Gemfile.lock
+  - fastlane
 
 options:
   bundleIdPrefix: at.fhj

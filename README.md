@@ -29,6 +29,9 @@ This command must also be run after switching branches and it's advisable to als
 Open the IronRoadForChildren.xcodeproj in Xcode and start coding 💻😃 
 
 ## Documentation
+### MVVM Example
+An MVVM Example can be found in [ExampleMVVM](Packages/ExampleMVVM/) folder.
+
 ### Fastlane
 [Fastlane](https://github.com/fastlane/fastlane) is our app automation tool. 
 

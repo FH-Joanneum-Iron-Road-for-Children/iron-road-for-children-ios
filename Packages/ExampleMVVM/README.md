@@ -1,3 +1,3 @@
 # ExampleMVVM
 
-A description of this package.
+This Swift Package should demonstrate, how a mvvm architecture could look like.

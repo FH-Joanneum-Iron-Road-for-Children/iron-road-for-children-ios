@@ -12,7 +12,7 @@ public extension URLSession {
         responseType: R.Type
     ) async throws -> (R, HTTPURLResponse) {
         let placeholder: String? = nil
-        return try await data(.get, from: url, withRequestBody: placeholder, responseType: responseType)
+        return try await data(httpMethod, from: url, withRequestBody: placeholder, responseType: responseType)
     }
     
     /**

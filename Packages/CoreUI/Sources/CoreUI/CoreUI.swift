@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CoreUI: View {
     var text = "Hello, World!"
-    
+
     var body: some View {
         Text(text)
     }

@@ -6,15 +6,14 @@ labels: ''
 assignees: ''
 
 ---
-
-**Description**
-
+# Description
 As <actor>, I want to have <stuff> to <fulfill>.
 
-**Acceptance criteria** 
+# Acceptance criteria
+- Todo
+- 
 
-Todo
-
-**Possible way to test ** 
-
+# Possible way to test
 Todo by developer
+1. ...
+2. ...

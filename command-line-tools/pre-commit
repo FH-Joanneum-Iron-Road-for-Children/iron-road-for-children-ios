@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Check if swiftlint is installed
+if ! command -v swiftlint &> /dev/null
+then
+    echo "swiftlint not found. Please install it first."
+    exit 1
+fi
+
+# Check if swiftformat is installed
+if ! command -v swiftformat &> /dev/null; then
+    echo "swiftformat not found. Please install it first."
+    exit 1
+fi
+
+# Run swiftlint and swiftformat checks
+exit_after=$false
+
+swiftformat . --lint --quiet
+if [ $? -eq 1 ]; then
+    swiftformat . --quiet
+	exit_after=true
+fi
+
+swiftlint --quiet --config .swiftlint.yml
+if [ $? -eq 1 ]; then
+    swiftlint --fix --config .swiftlint.yml
+	exit_after=true
+fi
+
+if [ "$exit_after" == "true" ]; then
+	exit 1
+else
+	exit 0
+fi

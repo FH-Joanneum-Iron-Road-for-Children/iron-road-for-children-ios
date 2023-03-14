@@ -5,13 +5,19 @@
 
 **Xcode** `14.2` or above is required for development.
 
+### Others (Installed with setup.sh script)
 **Xcodegen** This project uses [XcodeGen](https://github.com/yonaskolb/XcodeGen) for generating the Xcode project.
-If not installed, you can install XcodeGen using brew:
-```bash
-brew install xcodegen
-```
+
+**SwiftLint**
+
+**SwiftFormat**
 
 ## Getting started
+First of all install all needed dependencies and git hooks. Execute follwing script:
+```bash
+./setup.sh
+```
+
 For ruby dependencies we use `Gemfile` to ensure that all developers use the same versions of software tools like Fastlane.
 To install all the dependencies run follwoing command:
 ```bash

@@ -5,13 +5,6 @@ if ! command -v brew &> /dev/null; then
     exit 1
 fi
 
-# Check if homebrew is installed
-if ! command -v brew &> /dev/null; then
-    echo "homebrew not found. Please install it first."
-    exit 1
-fi
-
-
 brew install xcodegen
 brew install swiftlint
 brew install swiftformat

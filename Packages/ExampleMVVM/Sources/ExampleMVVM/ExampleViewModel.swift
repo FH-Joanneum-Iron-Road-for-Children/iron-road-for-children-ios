@@ -1,6 +1,6 @@
 //
 //  ExampleViewModel.swift
-//  
+//
 //
 //  Created by Alexander Kauer on 12.03.23.
 //
@@ -10,7 +10,6 @@ import Foundation
 import Networking
 
 class ExampleViewModel: ObservableObject {
-
     @Published var model: ExampleModel?
     @Published var errorText: String?
     @Published var isLoading: Bool = false
@@ -30,7 +29,7 @@ class ExampleViewModel: ObservableObject {
 
             guard response.statusCode == 200 else { throw NetworkingError.wrongStatusCode }
 
-            self.model = body
+            model = body
 
             isLoading = false
 

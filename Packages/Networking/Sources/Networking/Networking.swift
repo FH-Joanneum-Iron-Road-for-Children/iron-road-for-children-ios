@@ -1,14 +1,13 @@
 import Foundation
 
 public extension URLSession {
-
     /**
      Sends HTTP request to a server and does the encoding/decoding of the Codable objects
      */
     func data<R: Codable>(
         _ httpMethod: HTTPMethod,
         from url: URL,
-        withHeaders headers: [String: String]? = nil,
+        withHeaders _: [String: String]? = nil,
         responseType: R.Type
     ) async throws -> (R, HTTPURLResponse) {
         let placeholder: String? = nil
@@ -21,7 +20,7 @@ public extension URLSession {
     func data<R: Codable, B: Codable>(
         _ httpMethod: HTTPMethod,
         from url: URL,
-        withHeaders headers: [String: String]? = nil,
+        withHeaders _: [String: String]? = nil,
         withRequestBody requestBody: B? = nil,
         responseType: R.Type
     ) async throws -> (R, HTTPURLResponse) {
@@ -42,7 +41,6 @@ public extension URLSession {
 
         return (responseBody, urlResponse)
     }
-
 }
 
 public enum NetworkingError: Error {
@@ -51,7 +49,7 @@ public enum NetworkingError: Error {
 }
 
 public enum HTTPMethod: String {
-    case `get` = "GET"
+    case get = "GET"
     case post = "POST"
     case put = "PUT"
     case delete = "DELETE"

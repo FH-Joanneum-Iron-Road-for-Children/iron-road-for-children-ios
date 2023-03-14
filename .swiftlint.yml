@@ -24,3 +24,6 @@ force_try:
 
 cyclomatic_complexity:
   ignores_case_statements: true
+  
+trailing_comma:
+  mandatory_comma: true

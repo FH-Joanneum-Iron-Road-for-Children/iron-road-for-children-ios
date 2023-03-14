@@ -1,6 +1,6 @@
 //
 //  ExampleView.swift
-//  
+//
 //
 //  Created by Alexander Kauer on 12.03.23.
 //
@@ -8,15 +8,14 @@
 import SwiftUI
 
 public struct ExampleView: View {
-
     let text = "Hello, World!"
 
     @StateObject var viewModel = ExampleViewModel()
 
-    // needed to perform animation 
+    // needed to perform animation
     @State var isLoading = true
 
-    public init() { }
+    public init() {}
 
     public var body: some View {
         VStack {

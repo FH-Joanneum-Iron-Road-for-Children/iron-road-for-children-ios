@@ -9,9 +9,28 @@ import ExampleMVVM
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.backgroundColor = UIColor.yellow
+        tabBarAppearance.unselectedItemTintColor = UIColor.black
+    }
+
     var body: some View {
-        VStack {
+        TabView {
             ExampleView()
+                .tabItem {
+                    Label("Example", systemImage: "list.dash")
+                }
+
+            ProgramView()
+                .tabItem {
+                    Label("Program", systemImage: "calendar")
+                }
+
+            VoteView()
+                .tabItem {
+                    Label("Vote", systemImage: "tray")
+                }
         }
     }
 }

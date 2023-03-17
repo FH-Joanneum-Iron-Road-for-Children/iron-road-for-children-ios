@@ -50,13 +50,13 @@ platform :ios do
 
       match(
         type: "appstore",
-        git_private_key: "./fastlane/.keys/github-deploy-key",
+        #git_private_key: "./fastlane/.keys/github-deploy-key", # match has an issue that the key is only used for pulling but not pushing -> key is added manually to the ssh-agent (https://github.com/fastlane/fastlane/issues/19266)
         keychain_name: "IRFC_iOS_keychain",
         keychain_password: ENV["KEYCHAIN_PASSWORD"]
       )
       match(
         type: "development",
-        git_private_key: "./fastlane/.keys/github-deploy-key",
+        #git_private_key: "./fastlane/.keys/github-deploy-key", # see above
         keychain_name: "IRFC_iOS_keychain",
         keychain_password: ENV["KEYCHAIN_PASSWORD"]
       )

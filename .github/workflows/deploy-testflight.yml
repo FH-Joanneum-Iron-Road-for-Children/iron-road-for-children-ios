@@ -23,9 +23,13 @@ jobs:
           cd fastlane
           mkdir .keys
           echo -n "${{secrets.APPSTORE_API_PRIVATE_KEY}}" | base64 --decode -o .keys/api_key.p8
-          echo -n "${{secrets.DEPLOY_KEY_GITHUB}}" | base64 --decode -o .keys/github-deploy-key
-          chmod 600 .keys/github-deploy-key
           cd ..
+
+      # # match has an issue that the key is only used for pulling but not pushing -> key is added manually to the ssh-agent (https://github.com/fastlane/fastlane/issues/19266)
+      - name: Add deploy key to ssh-agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY_GITHUB }}
 
       - name: Setup xcodegen and init xcode project
         uses: xavierLowmiller/xcodegen-action@1.1.2

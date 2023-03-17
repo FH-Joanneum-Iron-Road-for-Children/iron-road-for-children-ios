@@ -1,0 +1,42 @@
+name: Publish to TestFlight
+
+on:
+  tag:
+
+jobs:
+  publish:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby '2.7.7'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.7'
+          bundler-cache: true
+
+      - name: Extract secrets
+        run: |
+          cd fastlane
+          mkdir .keys
+          echo -n "${{secrets.APPSTORE_API_PRIVATE_KEY}}" | base64 --decode -o .keys/api_key.p8
+          echo -n "${{secrets.DEPLOY_KEY_GITHUB}}" | base64 --decode -o .keys/github-deploy-key
+          chmod 600 .keys/github-deploy-key
+          cd ..
+
+      - name: Setup xcodegen and init xcode project
+        uses: xavierLowmiller/xcodegen-action@1.1.2
+        with:
+          spec: project.yml
+          use-cache: true
+
+      - name: Publish to TestFlight
+        run: bundle exec fastlane release_irfc
+        env:
+          # FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
+          FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}
+          FASTLANE_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          FASTLANE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}

@@ -20,4 +20,70 @@ platform :ios do
   lane :test do
     run_tests(scheme: "IronRoadForChildren")
   end
+
+  desc "Sync certificates"
+  lane :sync_certificates do
+    if ENV["CI"]
+      ensure_env_vars(
+        env_vars: [
+          "FASTLANE_CERTIFICATES_GIT_URL", 
+          "APPSTORE_API_KEY_ID", 
+          "APPSTORE_ISSUER_ID",
+          "KEYCHAIN_PASSWORD"
+        ]
+      )
+  
+      create_keychain(
+        name: "IRFC_iOS_keychain",
+        password: ENV["KEYCHAIN_PASSWORD"],
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+  
+      app_store_connect_api_key(
+        key_id: ENV["APPSTORE_API_KEY_ID"],
+        issuer_id: ENV["APPSTORE_ISSUER_ID"],
+        key_filepath: "./fastlane/.keys/api_key.p8",
+      )
+
+      match(
+        type: "appstore",
+        git_private_key: "./fastlane/.keys/github-deploy-key",
+        keychain_name: "IRFC_iOS_keychain",
+        keychain_password: ENV["KEYCHAIN_PASSWORD"]
+      )
+      match(
+        type: "development",
+        git_private_key: "./fastlane/.keys/github-deploy-key",
+        keychain_name: "IRFC_iOS_keychain",
+        keychain_password: ENV["KEYCHAIN_PASSWORD"]
+      )
+    else
+      match(
+        type: "appstore"
+      )
+      match(
+        type: "development"
+      )
+    end
+  end
+
+  lane :release_irfc do
+    sync_certificates
+
+    build_app(
+        project: "IronRoadForChildren.xcodeproj",
+        scheme: "IronRoadForChildren",
+        output_name: "IronRoadForChildren.ipa",
+        output_directory: "./build/",
+        export_method: "app-store"
+    )
+
+    upload_to_testflight(
+      ipa: "./build/IronRoadForChildren.ipa",
+      skip_waiting_for_build_processing: true
+    )
+  end
 end

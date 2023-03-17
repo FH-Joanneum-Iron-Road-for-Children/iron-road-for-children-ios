@@ -23,6 +23,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Run all iOS unit and ui tests.
 
+### ios sync_certificates
+
+```sh
+[bundle exec] fastlane ios sync_certificates
+```
+
+Sync certificates
+
+### ios release_irfc
+
+```sh
+[bundle exec] fastlane ios release_irfc
+```
+
+
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

@@ -6,6 +6,7 @@ fileGroups:
   - Gemfile
   - Gemfile.lock
   - fastlane
+  - command-line-tools
 
 packages:
   CoreUI: 
@@ -16,7 +17,7 @@ packages:
     path: ./Packages/Networking
 
 options:
-  bundleIdPrefix: at.fhj
+  bundleIdPrefix: at.irfc.app
 
 targets:
   IronRoadForChildren:
@@ -47,18 +48,18 @@ targets:
       - package: ExampleMVVM
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
         INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
     info:
       path: "IronRoadForChildren/SupportingFiles/Info.plist"
       properties:
         CFBundleShortVersionString: "0.0.1"
-        CFBundleVersion: "1"
+        CFBundleVersion: "3"
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleDisplayName: "IRFC"
         CFBundleExecutable: "$(EXECUTABLE_NAME)"
-        CFBundleIdentifier: "at.fhj.irfc"
+        CFBundleIdentifier: "at.irfc.app"
         CFBundleInfoDictionaryVersion: "6.0"
         CFBundleName: "IRFC"
         CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
@@ -85,7 +86,7 @@ targets:
       - IronRoadForChildrenTests
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
         INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
 
@@ -96,7 +97,7 @@ targets:
       - IronRoadForChildrenUITests
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
+        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
         INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
         TEST_TARGET_NAME: "IronRoadForChildren"

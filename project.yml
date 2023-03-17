@@ -19,6 +19,11 @@ packages:
 options:
   bundleIdPrefix: at.irfc.app
 
+settings:
+  base:
+    CODE_SIGN_STYLE: "Manual"
+    DEVELOPMENT_TEAM: "2NQK7PCJGP"
+
 targets:
   IronRoadForChildren:
     type: application
@@ -51,11 +56,20 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
         INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+      configs:
+        RELEASE:
+          ONLY_ACTIVE_ARCH: "NO"
+          PROVISIONING_PROFILE_SPECIFIER: "match AppStore at.irfc.app"
+          CODE_SIGN_IDENTITY: "iPhone Distribution"
+        DEBUG:
+          ONLY_ACTIVE_ARCH: "YES"
+          PROVISIONING_PROFILE_SPECIFIER: "match Development at.irfc.app"
+          CODE_SIGN_IDENTITY: "iPhone Developer"
     info:
       path: "IronRoadForChildren/SupportingFiles/Info.plist"
       properties:
         CFBundleShortVersionString: "2.0.0"
-        CFBundleVersion: "12"
+        CFBundleVersion: "13"
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleDisplayName: "IRFC"
         CFBundleExecutable: "$(EXECUTABLE_NAME)"

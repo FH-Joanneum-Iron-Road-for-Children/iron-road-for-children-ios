@@ -2,7 +2,8 @@ name: Publish to TestFlight
 
 on:
   push:
-    tags:
+    tags: 
+      - '*.*.*-b*'
 
 jobs:
   publish:

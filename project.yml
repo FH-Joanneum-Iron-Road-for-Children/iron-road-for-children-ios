@@ -69,7 +69,7 @@ targets:
       path: "IronRoadForChildren/SupportingFiles/Info.plist"
       properties:
         CFBundleShortVersionString: "2.0.0"
-        CFBundleVersion: "13"
+        CFBundleVersion: "14"
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleDisplayName: "IRFC"
         CFBundleExecutable: "$(EXECUTABLE_NAME)"

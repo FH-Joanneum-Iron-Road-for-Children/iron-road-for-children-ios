@@ -24,6 +24,7 @@ settings:
   base:
     CODE_SIGN_STYLE: "Manual"
     DEVELOPMENT_TEAM: "2NQK7PCJGP"
+    VERSIONING_SYSTEM: apple-generic
 
 targets:
   IronRoadForChildren:
@@ -66,33 +67,6 @@ targets:
           ONLY_ACTIVE_ARCH: "YES"
           PROVISIONING_PROFILE_SPECIFIER: "match Development at.irfc.app"
           CODE_SIGN_IDENTITY: "iPhone Developer"
-    info:
-      path: "IronRoadForChildren/SupportingFiles/Info.plist"
-      properties:
-        CFBundleShortVersionString: "2.0.0"
-        CFBundleVersion: "14"
-        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
-        CFBundleDisplayName: "IRFC"
-        CFBundleExecutable: "$(EXECUTABLE_NAME)"
-        CFBundleIdentifier: "at.irfc.app"
-        CFBundleInfoDictionaryVersion: "6.0"
-        CFBundleName: "IRFC"
-        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
-        LSRequiresIPhoneOS: true
-        ITSAppUsesNonExemptEncryption: false
-        UIApplicationSceneManifest:
-          UIApplicationSupportsMultipleScenes: false
-
-        UIRequiredDeviceCapabilities:
-          - armv7
-        UISupportedInterfaceOrientations:
-          - UIInterfaceOrientationPortrait
-        UISupportedInterfaceOrientations~ipad:
-          - UIInterfaceOrientationPortrait
-          - UIInterfaceOrientationPortraitUpsideDown
-          - UIInterfaceOrientationLandscapeLeft
-          - UIInterfaceOrientationLandscapeRight
-        UILaunchStoryboardName: LaunchScreen.storyboard
 
   IronRoadForChildrenTests:
     type: bundle.unit-test
@@ -101,9 +75,9 @@ targets:
       - IronRoadForChildrenTests
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
+        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app.tests"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+        INFOPLIST_FILE: "IronRoadForChildrenTests/Info.plist"
 
   IronRoadForChildrenUITests:
     type: bundle.ui-testing
@@ -112,7 +86,7 @@ targets:
       - IronRoadForChildrenUITests
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app"
+        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app.ui-tests"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
+        INFOPLIST_FILE: "IronRoadForChildrenUITests/Info.plist"
         TEST_TARGET_NAME: "IronRoadForChildren"

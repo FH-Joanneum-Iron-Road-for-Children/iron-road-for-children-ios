@@ -23,6 +23,16 @@ public struct ExampleView: View {
                 .font(.headline)
                 .padding()
 
+            if let version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                Text(version)
+                    .padding()
+            }
+
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                Text(version)
+                    .padding()
+            }
+
             if isLoading {
                 ProgressView().padding()
             } else if let text = viewModel.model?.url {

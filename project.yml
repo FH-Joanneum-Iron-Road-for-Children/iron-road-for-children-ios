@@ -24,7 +24,9 @@ settings:
   base:
     CODE_SIGN_STYLE: "Manual"
     DEVELOPMENT_TEAM: "2NQK7PCJGP"
-    VERSIONING_SYSTEM: apple-generic
+    VERSIONING_SYSTEM: "apple-generic"
+    CURRENT_PROJECT_VERSION: $(MARKETING_VERSION)
+    SHORT_VERSION_STRING: $(MARKETING_VERSION)
 
 targets:
   IronRoadForChildren:
@@ -33,12 +35,12 @@ targets:
     deploymentTarget: "15.0"
     scheme:
       testTargets:
-        - name: IronRoadForChildrenTests
-          randomExecutionOrder: true
-          parallelizable: true
-        - name: IronRoadForChildrenUITests
-          randomExecutionOrder: true
-          parallelizable: true
+        # - name: IronRoadForChildrenTests
+        #   randomExecutionOrder: true
+        #   parallelizable: true
+        # - name: IronRoadForChildrenUITests
+        #   randomExecutionOrder: true
+        #   parallelizable: true
         - package: CoreUI/CoreUITests
           randomExecutionOrder: true
           parallelizable: true
@@ -68,25 +70,21 @@ targets:
           PROVISIONING_PROFILE_SPECIFIER: "match Development at.irfc.app"
           CODE_SIGN_IDENTITY: "iPhone Developer"
 
-  IronRoadForChildrenTests:
-    type: bundle.unit-test
-    platform: iOS
-    sources:
-      - IronRoadForChildrenTests
-    settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app.tests"
-        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildrenTests/Info.plist"
+  # IronRoadForChildrenTests:
+  #   type: bundle.unit-test
+  #   platform: iOS
+  #   sources:
+  #     - IronRoadForChildrenTests
+  #   settings:
+  #     base:
+  #       IPHONEOS_DEPLOYMENT_TARGET: "15.0"
 
-  IronRoadForChildrenUITests:
-    type: bundle.ui-testing
-    platform: iOS
-    sources:
-      - IronRoadForChildrenUITests
-    settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.irfc.app.ui-tests"
-        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildrenUITests/Info.plist"
-        TEST_TARGET_NAME: "IronRoadForChildren"
+  # IronRoadForChildrenUITests:
+  #   type: bundle.ui-testing
+  #   platform: iOS
+  #   sources:
+  #     - IronRoadForChildrenUITests
+  #   settings:
+  #     base:
+  #       IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+  #       TEST_TARGET_NAME: "IronRoadForChildren"

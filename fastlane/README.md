@@ -39,6 +39,38 @@ Sync certificates
 
 
 
+### ios start_ci
+
+```sh
+[bundle exec] fastlane ios start_ci
+```
+
+
+
+### ios new_build_number
+
+```sh
+[bundle exec] fastlane ios new_build_number
+```
+
+
+
+### ios new_version_number
+
+```sh
+[bundle exec] fastlane ios new_version_number
+```
+
+
+
+### ios tag_current_version
+
+```sh
+[bundle exec] fastlane ios tag_current_version
+```
+
+
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

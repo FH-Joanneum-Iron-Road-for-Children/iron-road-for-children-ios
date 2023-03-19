@@ -10,9 +10,6 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
 platform :ios do
@@ -86,4 +83,41 @@ platform :ios do
       skip_waiting_for_build_processing: true
     )
   end
+
+  lane :start_ci do |options| 
+    new_build_number options
+  
+    new_version_number options if !options[:v].nil? || !options[:bump_type].nil? || options[:bump_version] == true
+  
+    git_commit(path: '.', message: "Updated to #{tag_name(options[:tag_postfix])}")
+    tag_current_version options
+    # push_to_git_remote
+  end  
+
+  lane :new_build_number do |options|
+    if !options[:b].nil?
+      increment_build_number(build_number: options[:b])
+    else
+      increment_build_number
+    end
+  end
+
+  lane :new_version_number do |options|
+    if !options[:bump_type].nil?
+      increment_version_number(bump_type: options[:bump_type])
+    elsif !options[:v].nil?
+      increment_version_number(version_number: options[:v])
+    else
+      increment_version_number
+    end
+  end
+
+  def tag_name(postfix)
+    to_append = postfix.nil? ? '' : "_#{postfix}"
+    "v#{get_version_number(xcodeproj: "IronRoadForChildren.xcodeproj", target: "IronRoadForChildren")}-b#{get_build_number}#{to_append}"
+  end
+
+  lane :tag_current_version do |options|
+    add_git_tag(tag: tag_name(options[:tag_postfix]))
+  end  
 end

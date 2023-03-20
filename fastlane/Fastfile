@@ -9,6 +9,7 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+require 'yaml'
 
 default_platform(:ios)
 
@@ -85,6 +86,8 @@ platform :ios do
   end
 
   lane :start_ci do |options| 
+
+    
     new_build_number options
   
     new_version_number options if !options[:v].nil? || !options[:bump_type].nil? || options[:bump_version] == true
@@ -94,11 +97,33 @@ platform :ios do
     # push_to_git_remote
   end  
 
+  lane :new_build_xcodegen do |options|
+
+    new_b = increment_build_number_new()
+
+    # define the path to your YAML file
+    file_path = '../project.yml'
+
+    # read in the YAML file
+    data = YAML.load_file(file_path)
+
+    puts data.inspect
+
+    # Update value
+    data["variables.version"] = "2.0.1"
+    data["variables.version_build"] = "16"
+
+    # write the updated YAML data back to the file
+    File.write(file_path, data.to_yaml)
+
+    git_commit(path: '.', message: "Updated to #{tag_name(options[:tag_postfix])}")
+  end
+
   lane :new_build_number do |options|
     if !options[:b].nil?
-      increment_build_number(build_number: options[:b])
+      options[:b]
     else
-      increment_build_number
+      increment_build_number_new
     end
   end
 
@@ -120,4 +145,27 @@ platform :ios do
   lane :tag_current_version do |options|
     add_git_tag(tag: tag_name(options[:tag_postfix]))
   end  
+
+end
+
+# iterate through the YAML data to find and replace the specified variable name
+def replace_variable_in_yaml(data, variable_name, new_value)
+  case data
+  when String
+    data
+  when Hash
+    data.each { |k, v| data[k] = replace_variable_in_yaml(v, variable_name, new_value) }
+  when Array
+    data.map! { |v| replace_variable_in_yaml(v, variable_name, new_value) }
+  else
+    if data.to_s == variable_name
+      new_value
+    else
+      data
+    end
+  end
+end
+
+def increment_build_number_new(current_build)
+  current_build + 1
 end

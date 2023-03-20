@@ -47,6 +47,14 @@ Sync certificates
 
 
 
+### ios new_build_xcodegen
+
+```sh
+[bundle exec] fastlane ios new_build_xcodegen
+```
+
+
+
 ### ios new_build_number
 
 ```sh

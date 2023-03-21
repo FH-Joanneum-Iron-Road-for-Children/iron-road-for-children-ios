@@ -118,5 +118,5 @@ targetTemplates:
     deploymentTarget: '15.0'
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 12
+        CURRENT_PROJECT_VERSION: 13
         MARKETING_VERSION: 1.1.0

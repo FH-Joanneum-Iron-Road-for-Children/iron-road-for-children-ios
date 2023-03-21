@@ -1,7 +1,6 @@
 name: Publish to TestFlight
 
 on:
-  workflow_call:
   push:
     tags: 
       - '*.*.*-b*'

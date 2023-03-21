@@ -27,8 +27,8 @@ settings:
     DEVELOPMENT_TEAM: 2NQK7PCJGP
 targets:
   IronRoadForChildren:
-    templates: 
-      - AppTarget
+    templates:
+    - AppTarget
     scheme:
       testTargets:
       - name: IronRoadForChildrenTests
@@ -117,5 +117,5 @@ targetTemplates:
     deploymentTarget: '15.0'
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 16
-        MARKETING_VERSION: 2.0.0
+        CURRENT_PROJECT_VERSION: 11
+        MARKETING_VERSION: 1.1.0

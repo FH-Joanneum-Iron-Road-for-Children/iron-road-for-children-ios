@@ -6,7 +6,10 @@ on:
       - '*.*.*-b*'
 
 jobs:
+  test:
+    uses: ./.github/workflows/test-ios.yml
   publish:
+    needs: test
     runs-on: macos-latest
     steps:
       - name: Checkout repo

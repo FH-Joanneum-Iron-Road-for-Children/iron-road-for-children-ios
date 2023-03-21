@@ -27,6 +27,8 @@ settings:
     DEVELOPMENT_TEAM: 2NQK7PCJGP
 targets:
   IronRoadForChildren:
+    templates: 
+      - AppTarget
     scheme:
       testTargets:
       - name: IronRoadForChildrenTests

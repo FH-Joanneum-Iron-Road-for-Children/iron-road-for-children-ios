@@ -98,7 +98,7 @@ platform :ios do
     tag = "v#{new_version}-b#{new_build_number}"
     git_commit(path: '.', message: "Updated to #{tag}")
     add_git_tag(tag: tag)
-    #push_to_git_remote
+    push_to_git_remote
   end
 
   lane :new_build_number_yml do |options|

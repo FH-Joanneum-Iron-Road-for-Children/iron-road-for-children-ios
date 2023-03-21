@@ -47,34 +47,18 @@ Sync certificates
 
 
 
-### ios new_build_xcodegen
+### ios new_build_number_yml
 
 ```sh
-[bundle exec] fastlane ios new_build_xcodegen
+[bundle exec] fastlane ios new_build_number_yml
 ```
 
 
 
-### ios new_build_number
+### ios new_version_yml
 
 ```sh
-[bundle exec] fastlane ios new_build_number
-```
-
-
-
-### ios new_version_number
-
-```sh
-[bundle exec] fastlane ios new_version_number
-```
-
-
-
-### ios tag_current_version
-
-```sh
-[bundle exec] fastlane ios tag_current_version
+[bundle exec] fastlane ios new_version_yml
 ```
 
 

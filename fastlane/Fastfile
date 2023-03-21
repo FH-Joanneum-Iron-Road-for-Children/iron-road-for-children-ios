@@ -10,8 +10,13 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 require 'yaml'
+require 'psych'
 
 default_platform(:ios)
+
+xcodegen_proj="../project.yml"
+version_yml_position="targetTemplates.AppTarget.settings.base.MARKETING_VERSION"
+build_yml_position="targetTemplates.AppTarget.settings.base.CURRENT_PROJECT_VERSION"
 
 platform :ios do
   desc "Run all iOS unit and ui tests."
@@ -85,87 +90,82 @@ platform :ios do
     )
   end
 
-  lane :start_ci do |options| 
+  lane :start_ci do |options|
+    UI.message("Starting to create new version ...")
+    new_version = new_version_yml options
+    new_build_number = new_build_number_yml options
 
-    
-    new_build_number options
-  
-    new_version_number options if !options[:v].nil? || !options[:bump_type].nil? || options[:bump_version] == true
-  
-    git_commit(path: '.', message: "Updated to #{tag_name(options[:tag_postfix])}")
-    tag_current_version options
-    # push_to_git_remote
-  end  
-
-  lane :new_build_xcodegen do |options|
-
-    new_b = increment_build_number_new()
-
-    # define the path to your YAML file
-    file_path = '../project.yml'
-
-    # read in the YAML file
-    data = YAML.load_file(file_path)
-
-    puts data.inspect
-
-    # Update value
-    data["variables.version"] = "2.0.1"
-    data["variables.version_build"] = "16"
-
-    # write the updated YAML data back to the file
-    File.write(file_path, data.to_yaml)
-
-    git_commit(path: '.', message: "Updated to #{tag_name(options[:tag_postfix])}")
+    tag = tag_name(new_version, new_build_number)
+    git_commit(path: '.', message: "Updated to #{tag}")
+    add_git_tag(tag: tag)
+    #push_to_git_remote
   end
 
-  lane :new_build_number do |options|
+  lane :new_build_number_yml do |options|
+    UI.message("Load the YAML file")
+    config = YAML.load_file(xcodegen_proj, aliases: true)
+
     if !options[:b].nil?
-      options[:b]
+      updateVarFromYml(build_yml_position, options[:b].to_i, config)
+
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      options[:b].to_i
     else
-      increment_build_number_new
+      UI.message("Setting build variable in YAML")
+      newBuild = getVarFromYml(build_yml_position, config) + 1
+      updateVarFromYml(build_yml_position, newBuild, config)
+      
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      newBuild
     end
   end
 
-  lane :new_version_number do |options|
-    if !options[:bump_type].nil?
-      increment_version_number(bump_type: options[:bump_type])
-    elsif !options[:v].nil?
-      increment_version_number(version_number: options[:v])
-    else
-      increment_version_number
+  lane :new_version_yml do |options|
+    UI.message("Load the YAML file")
+    config = YAML.load_file(xcodegen_proj, aliases: true)
+    if !options[:v].nil?
+      version = options[:v]
+      UI.message("Updating version to $#{version}")
+
+      updateVarFromYml(version_yml_position, version, config)
+
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      version
+    else 
+      UI.message("Version stays the same.")
+      getVarFromYml(version_yml_position, config)
     end
   end
 
-  def tag_name(postfix)
-    to_append = postfix.nil? ? '' : "_#{postfix}"
-    "v#{get_version_number(xcodeproj: "IronRoadForChildren.xcodeproj", target: "IronRoadForChildren")}-b#{get_build_number}#{to_append}"
+  def tag_name(version, build)
+    tag = "v#{version}-b#{build}"
+    puts "New tag: $#{tag}"
   end
 
-  lane :tag_current_version do |options|
-    add_git_tag(tag: tag_name(options[:tag_postfix]))
-  end  
+  def getVarFromYml(path, config) 
+    keys = path.split('.')
+    result = keys.reduce(config) { |hash, key| hash[key] }
 
-end
+    result
+  end
 
-# iterate through the YAML data to find and replace the specified variable name
-def replace_variable_in_yaml(data, variable_name, new_value)
-  case data
-  when String
-    data
-  when Hash
-    data.each { |k, v| data[k] = replace_variable_in_yaml(v, variable_name, new_value) }
-  when Array
-    data.map! { |v| replace_variable_in_yaml(v, variable_name, new_value) }
-  else
-    if data.to_s == variable_name
-      new_value
-    else
-      data
-    end
+  def updateVarFromYml(path, newVal, config) 
+    keys = path.split('.')
+
+    # Traverse the hash using `dig` to get the value of the final key in the path
+    value = config.dig(*keys)
+    
+    # Update the value of the final key in the path
+    config.dig(*keys[0..-2])[keys.last] = newVal
   end
 end
 
-def increment_build_number_new(current_build)
-  current_build + 1
-end

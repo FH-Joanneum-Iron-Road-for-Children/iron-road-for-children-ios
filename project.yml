@@ -1,3 +1,4 @@
+---
 name: IronRoadForChildren
 fileGroups:
 - project.yml
@@ -26,9 +27,6 @@ settings:
     DEVELOPMENT_TEAM: 2NQK7PCJGP
 targets:
   IronRoadForChildren:
-    type: application
-    platform: iOS
-    deploymentTarget: '15.0'
     scheme:
       testTargets:
       - name: IronRoadForChildrenTests
@@ -59,6 +57,7 @@ targets:
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Manual
+        INFOPLIST_KEY_CFBundleDisplayName: IRFC
       configs:
         RELEASE:
           ONLY_ACTIVE_ARCH: 'NO'
@@ -71,8 +70,6 @@ targets:
     info:
       path: IronRoadForChildren/SupportingFiles/Info.plist
       properties:
-        CFBundleShortVersionString: "2.0.0"
-        CFBundleVersion: "15"
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleDisplayName: IRFC
         CFBundleExecutable: "$(EXECUTABLE_NAME)"
@@ -111,3 +108,12 @@ targets:
       base:
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         TEST_TARGET_NAME: IronRoadForChildren
+targetTemplates:
+  AppTarget:
+    type: application
+    platform: iOS
+    deploymentTarget: '15.0'
+    settings:
+      base:
+        CURRENT_PROJECT_VERSION: 15
+        MARKETING_VERSION: 2.0.0

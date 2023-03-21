@@ -95,7 +95,7 @@ platform :ios do
     new_version = new_version_yml options
     new_build_number = new_build_number_yml options
 
-    tag = tag_name(new_version, new_build_number)
+    tag = "v#{new_version}-b#{new_build_number}"
     git_commit(path: '.', message: "Updated to #{tag}")
     add_git_tag(tag: tag)
     #push_to_git_remote
@@ -144,11 +144,6 @@ platform :ios do
       UI.message("Version stays the same.")
       getVarFromYml(version_yml_position, config)
     end
-  end
-
-  def tag_name(version, build)
-    tag = "v#{version}-b#{build}"
-    puts "New tag: $#{tag}"
   end
 
   def getVarFromYml(path, config) 

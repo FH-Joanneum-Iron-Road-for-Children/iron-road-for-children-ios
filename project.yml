@@ -73,7 +73,7 @@ targets:
     settings:
       base:
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
-        GENERATE_INFOPLIST_FILE: YES
+        GENERATE_INFOPLIST_FILE: true
   IronRoadForChildrenUITests:
     type: bundle.ui-testing
     platform: iOS
@@ -81,7 +81,7 @@ targets:
     - IronRoadForChildrenUITests
     settings:
       base:
-        GENERATE_INFOPLIST_FILE: YES
+        GENERATE_INFOPLIST_FILE: true
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         TEST_TARGET_NAME: IronRoadForChildren
 targetTemplates:
@@ -91,25 +91,24 @@ targetTemplates:
     deploymentTarget: '15.0'
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 14
+        CURRENT_PROJECT_VERSION: 15
         MARKETING_VERSION: 1.1.0
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
-        ENABLE_PREVIEWS: YES
-        SWIFT_EMIT_LOC_STRINGS: YES
+        ENABLE_PREVIEWS: true
+        SWIFT_EMIT_LOC_STRINGS: true
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Manual
-        GENERATE_INFOPLIST_FILE: YES
-        TARGETED_DEVICE_FAMILY: "1,2"
-        DEVELOPMENT_ASSET_PATHS: "IronRoadForChildren/SupportingFiles/PreviewContent"
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
-        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        GENERATE_INFOPLIST_FILE: true
+        TARGETED_DEVICE_FAMILY: '1,2'
+        DEVELOPMENT_ASSET_PATHS: IronRoadForChildren/SupportingFiles/PreviewContent
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone:
-        - "UIInterfaceOrientationPortrait"
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: 
-        - "UIInterfaceOrientationPortrait"
-        - "UIInterfaceOrientationPortraitUpsideDown"
-        - "UIInterfaceOrientationLandscapeLeft"
-        - "UIInterfaceOrientationLandscapeRight"
-
+        - UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad:
+        - UIInterfaceOrientationPortrait
+        - UIInterfaceOrientationPortraitUpsideDown
+        - UIInterfaceOrientationLandscapeLeft
+        - UIInterfaceOrientationLandscapeRight

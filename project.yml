@@ -55,7 +55,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        PRODUCT_NAME: IRFC
+        INFOPLIST_KEY_CFBundleDisplayName: IronRoadForChildren
       configs:
         RELEASE:
           ONLY_ACTIVE_ARCH: 'NO'
@@ -70,15 +70,23 @@ targets:
     platform: iOS
     sources:
     - IronRoadForChildrenTests
+    dependencies:
+      - target: IronRoadForChildren
     settings:
       base:
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         GENERATE_INFOPLIST_FILE: true
+        TEST_TARGET_NAME: IronRoadForChildren
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/IronRoadForChildren.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IronRoadForChildren"
   IronRoadForChildrenUITests:
     type: bundle.ui-testing
     platform: iOS
     sources:
     - IronRoadForChildrenUITests
+    dependencies:
+      - target: IronRoadForChildren
+
+
     settings:
       base:
         GENERATE_INFOPLIST_FILE: true
@@ -105,10 +113,5 @@ targetTemplates:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
         INFOPLIST_KEY_UILaunchScreen_Generation: true
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone:
-        - UIInterfaceOrientationPortrait
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad:
-        - UIInterfaceOrientationPortrait
-        - UIInterfaceOrientationPortraitUpsideDown
-        - UIInterfaceOrientationLandscapeLeft
-        - UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"

@@ -9,6 +9,7 @@ import Combine
 import Foundation
 import Networking
 
+@MainActor
 class ExampleViewModel: ObservableObject {
     @Published var model: ExampleModel?
     @Published var errorText: String?

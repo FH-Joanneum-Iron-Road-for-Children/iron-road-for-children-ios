@@ -18,7 +18,7 @@ struct DayTabButtonView: View {
                 .frame(maxWidth: .infinity)
                 // .font(.headline)
                 .foregroundColor(.black)
-                .padding(.bottom, 25)
+                .padding(.bottom, 20)
                 // .background(Color(.systemBackground))
                 .overlay(
                     Rectangle()

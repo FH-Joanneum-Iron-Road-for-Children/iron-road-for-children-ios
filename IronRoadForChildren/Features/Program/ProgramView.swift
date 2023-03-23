@@ -28,7 +28,7 @@ struct ProgramView: View {
                     viewModel.selectedTab = 1
                 }
             }
-            .frame(height: 30)
+            .frame(height: 25)
 
             // Subview based on selected tab
             DayView(contents: viewModel.programText)

@@ -1,4 +1,13 @@
+<br>
+<h3 align="center">
+  <a href="./Documentation/images/logo.png">
+  <img src="./Documentation/images/logo.png" alt="IRFC Logo" width="250" style="border-radius: 50px;">
+  </a>
+</h3>
+<br>
+
 # Iron Road for Children iOS App (IRFC) 
+
 
 ## 💻 Setup prerequisites
 **Ruby** version `2.7.x` or above is required. We strongly recommend using [rbenv](https://github.com/rbenv/rbenv) for installing different ruby versions.

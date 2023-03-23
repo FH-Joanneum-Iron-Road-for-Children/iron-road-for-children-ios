@@ -43,7 +43,6 @@ jobs:
       - name: Publish to TestFlight
         run: bundle exec fastlane release_irfc
         env:
-          # FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
           FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}
           APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}

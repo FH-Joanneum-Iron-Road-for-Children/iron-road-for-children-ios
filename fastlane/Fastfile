@@ -9,15 +9,163 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+require 'yaml'
+require 'psych'
 
 default_platform(:ios)
+
+xcodegen_proj="../project.yml"
+version_yml_position="targetTemplates.AppTarget.settings.base.MARKETING_VERSION"
+build_yml_position="targetTemplates.AppTarget.settings.base.CURRENT_PROJECT_VERSION"
 
 platform :ios do
   desc "Run all iOS unit and ui tests."
   lane :test do
     run_tests(scheme: "IronRoadForChildren")
   end
+
+  desc "Sync certificates"
+  lane :sync_certificates do
+    if ENV["CI"]
+      ensure_env_vars(
+        env_vars: [
+          "FASTLANE_CERTIFICATES_GIT_URL", 
+          "APPSTORE_API_KEY_ID", 
+          "APPSTORE_ISSUER_ID",
+          "KEYCHAIN_PASSWORD"
+        ]
+      )
+  
+      create_keychain(
+        name: "IRFC_iOS_keychain",
+        password: ENV["KEYCHAIN_PASSWORD"],
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+  
+      app_store_connect_api_key(
+        key_id: ENV["APPSTORE_API_KEY_ID"],
+        issuer_id: ENV["APPSTORE_ISSUER_ID"],
+        key_filepath: "./fastlane/.keys/api_key.p8",
+      )
+
+      match(
+        type: "appstore",
+        #git_private_key: "./fastlane/.keys/github-deploy-key", # match has an issue that the key is only used for pulling but not pushing -> key is added manually to the ssh-agent (https://github.com/fastlane/fastlane/issues/19266)
+        keychain_name: "IRFC_iOS_keychain",
+        keychain_password: ENV["KEYCHAIN_PASSWORD"]
+      )
+      match(
+        type: "development",
+        #git_private_key: "./fastlane/.keys/github-deploy-key", # see above
+        keychain_name: "IRFC_iOS_keychain",
+        keychain_password: ENV["KEYCHAIN_PASSWORD"]
+      )
+    else
+      match(
+        type: "appstore"
+      )
+      match(
+        type: "development"
+      )
+    end
+  end
+
+  lane :release_irfc do
+    sync_certificates
+
+    build_app(
+        project: "IronRoadForChildren.xcodeproj",
+        scheme: "IronRoadForChildren",
+        output_name: "IronRoadForChildren.ipa",
+        output_directory: "./build/",
+        export_method: "app-store"
+    )
+
+    upload_to_testflight(
+      ipa: "./build/IronRoadForChildren.ipa",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Updates build number and version. Creates a new tag based on those and pushes it to origin"
+  lane :start_ci do |options|
+    UI.message("Starting to create new version ...")
+    new_version = new_version_yml options
+    new_build_number = new_build_number_yml options
+
+    tag = "v#{new_version}-b#{new_build_number}"
+    git_commit(path: '.', message: "Updated to #{tag}")
+    add_git_tag(tag: tag)
+    push_to_git_remote
+  end
+
+  desc "Updates build number in project.yml. If no ':b' parameter is provided, the existing number will be increased by 1"
+  lane :new_build_number_yml do |options|
+    UI.message("Load the YAML file")
+    config = YAML.load_file(xcodegen_proj, aliases: true)
+
+    if !options[:b].nil?
+      updateVarFromYml(build_yml_position, options[:b].to_i, config)
+
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      options[:b].to_i
+    else
+      UI.message("Setting build variable in YAML")
+      newBuild = getVarFromYml(build_yml_position, config) + 1
+      updateVarFromYml(build_yml_position, newBuild, config)
+      
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      newBuild
+    end
+  end
+
+  desc "Updates build number in project.yml. If no ':v' parameter is provided, the existing version will be used."
+  lane :new_version_yml do |options|
+    UI.message("Load the YAML file")
+    config = YAML.load_file(xcodegen_proj, aliases: true)
+    if !options[:v].nil?
+      version = options[:v]
+      UI.message("Updating version to $#{version}")
+
+      updateVarFromYml(version_yml_position, version, config)
+
+      UI.message("Write the updated YAML file")
+      File.write(xcodegen_proj, config.to_yaml)
+
+      UI.success("YAML file updated successfully!")
+      version
+    else 
+      UI.message("Version stays the same.")
+      getVarFromYml(version_yml_position, config)
+    end
+  end
+
+  # get a variable from a .yml data config
+  def getVarFromYml(path, config) 
+    keys = path.split('.')
+    result = keys.reduce(config) { |hash, key| hash[key] }
+
+    result
+  end
+
+  # set a variable in a .yml data config
+  def updateVarFromYml(path, newVal, config) 
+    keys = path.split('.')
+
+    # Traverse the hash using `dig` to get the value of the final key in the path
+    value = config.dig(*keys)
+    
+    # Update the value of the final key in the path
+    config.dig(*keys[0..-2])[keys.last] = newVal
+  end
 end
+

@@ -11,6 +11,7 @@ struct ProgramView: View {
     @StateObject var viewModel = ProgramViewModel()
 
     var body: some View {
+        // view title, left aligned
         VStack(alignment: .center) {
             HStack {
                 Text("Programm")
@@ -19,7 +20,8 @@ struct ProgramView: View {
                     .padding(.bottom, 25)
                 Spacer()
             }
-            // upper Tabbar to select the days
+            // upper Tabbar to select the days, 25 px height
+            // note, the DayTabButtonView also has a bottom padding
             HStack {
                 DayTabButtonView(title: "Samstag", isSelected: viewModel.selectedTab == 0) {
                     viewModel.selectedTab = 0

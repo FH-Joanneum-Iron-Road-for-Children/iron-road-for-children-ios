@@ -15,15 +15,20 @@ struct DayTabButtonView: View {
     var body: some View {
         Button(action: action) {
             Text(title)
+                // the buttons take the whole vertical space
                 .frame(maxWidth: .infinity)
-                // .font(.headline)
+                // foregroundColor needs to be black, otherwize it's blue
                 .foregroundColor(.black)
+                // pushes the rectangle down
                 .padding(.bottom, 20)
-                // .background(Color(.systemBackground))
+                // the yellow underline (rectangle), when selected
                 .overlay(
                     Rectangle()
+                        // it's a rectangle with a height of 2
                         .frame(height: 2)
+                        // color yellow if selected
                         .foregroundColor(isSelected ? Color.yellow : Color.clear)
+                        // let a little space between the divider and align it to the bottom
                         .padding(.bottom, 2), alignment: .bottom
                 )
         }

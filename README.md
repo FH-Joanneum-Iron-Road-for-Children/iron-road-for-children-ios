@@ -1,11 +1,9 @@
 <br>
-<br>
 <h3 align="center">
   <a href="./Documentation/images/logo.png">
   <img src="./Documentation/images/logo.png" alt="IRFC Logo" width="250" style="border-radius: 50px;">
   </a>
 </h3>
-<br>
 <br>
 
 # Iron Road for Children iOS App (IRFC) 

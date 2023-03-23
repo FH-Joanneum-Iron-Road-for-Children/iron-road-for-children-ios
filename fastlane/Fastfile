@@ -90,6 +90,7 @@ platform :ios do
     )
   end
 
+  desc "Updates build number and version. Creates a new tag based on those and pushes it to origin"
   lane :start_ci do |options|
     UI.message("Starting to create new version ...")
     new_version = new_version_yml options
@@ -101,6 +102,7 @@ platform :ios do
     push_to_git_remote
   end
 
+  desc "Updates build number in project.yml. If no ':b' parameter is provided, the existing number will be increased by 1"
   lane :new_build_number_yml do |options|
     UI.message("Load the YAML file")
     config = YAML.load_file(xcodegen_proj, aliases: true)
@@ -126,6 +128,7 @@ platform :ios do
     end
   end
 
+  desc "Updates build number in project.yml. If no ':v' parameter is provided, the existing version will be used."
   lane :new_version_yml do |options|
     UI.message("Load the YAML file")
     config = YAML.load_file(xcodegen_proj, aliases: true)
@@ -146,6 +149,7 @@ platform :ios do
     end
   end
 
+  # get a variable from a .yml data config
   def getVarFromYml(path, config) 
     keys = path.split('.')
     result = keys.reduce(config) { |hash, key| hash[key] }
@@ -153,6 +157,7 @@ platform :ios do
     result
   end
 
+  # set a variable in a .yml data config
   def updateVarFromYml(path, newVal, config) 
     keys = path.split('.')
 

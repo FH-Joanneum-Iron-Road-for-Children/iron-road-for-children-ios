@@ -43,6 +43,7 @@ struct ContentView: View {
                     Label("CoreUI", systemImage: "list.dash")
                 }
         }
+        .accentColor(.irfcYellow)
         .tint(.irfcYellow)
     }
 }

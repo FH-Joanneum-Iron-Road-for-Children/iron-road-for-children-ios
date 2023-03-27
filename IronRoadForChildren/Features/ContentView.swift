@@ -18,11 +18,6 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            MapView()
-                .tabItem {
-                    Label("Map", image: "map")
-                }
-
             ProgramView()
                 .tabItem {
                     Label("Program", image: "program")
@@ -31,6 +26,11 @@ struct ContentView: View {
             VoteView()
                 .tabItem {
                     Label("Vote", image: "vote")
+                }
+
+            MapView()
+                .tabItem {
+                    Label("Map", image: "map")
                 }
 
             MoreView()

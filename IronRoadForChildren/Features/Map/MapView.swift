@@ -9,7 +9,21 @@ import SwiftUI
 
 struct MapView: View {
     var body: some View {
-        Text("Hello Map")
+        VStack {
+            HStack {
+                Text("Karte")
+                    .font(.largeTitle)
+                    .padding(.vertical, 60)
+                    .padding(.leading, 40)
+                Spacer()
+            }
+            Image(systemName: "photo.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: .infinity)
+                .padding(.horizontal, 20)
+            Spacer()
+        }
     }
 }
 

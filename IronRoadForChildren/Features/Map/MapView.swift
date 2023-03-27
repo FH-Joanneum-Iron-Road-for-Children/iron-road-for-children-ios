@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MapView: View {
+    @State private var scale: CGFloat = 1.0
+
     var body: some View {
         VStack {
             HStack {
@@ -22,6 +24,12 @@ struct MapView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: .infinity)
                 .padding(.horizontal, 20)
+                .gesture(MagnificationGesture()
+                    .onChanged { value in
+                        self.scale = value.magnitude
+                    }
+                )
+                .scaleEffect(scale)
             Spacer()
         }
     }

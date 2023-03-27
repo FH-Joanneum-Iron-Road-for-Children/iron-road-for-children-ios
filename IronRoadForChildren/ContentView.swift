@@ -16,21 +16,23 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView {
-            ExampleView()
-                .tabItem {
-                    Label("Example", systemImage: "list.dash")
-                }
+        NavigationView {
+            TabView {
+                ExampleView()
+                    .tabItem {
+                        Label("Example", systemImage: "list.dash")
+                    }
 
-            ProgramView()
-                .tabItem {
-                    Label("Program", systemImage: "calendar")
-                }
+                ProgramView()
+                    .tabItem {
+                        Label("Program", systemImage: "calendar")
+                    }
 
-            VoteView()
-                .tabItem {
-                    Label("Vote", systemImage: "tray")
-                }
+                VoteView()
+                    .tabItem {
+                        Label("Vote", systemImage: "tray")
+                    }
+            }
         }
     }
 }

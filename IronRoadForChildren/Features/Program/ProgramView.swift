@@ -10,32 +10,28 @@ import SwiftUI
 struct ProgramView: View {
     @StateObject var viewModel = ProgramViewModel()
 
-    var body: some View {
-        // view title, left aligned
-        VStack(alignment: .center) {
-            HStack {
-                Text("Programm")
-                    .font(.title)
-                    .padding(.leading, 20)
-                    .padding(.bottom, 25)
-                Spacer()
-            }
-            // upper Tabbar to select the days, 25 px height
-            // note, the DayTabButtonView also has a bottom padding
-            HStack {
-                DayTabButtonView(title: "Samstag", isSelected: viewModel.selectedTab == 0) {
-                    viewModel.selectedTab = 0
-                }
-                DayTabButtonView(title: "Sonntag", isSelected: viewModel.selectedTab == 1) {
-                    viewModel.selectedTab = 1
-                }
-            }
-            .frame(height: 25)
+    var titles = ["Samstag", "Sonntag"]
+    @State var selectedTab: Int = 0
 
-            // Subview based on selected tab
-            DayView(contents: viewModel.programText)
+    var body: some View {
+        NavigationView {
+            VStack {
+                ProgramTabBarHeader(
+                    currentTab: $selectedTab,
+                    tabBarOptions: titles
+                )
+
+                TabView(selection: $selectedTab) {
+                    DayView(contents: "Samstag Programm")
+                        .tag(0)
+
+                    DayView(contents: "Sonntag Programm")
+                        .tag(1)
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .animation(.easeInOut(duration: 0.3), value: selectedTab)
+            }
         }
-        .padding(.vertical)
     }
 }
 

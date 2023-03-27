@@ -5,10 +5,11 @@
 //  Created by Alexander Kauer on 12.03.23.
 //
 
+import CoreUI
 import SwiftUI
 
 public struct ExampleView: View {
-    let text = "Hello, World!"
+    public let text = "Hello, World!"
 
     @StateObject var viewModel = ExampleViewModel()
 
@@ -18,10 +19,14 @@ public struct ExampleView: View {
     public init() {}
 
     public var body: some View {
-        VStack {
-            Text(text)
-                .font(.headline)
-                .padding()
+        VStack(spacing: 16) {
+            HStack(spacing: 16) {
+                Button("Konzert") {}
+                    .buttonStyle(IrfcYellowRoundedButton())
+
+                Button("Konzert") {}
+                    .buttonStyle(IrfcWhiteRoundedButton())
+            }
 
             if isLoading {
                 ProgressView().padding()

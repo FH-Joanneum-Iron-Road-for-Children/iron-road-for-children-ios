@@ -1,0 +1,3 @@
+app_identifier(["at.irfc.app"])
+git_url(ENV["FASTLANE_CERTIFICATES_GIT_URL"])
+type("appstore")

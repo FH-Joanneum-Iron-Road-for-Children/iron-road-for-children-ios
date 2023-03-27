@@ -1,102 +1,118 @@
+---
 name: IronRoadForChildren
-
 fileGroups:
-  - project.yml
-  - README.md
-  - Gemfile
-  - Gemfile.lock
-  - fastlane
-
+- project.yml
+- README.md
+- Gemfile
+- Gemfile.lock
+- fastlane
+- command-line-tools
+- ".github/workflows"
 packages:
-  CoreUI: 
-    path: ./Packages/CoreUI
+  CoreUI:
+    path: "./Packages/CoreUI"
   ExampleMVVM:
-    path: ./Packages/ExampleMVVM
+    path: "./Packages/ExampleMVVM"
   Networking:
-    path: ./Packages/Networking
-
+    path: "./Packages/Networking"
 options:
-  bundleIdPrefix: at.fhj
-
+  bundleIdPrefix: at.irfc.app
+  createIntermediateGroups: true
+  localPackagesGroup: Packages
+  deploymentTarget:
+    iOS: 15.0
+  xcodeVersion: 14.2
+settings:
+  base:
+    DEVELOPMENT_TEAM: 2NQK7PCJGP
 targets:
   IronRoadForChildren:
-    type: application
-    platform: iOS
-    deploymentTarget: "15.0"
+    templates:
+    - AppTarget
     scheme:
       testTargets:
-        - name: IronRoadForChildrenTests
-          randomExecutionOrder: true
-          parallelizable: true
-        - name: IronRoadForChildrenUITests
-          randomExecutionOrder: true
-          parallelizable: true
-        - package: CoreUI/CoreUITests
-          randomExecutionOrder: true
-          parallelizable: true
-        - package: Networking/NetworkingTests
-          randomExecutionOrder: true
-          parallelizable: true
-        - package: ExampleMVVM/ExampleMVVMTests
-          randomExecutionOrder: true
-          parallelizable: true
+      - name: IronRoadForChildrenTests
+        randomExecutionOrder: true
+        parallelizable: true
+      - name: IronRoadForChildrenUITests
+        randomExecutionOrder: true
+        parallelizable: true
+      - package: CoreUI/CoreUITests
+        randomExecutionOrder: true
+        parallelizable: true
+      - package: Networking/NetworkingTests
+        randomExecutionOrder: true
+        parallelizable: true
+      - package: ExampleMVVM/ExampleMVVMTests
+        randomExecutionOrder: true
+        parallelizable: true
     sources:
-      - IronRoadForChildren
+    - IronRoadForChildren
     dependencies:
-      - package: CoreUI
-      - package: ExampleMVVM
+    - package: CoreUI
+    - package: ExampleMVVM
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
-        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
-    info:
-      path: "IronRoadForChildren/SupportingFiles/Info.plist"
-      properties:
-        CFBundleShortVersionString: "0.0.1"
-        CFBundleVersion: "1"
-        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
-        CFBundleDisplayName: "IRFC"
-        CFBundleExecutable: "$(EXECUTABLE_NAME)"
-        CFBundleIdentifier: "at.fhj.irfc"
-        CFBundleInfoDictionaryVersion: "6.0"
-        CFBundleName: "IRFC"
-        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
-        LSRequiresIPhoneOS: true
-        ITSAppUsesNonExemptEncryption: false
-        UIApplicationSceneManifest:
-          UIApplicationSupportsMultipleScenes: false
-
-        UIRequiredDeviceCapabilities:
-          - armv7
-        UISupportedInterfaceOrientations:
-          - UIInterfaceOrientationPortrait
-        UISupportedInterfaceOrientations~ipad:
-          - UIInterfaceOrientationPortrait
-          - UIInterfaceOrientationPortraitUpsideDown
-          - UIInterfaceOrientationLandscapeLeft
-          - UIInterfaceOrientationLandscapeRight
-        UILaunchStoryboardName: LaunchScreen.storyboard
-
+        PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: IronRoadForChildren
+      configs:
+        RELEASE:
+          ONLY_ACTIVE_ARCH: 'NO'
+          PROVISIONING_PROFILE_SPECIFIER: match AppStore at.irfc.app
+          CODE_SIGN_IDENTITY: iPhone Distribution
+        DEBUG:
+          ONLY_ACTIVE_ARCH: 'YES'
+          PROVISIONING_PROFILE_SPECIFIER: match Development at.irfc.app
+          CODE_SIGN_IDENTITY: iPhone Developer
   IronRoadForChildrenTests:
     type: bundle.unit-test
     platform: iOS
     sources:
-      - IronRoadForChildrenTests
+    - IronRoadForChildrenTests
+    dependencies:
+    - target: IronRoadForChildren
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
-        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
-
+        IPHONEOS_DEPLOYMENT_TARGET: '15.0'
+        GENERATE_INFOPLIST_FILE: true
+        TEST_TARGET_NAME: IronRoadForChildren
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/IronRoadForChildren.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IronRoadForChildren"
   IronRoadForChildrenUITests:
     type: bundle.ui-testing
     platform: iOS
     sources:
-      - IronRoadForChildrenUITests
+    - IronRoadForChildrenUITests
+    dependencies:
+    - target: IronRoadForChildren
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "at.fhj.irfc"
-        IPHONEOS_DEPLOYMENT_TARGET: "15.0"
-        INFOPLIST_FILE: "IronRoadForChildren/SupportingFiles/Info.plist"
-        TEST_TARGET_NAME: "IronRoadForChildren"
+        GENERATE_INFOPLIST_FILE: true
+        IPHONEOS_DEPLOYMENT_TARGET: '15.0'
+        TEST_TARGET_NAME: IronRoadForChildren
+targetTemplates:
+  AppTarget:
+    type: application
+    platform: iOS
+    deploymentTarget: '15.0'
+    settings:
+      base:
+        CURRENT_PROJECT_VERSION: 16
+        MARKETING_VERSION: 1.1.0
+        IPHONEOS_DEPLOYMENT_TARGET: '15.0'
+        INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
+        ENABLE_PREVIEWS: true
+        SWIFT_EMIT_LOC_STRINGS: true
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: irfcBlue
+        CODE_SIGN_STYLE: Manual
+        GENERATE_INFOPLIST_FILE: true
+        TARGETED_DEVICE_FAMILY: '1,2'
+        DEVELOPMENT_ASSET_PATHS: IronRoadForChildren/SupportingFiles/PreviewContent
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchStoryboardName: "Launch Screen.storyboard"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait
+          UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight

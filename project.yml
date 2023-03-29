@@ -97,7 +97,7 @@ targetTemplates:
     deploymentTarget: '15.0'
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 16
+        CURRENT_PROJECT_VERSION: 17
         MARKETING_VERSION: 1.1.0
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
@@ -111,7 +111,7 @@ targetTemplates:
         DEVELOPMENT_ASSET_PATHS: IronRoadForChildren/SupportingFiles/PreviewContent
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
-        INFOPLIST_KEY_UILaunchStoryboardName: "Launch Screen.storyboard"
+        INFOPLIST_KEY_UILaunchStoryboardName: Launch Screen.storyboard
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait
           UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft

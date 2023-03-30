@@ -45,7 +45,7 @@ Sync certificates
 [bundle exec] fastlane ios start_ci
 ```
 
-
+Updates build number and version. Creates a new tag based on those and pushes it to origin
 
 ### ios new_build_number_yml
 
@@ -53,7 +53,7 @@ Sync certificates
 [bundle exec] fastlane ios new_build_number_yml
 ```
 
-
+Updates build number in project.yml. If no ':b' parameter is provided, the existing number will be increased by 1
 
 ### ios new_version_yml
 
@@ -61,7 +61,7 @@ Sync certificates
 [bundle exec] fastlane ios new_version_yml
 ```
 
-
+Updates build number in project.yml. If no ':v' parameter is provided, the existing version will be used.
 
 ----
 

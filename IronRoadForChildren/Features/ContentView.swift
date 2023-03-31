@@ -31,31 +31,45 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            NavigationView {
-                ProgramView()
-                    .navigationBarHidden(true)
-            }
-            .tabItem {
-                Label("Program", image: "program")
-            }
+            Group {
+                NavigationView {
+                    ProgramView()
+                        .navigationTitle("Programm")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .tabItem {
+                    Label("Program", image: "program")
+                }
 
-            VoteView()
+                NavigationView {
+                    VoteView()
+                        .navigationTitle("Voting")
+                }
                 .tabItem {
                     Label("Vote", image: "vote")
                 }
 
-            MapView()
+                NavigationView {
+                    MapView()
+                        .navigationTitle("Karte")
+                }
                 .tabItem {
-                    Label("Map", image: "map")
+                    Label("Karte", image: "map")
                 }
 
-            MoreView()
+                NavigationView {
+                    MoreView()
+                        .navigationTitle("Über uns")
+                }
                 .tabItem {
                     Label("More", systemImage: "ellipsis")
                 }
+            }
+            .tint(.irfcBlue)
+            .accentColor(.irfcBlue)
         }
-        .accentColor(.irfcYellow)
         .tint(.irfcYellow)
+        .accentColor(.irfcYellow)
     }
 }
 

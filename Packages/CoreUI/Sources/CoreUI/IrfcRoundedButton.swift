@@ -13,6 +13,7 @@ public struct IrfcYellowRoundedButton: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(8)
+            .foregroundColor(.black)
             .padding(.horizontal, 16)
             .background(Color.irfcYellow)
             .clipShape(Capsule())

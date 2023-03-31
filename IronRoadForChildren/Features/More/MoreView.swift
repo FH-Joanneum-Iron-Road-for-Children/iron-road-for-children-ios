@@ -12,52 +12,58 @@ struct MoreView: View {
     let text = """
     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
     At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     """
 
     var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    Text(text)
-                }
+        List {
+            Section {
+                Text(text)
+            }
 
-                Section {
-                    HStack {
-                        Spacer()
+            Section {
+                HStack {
+                    Spacer()
 
-                        Button(action: {}) {
-                            HStack {
-                                Image("map")
-                                Text("Spenden")
-                            }
+                    Button(action: {}) {
+                        HStack {
+                            Image("map")
+                            Text("Spenden")
                         }
-                        .buttonStyle(IrfcYellowRoundedButton())
-
-                        Spacer()
                     }
-                }
-                .listRowBackground(Color.clear)
+                    .buttonStyle(IrfcYellowRoundedButton())
 
-                Section {
-                    NavigationLink(destination: ImpressumView(), label: {
-                        HStack {
-                            Image(systemName: "info.circle")
-                            Text("Impressum")
-                            Spacer()
-                        }
-                    })
-
-                    NavigationLink(destination: DataPrivacyView(), label: {
-                        HStack {
-                            Image(systemName: "shield")
-                            Text("Datenschutz")
-                            Spacer()
-                        }
-                    })
+                    Spacer()
                 }
             }
-            .navigationTitle("Über uns")
+            .listRowBackground(Color.clear)
+
+            Section {
+                NavigationLink(destination: ImpressumView(), label: {
+                    HStack {
+                        Image(systemName: "info.circle")
+                        Text("Impressum")
+                        Spacer()
+                    }
+                })
+
+                NavigationLink(destination: DataPrivacyView(), label: {
+                    HStack {
+                        Image(systemName: "shield")
+                        Text("Datenschutz")
+                        Spacer()
+                    }
+                })
+            }
+
+            Section {
+                HStack {
+                    Spacer()
+                    Text("Zur Verfügung gestellt vom FH JOANNEUM Studiengang Mobile Software Development")
+                        .font(.caption)
+                    Spacer()
+                }
+            }
+            .listRowBackground(Color.clear)
         }
     }
 }

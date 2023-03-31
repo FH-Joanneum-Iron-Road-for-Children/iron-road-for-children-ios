@@ -14,23 +14,21 @@ struct ProgramView: View {
     @State var selectedTab: Int = 0
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ProgramTabBarHeader(
-                    currentTab: $selectedTab,
-                    tabBarOptions: titles
-                )
+        VStack {
+            ProgramTabBarHeader(
+                currentTab: $selectedTab,
+                tabBarOptions: titles
+            )
 
-                TabView(selection: $selectedTab) {
-                    DayView(contents: "Samstag Programm")
-                        .tag(0)
+            TabView(selection: $selectedTab) {
+                DayView(contents: "Samstag Programm")
+                    .tag(0)
 
-                    DayView(contents: "Sonntag Programm")
-                        .tag(1)
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .animation(.easeInOut(duration: 0.3), value: selectedTab)
+                DayView(contents: "Sonntag Programm")
+                    .tag(1)
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.easeInOut(duration: 0.3), value: selectedTab)
         }
     }
 }
@@ -38,5 +36,11 @@ struct ProgramView: View {
 struct ProgramView_Previews: PreviewProvider {
     static var previews: some View {
         ProgramView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("ios 16")
+
+        ProgramView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+            .previewDisplayName("ios 15")
     }
 }

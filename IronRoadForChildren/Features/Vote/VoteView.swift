@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct VoteView: View {
-    var body: some View {
-        Text("Hello, Vote!")
-    }
+	var body: some View {
+		Text("Hello, Vote!")
+	}
 }
 
 struct VoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        VoteView()
-    }
+	static var previews: some View {
+		VoteView()
+	}
 }

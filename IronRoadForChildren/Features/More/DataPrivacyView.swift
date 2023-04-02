@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DataPrivacyView: View {
-    var body: some View {
-        Text("DataPrivacyView")
-            .navigationTitle("Datenschutz")
-    }
+	var body: some View {
+		Text("DataPrivacyView")
+			.navigationTitle("Datenschutz")
+	}
 }
 
 struct DataPrivacyView_Previews: PreviewProvider {
-    static var previews: some View {
-        DataPrivacyView()
-    }
+	static var previews: some View {
+		DataPrivacyView()
+	}
 }

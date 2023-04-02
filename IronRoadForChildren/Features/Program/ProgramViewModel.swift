@@ -9,5 +9,5 @@ import Foundation
 
 @MainActor
 class ProgramViewModel: ObservableObject {
-    @Published var selectedTab = 0
+	@Published var selectedTab = 0
 }

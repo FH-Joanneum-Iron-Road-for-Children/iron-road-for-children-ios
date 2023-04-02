@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ImpressumView: View {
-    var body: some View {
-        Text("Impressum")
-            .navigationTitle("Impressum")
-    }
+	var body: some View {
+		Text("Impressum")
+			.navigationTitle("Impressum")
+	}
 }
 
 struct ImpressumView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImpressumView()
-    }
+	static var previews: some View {
+		ImpressumView()
+	}
 }

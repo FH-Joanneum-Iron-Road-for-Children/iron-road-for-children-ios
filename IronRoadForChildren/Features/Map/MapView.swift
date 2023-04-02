@@ -8,21 +8,65 @@
 import SwiftUI
 
 struct MapView: View {
-    @State private var scale: CGFloat = 1.0
+    @State private var zoomScale: CGFloat = 1
+    @State private var previousZoomScale: CGFloat = 1
+    private let minZoomScale: CGFloat = 1
+    private let maxZoomScale: CGFloat = 5
+
+    var zoomGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged(onZoomGestureStarted)
+            .onEnded(onZoomGestureEnded)
+    }
 
     var body: some View {
-        Image(systemName: "photo.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 20)
-            .gesture(MagnificationGesture()
-                .onChanged { value in
-                    self.scale = value.magnitude
-                }
-            )
-            .scaleEffect(scale)
-        Spacer()
+        GeometryReader { proxy in
+            ScrollView([.vertical, .horizontal]) {
+                Image("irfcMap")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: proxy.size.width * max(minZoomScale, zoomScale))
+                    .frame(maxHeight: .infinity)
+            }
+            .onTapGesture(count: 2, perform: onImageDoubleTapped)
+            .gesture(zoomGesture)
+        }
+    }
+
+    func onZoomGestureStarted(value: MagnificationGesture.Value) {
+        withAnimation(.easeIn(duration: 0.1)) {
+            let delta = value / previousZoomScale
+            previousZoomScale = value
+            let zoomDelta = zoomScale * delta
+            var minMaxScale = max(minZoomScale, zoomDelta)
+            minMaxScale = min(maxZoomScale, minMaxScale)
+            zoomScale = minMaxScale
+        }
+    }
+
+    func onZoomGestureEnded(value _: MagnificationGesture.Value) {
+        previousZoomScale = 1
+        if zoomScale <= 1 {
+            resetImageState()
+        } else if zoomScale > 5 {
+            zoomScale = 5
+        }
+    }
+
+    func resetImageState() {
+        withAnimation(.interactiveSpring()) {
+            zoomScale = 1
+        }
+    }
+
+    func onImageDoubleTapped() {
+        if zoomScale == 1 {
+            withAnimation(.spring()) {
+                zoomScale = 5
+            }
+        } else {
+            resetImageState()
+        }
     }
 }
 

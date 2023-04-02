@@ -52,6 +52,7 @@ struct ContentView: View {
                 NavigationView {
                     MapView()
                         .navigationTitle("Karte")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("Karte", image: "map")

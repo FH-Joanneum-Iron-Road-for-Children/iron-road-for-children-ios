@@ -58,7 +58,7 @@ struct MoreView: View {
 			Section {
 				HStack {
 					Spacer()
-					Text("Zur Verfügung gestellt vom FH JOANNEUM Studiengang Mobile Software Development")
+					Text("Zur Verfügung gestellt vom Studiengang Mobile Software Development der FH JOANNEUM.")
 						.font(.caption)
 					Spacer()
 				}

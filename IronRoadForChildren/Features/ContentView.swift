@@ -10,46 +10,78 @@ import ExampleMVVM
 import SwiftUI
 
 struct ContentView: View {
-    init() {
-        let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
-        tabBarAppearance.unselectedItemTintColor = UIColor.white
-    }
+	private let irfcYellow = UIColor(.irfcYellow)
+	private let irfcBlue = UIColor(.irfcBlue)
 
-    var body: some View {
-        TabView {
-            ProgramView()
-                .tabItem {
-                    Label("Program", image: "program")
-                }
+	init() {
+		let tabBarAppearance = UITabBarAppearance()
+		tabBarAppearance.configureWithOpaqueBackground()
+		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
+		tabBarAppearance.selectionIndicatorTintColor = UIColor.white
 
-            VoteView()
-                .tabItem {
-                    Label("Vote", image: "vote")
-                }
+		let tabBar = UITabBar.appearance()
+		tabBar.standardAppearance = tabBarAppearance
+		tabBar.scrollEdgeAppearance = tabBarAppearance
 
-            MapView()
-                .tabItem {
-                    Label("Map", image: "map")
-                }
+		tabBar.backgroundColor = UIColor(.irfcBlue)
+		tabBar.unselectedItemTintColor = UIColor.white
+		tabBar.barTintColor = UIColor(.irfcBlue)
+		tabBar.tintColor = UIColor(.irfcBlue)
+	}
 
-            MoreView()
-                .tabItem {
-                    Label("More", systemImage: "ellipsis")
-                }
+	var body: some View {
+		TabView {
+			Group {
+				NavigationView {
+					ProgramView()
+						.navigationTitle("Programm")
+						.navigationBarTitleDisplayMode(.inline)
+				}
+				.tabItem {
+					Label("Program", image: "program")
+				}
 
-            ExampleView()
-                .tabItem {
-                    Label("CoreUI", systemImage: "list.dash")
-                }
-        }
-        .accentColor(.irfcYellow)
-        .tint(.irfcYellow)
-    }
+				NavigationView {
+					VoteView()
+						.navigationTitle("Voting")
+				}
+				.tabItem {
+					Label("Vote", image: "vote")
+				}
+
+				NavigationView {
+					MapView()
+						.navigationTitle("Karte")
+						.navigationBarTitleDisplayMode(.inline)
+				}
+				.tabItem {
+					Label("Karte", image: "map")
+				}
+
+				NavigationView {
+					MoreView()
+						.navigationTitle("Über uns")
+				}
+				.tabItem {
+					Label("More", systemImage: "ellipsis")
+				}
+			}
+			.tint(.irfcBlue)
+			.accentColor(.irfcBlue)
+		}
+		.tint(.irfcYellow)
+		.accentColor(.irfcYellow)
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+			.previewDisplayName("ios 16")
+
+		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+			.previewDisplayName("ios 15")
+	}
 }

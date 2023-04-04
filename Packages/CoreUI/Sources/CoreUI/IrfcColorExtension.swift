@@ -9,6 +9,6 @@ import Foundation
 import SwiftUI
 
 public extension Color {
-    static let irfcYellow = Color("irfcYellow", bundle: .module)
-    static let irfcBlue = Color("irfcBlue", bundle: .module)
+	static let irfcYellow = Color("irfcYellow", bundle: .module)
+	static let irfcBlue = Color("irfcBlue", bundle: .module)
 }

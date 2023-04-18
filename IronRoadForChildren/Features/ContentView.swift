@@ -37,6 +37,7 @@ struct ContentView: View {
 						.navigationTitle("Programm")
 						.navigationBarTitleDisplayMode(.inline)
 				}
+				.navigationViewStyle(.stack)
 				.tabItem {
 					Label("Program", image: "program")
 				}
@@ -45,6 +46,7 @@ struct ContentView: View {
 					VoteView()
 						.navigationTitle("Voting")
 				}
+				.navigationViewStyle(.stack)
 				.tabItem {
 					Label("Vote", image: "vote")
 				}
@@ -54,6 +56,7 @@ struct ContentView: View {
 						.navigationTitle("Karte")
 						.navigationBarTitleDisplayMode(.inline)
 				}
+				.navigationViewStyle(.stack)
 				.tabItem {
 					Label("Karte", image: "map")
 				}
@@ -62,6 +65,7 @@ struct ContentView: View {
 					MoreView()
 						.navigationTitle("Über uns")
 				}
+				.navigationViewStyle(.stack)
 				.tabItem {
 					Label("More", systemImage: "ellipsis")
 				}

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct DayView: View {
-	var contents: String
-
 	var body: some View {
 		VStack {
 			Divider()
@@ -26,7 +24,7 @@ struct DayView: View {
 
 struct DayView_Previews: PreviewProvider {
 	static var previews: some View {
-		DayView(contents: "Tagesprogramm")
+		DayView()
 	}
 }
 

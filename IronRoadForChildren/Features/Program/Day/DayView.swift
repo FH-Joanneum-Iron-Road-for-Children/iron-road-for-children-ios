@@ -9,18 +9,19 @@ import SwiftUI
 
 struct DayView: View {
 	var body: some View {
-		VStack {
-			Divider()
-			ScrollView {
+		ScrollView {
+			VStack {
+				Divider()
 				ForEach(0 ..< 10) { _ in
 					NavigationLink(destination: ProgramItemDelailView()) {
 						ProgramItemView()
-							.padding(.top, 15)
+							.padding(.top, 16)
+							.padding(.horizontal, 24)
 					}
 				}
 			}
+			.padding(.bottom, 16)
 		}
-		.padding(.horizontal, 20)
 	}
 }
 

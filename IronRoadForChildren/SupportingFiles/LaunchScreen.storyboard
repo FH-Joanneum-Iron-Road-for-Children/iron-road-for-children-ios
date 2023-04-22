@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <device id="ipad7_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,45 +14,59 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7eh-QQ-h7O">
-                                <rect key="frame" x="16" y="252.33333333333334" width="396" height="421.33333333333326"/>
+                                <rect key="frame" x="0.0" y="181" width="744" height="771.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="irfcLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="wyr-59-5ai">
-                                        <rect key="frame" x="0.0" y="0.0" width="396" height="396"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="744" height="744"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="wyr-59-5ai" secondAttribute="height" multiplier="1:1" id="dbh-Zk-Xbl"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock. Ride. Help. #IRFC2023" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXZ-0T-SXH">
-                                        <rect key="frame" x="0.0" y="396" width="396" height="25.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="744" width="744" height="27.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-Qy-LsS">
+                                <rect key="frame" x="16" y="1040" width="712" height="41"/>
+                                <string key="text">Zur Verfügung gestellt vom FH JOANNEUM 
+Studiengang Mobile Software Development</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="irfcBlue"/>
                         <constraints>
-                            <constraint firstItem="7eh-QQ-h7O" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="16" id="3KV-iz-FnD"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="bLW-Qy-LsS" secondAttribute="bottom" constant="32" id="2My-7k-7E3"/>
+                            <constraint firstItem="7eh-QQ-h7O" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="3KV-iz-FnD"/>
                             <constraint firstItem="7eh-QQ-h7O" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9WT-rH-uqK"/>
                             <constraint firstItem="7eh-QQ-h7O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="16" id="ORC-Cb-mS2"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="bLW-Qy-LsS" secondAttribute="trailing" constant="16" id="Qh4-x0-tKO"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7eh-QQ-h7O" secondAttribute="bottom" constant="16" id="haJ-cl-TdM"/>
-                            <constraint firstAttribute="trailing" secondItem="7eh-QQ-h7O" secondAttribute="trailing" constant="16" id="jSB-eb-12l"/>
+                            <constraint firstItem="bLW-Qy-LsS" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="16" id="hx8-ds-cmf"/>
+                            <constraint firstAttribute="trailing" secondItem="7eh-QQ-h7O" secondAttribute="trailing" id="jSB-eb-12l"/>
                             <constraint firstItem="7eh-QQ-h7O" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="t1S-tK-jPn"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
+            <point key="canvasLocation" x="51.86915887850467" y="374.51403887688986"/>
         </scene>
     </scenes>
     <resources>
-        <image name="irfcLaunch" width="1240" height="1084"/>
+        <image name="irfcLaunch" width="1940" height="1940"/>
+        <namedColor name="irfcBlue">
+            <color red="0.14100000262260437" green="0.2199999988079071" blue="0.33300000429153442" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

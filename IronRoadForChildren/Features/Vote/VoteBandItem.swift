@@ -10,12 +10,12 @@ import SwiftUI
 struct VoteBandItem: View {
 	@State var bandName: String = "Bandname"
 	@State var bandDescription: String = "Band description test test"
-    @State var choosedBand: Bool = false
+	@State var choosedBand: Bool = false
 	var body: some View {
 		VStack {
 			Image("irfcMap")
 				.resizable()
-                .aspectRatio(contentMode: .fit)
+				.aspectRatio(contentMode: .fit)
 
 			HStack {
 				VStack(alignment: .leading) {
@@ -34,11 +34,11 @@ struct VoteBandItem: View {
 			}
 			.padding()
 			Button(action: {
-                choosedBand = !choosedBand
-            }, label: {
-                Text(choosedBand ? "Abwählen" : "Auswählen").padding()
+				choosedBand = !choosedBand
+			}, label: {
+				Text(choosedBand ? "Abwählen" : "Auswählen").padding()
 
-            }).background(!choosedBand ? Color.irfcYellow : Color.white)
+			}).background(!choosedBand ? Color.irfcYellow : Color.white)
 				.clipShape(Capsule())
 				.padding()
 		}
@@ -46,9 +46,8 @@ struct VoteBandItem: View {
 		.overlay(RoundedRectangle(cornerRadius: 10)
 			.stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 1)
 		)
-        .padding([.top, .horizontal])
-        .background(choosedBand ? Color.irfcYellow : Color.clear)
-        
+		.padding([.top, .horizontal])
+		.background(choosedBand ? Color.irfcYellow : Color.clear)
 	}
 }
 

@@ -14,6 +14,8 @@ struct MoreView: View {
 	At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
 	"""
 
+	@Environment(\.openURL) var openURL
+
 	var body: some View {
 		List {
 			Section {
@@ -24,9 +26,11 @@ struct MoreView: View {
 				HStack {
 					Spacer()
 
-					Button(action: {}) {
+					Button(action: {
+						openURL(URL(string: "https://irfc.at/home/charity/")!)
+					}) {
 						HStack {
-							Image("map")
+							Image("donate")
 							Text("Spenden")
 						}
 					}
@@ -71,5 +75,8 @@ struct MoreView: View {
 struct MoreView_Previews: PreviewProvider {
 	static var previews: some View {
 		MoreView()
+
+		MoreView()
+			.preferredColorScheme(.dark)
 	}
 }

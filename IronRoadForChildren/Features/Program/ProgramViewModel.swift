@@ -14,10 +14,21 @@ class ProgramViewModel: ObservableObject {
 
 	@Published var events: [Event] = []
 	@Published var isLoadingEvents = false
+	@Published var eventsError: String = ""
 
-	@Published var error: String = ""
+	init() {
+		loadEvents()
+	}
 
-	init() {}
+	private func loadEvents() {
+		Task {
+			do {
+				try await fetchEvents()
+			} catch {
+				self.eventsError = error.localizedDescription
+			}
+		}
+	}
 
 	private func fetchEvents() async throws {
 		isLoadingEvents = true

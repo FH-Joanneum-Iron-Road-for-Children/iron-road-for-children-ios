@@ -18,15 +18,20 @@ struct VoteView: View {
 				}
 			}
 			.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-			HStack(spacing: 2) {
+			HStack(spacing: 3) {
 				ForEach(0 ..< 10, id: \.self) { index in
 					Circle()
 						.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
 						.frame(width: 10, height: 10)
 				}
 			}
-			.padding()
-		}.background(Color.clear)
+            Button(action: {}, label: {
+                Text("Stimme abgeben").padding()
+
+            }).background(Color.irfcYellow)
+                .clipShape(Capsule())
+                .padding()
+		}
 	}
 }
 

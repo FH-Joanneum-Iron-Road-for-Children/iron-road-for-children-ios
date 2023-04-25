@@ -17,7 +17,7 @@ struct VoteView: View {
 					VoteBandItem()
 				}
 			}
-			.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+			.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 			HStack(spacing: 3) {
 				ForEach(0 ..< 10, id: \.self) { index in
 					Circle()
@@ -25,12 +25,12 @@ struct VoteView: View {
 						.frame(width: 10, height: 10)
 				}
 			}
-            Button(action: {}, label: {
-                Text("Stimme abgeben").padding()
+			Button(action: {}, label: {
+				Text("Stimme abgeben").padding()
 
-            }).background(Color.irfcYellow)
-                .clipShape(Capsule())
-                .padding()
+			}).background(Color.irfcYellow)
+				.clipShape(Capsule())
+				.padding()
 		}
 	}
 }

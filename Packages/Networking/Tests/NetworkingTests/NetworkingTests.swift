@@ -13,6 +13,8 @@ final class NetworkingTests: XCTestCase {
 		XCTAssertEqual(body.url, "https://postman-echo.com/get")
 	}
 
+	func testGetRequestWithArrayResponse() async throws {}
+
 	private struct TestModel: Codable {
 		let url: String
 	}

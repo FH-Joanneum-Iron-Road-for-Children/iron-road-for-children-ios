@@ -10,22 +10,25 @@ import SwiftUI
 struct ProgramView: View {
 	@StateObject var viewModel = ProgramViewModel()
 
-	var titles = ["Samstag", "Sonntag"]
+	var titles = ["Freitag", "Samstag", "Sonntag"]
 	@State var selectedTab: Int = 0
 
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			ProgramTabBarHeader(
 				currentTab: $selectedTab,
 				tabBarOptions: titles
 			)
 
 			TabView(selection: $selectedTab) {
-				DayView(contents: "Samstag Programm")
+				DayView()
 					.tag(0)
 
-				DayView(contents: "Sonntag Programm")
+				DayView()
 					.tag(1)
+
+				DayView()
+					.tag(2)
 			}
 			.tabViewStyle(.page(indexDisplayMode: .never))
 			.animation(.easeInOut(duration: 0.3), value: selectedTab)

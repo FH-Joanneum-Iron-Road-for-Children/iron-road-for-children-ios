@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct DayView: View {
-	var contents: String
-
 	var body: some View {
-		VStack {
-			Divider()
-			Spacer()
-			Text(contents)
-			Spacer()
+		ScrollView {
+			VStack {
+				ForEach(0 ..< 1) { _ in
+					NavigationLink(destination: ProgramItemDelailView()) {
+						ProgramItemView()
+							.padding(.top, 8)
+							.padding(.horizontal, 16)
+					}
+				}
+			}
+			.padding(.bottom, 16)
 		}
 	}
 }
 
 struct DayView_Previews: PreviewProvider {
 	static var previews: some View {
-		DayView(contents: "Tagesprogramm")
+		DayView()
 	}
 }

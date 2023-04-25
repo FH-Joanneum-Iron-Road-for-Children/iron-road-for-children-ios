@@ -11,8 +11,10 @@ import SwiftUI
 struct MoreView: View {
 	let text = """
 	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-	At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+	At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 	"""
+
+	@Environment(\.openURL) var openURL
 
 	var body: some View {
 		List {
@@ -24,9 +26,11 @@ struct MoreView: View {
 				HStack {
 					Spacer()
 
-					Button(action: {}) {
+					Button(action: {
+						openURL(URL(string: "https://irfc.at/home/charity/")!)
+					}) {
 						HStack {
-							Image("map")
+							Image("donate")
 							Text("Spenden")
 						}
 					}
@@ -58,8 +62,15 @@ struct MoreView: View {
 			Section {
 				HStack {
 					Spacer()
-					Text("Zur Verfügung gestellt vom Studiengang Mobile Software Development der FH JOANNEUM.")
-						.font(.caption)
+
+					Text("""
+					     Zur Verfügung gestellt vom FH JOANNEUM
+					     Studiengang Mobile Software Development.
+					""")
+					.font(.caption)
+					.multilineTextAlignment(.center)
+					.padding()
+
 					Spacer()
 				}
 			}
@@ -71,5 +82,8 @@ struct MoreView: View {
 struct MoreView_Previews: PreviewProvider {
 	static var previews: some View {
 		MoreView()
+
+		MoreView()
+			.preferredColorScheme(.dark)
 	}
 }

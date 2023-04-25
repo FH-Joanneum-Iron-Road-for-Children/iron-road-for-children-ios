@@ -8,46 +8,51 @@
 import SwiftUI
 
 struct ProgramItemView: View {
+	private let rowHeight: CGFloat = 100
+
 	var body: some View {
-		Rectangle()
-			.cornerRadius(10)
-			.frame(height: 80)
-			.foregroundColor(.pink.opacity(0.03))
-			.overlay(
-				RoundedRectangle(cornerRadius: 20)
-					.strokeBorder(Color.gray, lineWidth: 1)
-			)
-			.overlay(
-				HStack {
-					Image(systemName: "person.fill")
-						.resizable()
-						.frame(height: 80)
-						.aspectRatio(1, contentMode: .fit)
-					VStack(alignment: .leading, spacing: 5) {
-						Text("THE BAND THAT HAS A VERY LONG NAME")
-							.fontWeight(.semibold)
-							.lineSpacing(5)
-							.font(.system(size: 16))
-						Text("STAGE HAS ALSO A LONG NAME")
-							.lineLimit(1)
-							.font(.system(size: 15))
-					}
-					// .background(Color.red)
-					Spacer()
-					Text("16:00 - 16:40")
-						.font(.system(size: 16))
-						.fontWeight(.semibold)
-						.padding(.trailing, 5)
-						.lineLimit(1)
-						.fixedSize(horizontal: true, vertical: false)
-				}
-				.padding(.horizontal, 10)
-			)
+		HStack(spacing: 10) {
+			Image("seiler-speer")
+				.resizable()
+				.scaledToFill()
+				.frame(width: rowHeight, height: rowHeight)
+				.clipped()
+
+			VStack(alignment: .leading, spacing: 5) {
+				Text("Seiler & Speer")
+					.font(.headline)
+
+				Text("STAGE HAS ALSO A LONG NAME")
+					.font(.body)
+			}
+
+			Spacer()
+
+			Text("16:00 - 16:40")
+				.font(.system(size: 16))
+				.fontWeight(.semibold)
+				.padding(.trailing, 8)
+				.lineLimit(1)
+				.fixedSize(horizontal: true, vertical: false)
+		}
+		.background(.background)
+		.overlay(
+			RoundedRectangle(cornerRadius: 16)
+				.stroke(.gray, lineWidth: 1)
+		)
+		.cornerRadius(16)
+		.frame(height: rowHeight)
+		.shadow(color: .gray.opacity(0.20), radius: 4)
 	}
 }
 
 struct ProgramItemView_Previews: PreviewProvider {
 	static var previews: some View {
 		ProgramItemView()
+			.padding(8)
+
+		ProgramItemView()
+			.padding(8)
+			.preferredColorScheme(.dark)
 	}
 }

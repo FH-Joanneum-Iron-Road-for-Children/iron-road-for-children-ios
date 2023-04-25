@@ -11,12 +11,11 @@ struct DayView: View {
 	var body: some View {
 		ScrollView {
 			VStack {
-				Divider()
-				ForEach(0 ..< 10) { _ in
+				ForEach(0 ..< 1) { _ in
 					NavigationLink(destination: ProgramItemDelailView()) {
 						ProgramItemView()
-							.padding(.top, 16)
-							.padding(.horizontal, 24)
+							.padding(.top, 8)
+							.padding(.horizontal, 16)
 					}
 				}
 			}

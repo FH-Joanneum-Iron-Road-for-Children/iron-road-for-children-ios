@@ -14,7 +14,7 @@ struct ProgramView: View {
 	@State var selectedTab: Int = 0
 
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			ProgramTabBarHeader(
 				currentTab: $selectedTab,
 				tabBarOptions: titles

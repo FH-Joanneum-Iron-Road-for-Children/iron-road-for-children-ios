@@ -14,23 +14,28 @@ struct ProgramTabBarHeader: View {
 	var tabBarOptions: [String]
 
 	var body: some View {
-		HStack {
-			ForEach(
-				Array(zip(self.tabBarOptions.indices, self.tabBarOptions)),
-				id: \.0
-			) { index, name in
+		VStack(spacing: 0) {
+			HStack {
+				ForEach(
+					Array(zip(self.tabBarOptions.indices, self.tabBarOptions)),
+					id: \.0
+				) { index, name in
 
-				ProgramTabBarItem(
-					currentTab: self.$currentTab,
-					namespace: namespace.self,
-					tabBarItemName: name,
-					tab: index
-				)
+					ProgramTabBarItem(
+						currentTab: self.$currentTab,
+						namespace: namespace.self,
+						tabBarItemName: name,
+						tab: index
+					)
+				}
 			}
+			.frame(maxWidth: .infinity)
+			.frame(height: 30)
+			.padding(.horizontal)
+			.padding(.bottom, 7)
+
+			Divider()
 		}
-		.frame(maxWidth: .infinity)
-		.padding(.horizontal)
-		.frame(height: 30)
 	}
 }
 

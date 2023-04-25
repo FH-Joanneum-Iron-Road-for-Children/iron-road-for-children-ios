@@ -7,7 +7,7 @@
 
 import Foundation
 
-var Current = World()
+var world = World()
 
 struct World {
 	private var serverURLComponents: URLComponents

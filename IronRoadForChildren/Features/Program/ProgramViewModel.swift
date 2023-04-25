@@ -22,7 +22,7 @@ class ProgramViewModel: ObservableObject {
 	private func fetchEvents() async throws {
 		isLoadingEvents = true
 
-		let url = Current.serverUrlWith(path: "/api/events")
+		let url = world.serverUrlWith(path: "/api/events")
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: Event.self)
 
 		events = body

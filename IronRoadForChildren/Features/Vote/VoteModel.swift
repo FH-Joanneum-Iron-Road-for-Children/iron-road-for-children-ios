@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Band: Identifiable {
+	let id = UUID()
+	let bandName: String
+	let description: String
+	let status: Int
+}

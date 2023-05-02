@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ProgramItemDelailView: View {
+	let horizontalPadding: CGFloat = 16
+	// Calculate image width based on screen width and padding
+	let imageWidth = UIScreen.main.bounds.width - (2 * 16)
+
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			Text("BAND NAME")
@@ -15,10 +19,12 @@ struct ProgramItemDelailView: View {
 				.padding(.vertical, 24)
 				.padding(.horizontal, 16)
 
-			Image(systemName: "photo")
+			Image(systemName: "person.2.fill")
 				.resizable()
-				.scaledToFit()
+				.scaledToFill()
+				.frame(width: imageWidth)
 				.frame(maxHeight: 200)
+				.clipped()
 				.padding(.bottom, 16)
 
 			Text("Uhrzeit")
@@ -40,12 +46,12 @@ struct ProgramItemDelailView: View {
 				.padding(.horizontal, 16)
 
 			Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dapibus, arcu at posuere maximus, nibh dui facilisis velit.")
-				.font(.footnote)
+				.font(.body)
 				.lineLimit(4)
 				.padding(.horizontal, 16)
 
 			HStack {
-				Image(systemName: "photo")
+				Image(systemName: "person.2")
 					.resizable()
 					.scaledToFit()
 					.frame(maxHeight: 100)
@@ -59,7 +65,7 @@ struct ProgramItemDelailView: View {
 		}
 		.background(
 			RoundedRectangle(cornerRadius: 10)
-				.fill(Color(red: 1.0, green: 0.96, blue: 0.9))
+				.stroke(lineWidth: 2) // Use stroke instead of fill to draw the frame
 				.shadow(radius: 5, x: 0, y: 5)
 		)
 		.padding(.horizontal, 16)

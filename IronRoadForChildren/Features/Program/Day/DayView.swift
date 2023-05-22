@@ -11,7 +11,7 @@ struct DayView: View {
 	var body: some View {
 		ScrollView {
 			VStack {
-				ForEach(0 ..< 1) { _ in
+				ForEach(0 ..< 10) { _ in
 					NavigationLink(destination: ProgramItemDelailView()) {
 						ProgramItemView()
 							.padding(.top, 8)

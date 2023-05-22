@@ -13,76 +13,100 @@ struct ContentView: View {
 	private let irfcYellow = UIColor(.irfcYellow)
 	private let irfcBlue = UIColor(.irfcBlue)
 
-	private var shouldApplyBackground: Bool {
-		guard #available(iOS 16, *) else {
-			return true
-		}
-		return false
+	init() {
+		let tabBarAppearance = UITabBarAppearance()
+		tabBarAppearance.configureWithOpaqueBackground()
+		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
+
+		let tabBar = UITabBar.appearance()
+		tabBar.standardAppearance = tabBarAppearance
+		tabBar.scrollEdgeAppearance = tabBarAppearance
 	}
 
 	var body: some View {
-		Group {
-			if #available(iOS 16, *) {
-				TabView {
-					tabbarContent
-						.toolbarColorScheme(.dark, for: .tabBar)
+		if #available(iOS 16, *) {
+			TabView {
+				Group {
+					NavigationStack {
+						ProgramView()
+							.navigationTitle("Programm")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Program", image: "program")
+					}
+
+					NavigationStack {
+						VoteView()
+							.navigationTitle("Voting")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Vote", image: "vote")
+					}
+
+					NavigationStack {
+						MapView()
+							.navigationTitle("Karte")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Karte", image: "map")
+					}
+
+					NavigationStack {
+						MoreView()
+							.navigationTitle("Über uns")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("More", systemImage: "ellipsis")
+					}
+				}
+				.tint(.irfcAccentColor)
+			}
+			.tint(.irfcYellow)
+		} else {
+			TabView {
+				NavigationView {
+					ProgramView()
+						.navigationTitle("Programm")
+						.navigationBarTitleDisplayMode(.inline)
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					Label("Program", image: "program")
 				}
 
-			} else {
-				TabView {
-					tabbarContent
+				NavigationView {
+					VoteView()
+						.navigationTitle("Voting")
 				}
-			}
-		}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					Label("Vote", image: "vote")
+				}
 
-		.onAppear {
-			let tabBarAppearance = UITabBarAppearance()
-			tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
+				NavigationView {
+					MapView()
+						.navigationTitle("Karte")
+						.navigationBarTitleDisplayMode(.inline)
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					Label("Karte", image: "map")
+				}
 
-			let tabBar = UITabBar.appearance()
-			tabBar.standardAppearance = tabBarAppearance
-			tabBar.scrollEdgeAppearance = tabBarAppearance
-		}
-	}
-
-	var tabbarContent: some View {
-		Group {
-			NavigationView {
-				ProgramView()
-					.navigationTitle("Programm")
-					.navigationBarTitleDisplayMode(.inline)
-			}
-			.navigationViewStyle(.stack)
-			.tabItem {
-				Label("Program", image: "program")
-			}
-
-			NavigationView {
-				VoteView()
-					.navigationTitle("Voting")
-			}
-			.navigationViewStyle(.stack)
-			.tabItem {
-				Label("Vote", image: "vote")
-			}
-
-			NavigationView {
-				MapView()
-					.navigationTitle("Karte")
-					.navigationBarTitleDisplayMode(.inline)
-			}
-			.navigationViewStyle(.stack)
-			.tabItem {
-				Label("Karte", image: "map")
-			}
-
-			NavigationView {
-				MoreView()
-					.navigationTitle("Über uns")
-			}
-			.navigationViewStyle(.stack)
-			.tabItem {
-				Label("More", systemImage: "ellipsis")
+				NavigationView {
+					MoreView()
+						.navigationTitle("Über uns")
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					Label("Mehr", systemImage: "ellipsis")
+				}
 			}
 		}
 	}

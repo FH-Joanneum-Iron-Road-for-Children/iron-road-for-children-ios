@@ -17,6 +17,7 @@ struct DayView: View {
 							.padding(.top, 8)
 							.padding(.horizontal, 16)
 					}
+					.buttonStyle(PlainButtonStyle())
 				}
 			}
 			.padding(.bottom, 16)

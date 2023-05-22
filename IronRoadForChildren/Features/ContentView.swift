@@ -13,68 +13,78 @@ struct ContentView: View {
 	private let irfcYellow = UIColor(.irfcYellow)
 	private let irfcBlue = UIColor(.irfcBlue)
 
-	init() {
-		let tabBarAppearance = UITabBarAppearance()
-		tabBarAppearance.configureWithOpaqueBackground()
-		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
-		tabBarAppearance.selectionIndicatorTintColor = UIColor.white
-
-		let tabBar = UITabBar.appearance()
-		tabBar.standardAppearance = tabBarAppearance
-		tabBar.scrollEdgeAppearance = tabBarAppearance
-
-		tabBar.backgroundColor = UIColor(.irfcBlue)
-		tabBar.unselectedItemTintColor = UIColor.white
-		tabBar.barTintColor = UIColor(.irfcBlue)
-		tabBar.tintColor = UIColor(.irfcBlue)
+	private var shouldApplyBackground: Bool {
+		guard #available(iOS 16, *) else {
+			return true
+		}
+		return false
 	}
 
 	var body: some View {
-		TabView {
-			Group {
-				NavigationView {
-					ProgramView()
-						.navigationTitle("Programm")
-						.navigationBarTitleDisplayMode(.inline)
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Program", image: "program")
+		Group {
+			if #available(iOS 16, *) {
+				TabView {
+					tabbarContent
+						.toolbarColorScheme(.dark, for: .tabBar)
 				}
 
-				NavigationView {
-					VoteView()
-						.navigationTitle("Voting")
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Vote", image: "vote")
-				}
-
-				NavigationView {
-					MapView()
-						.navigationTitle("Karte")
-						.navigationBarTitleDisplayMode(.inline)
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Karte", image: "map")
-				}
-
-				NavigationView {
-					MoreView()
-						.navigationTitle("Über uns")
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("More", systemImage: "ellipsis")
+			} else {
+				TabView {
+					tabbarContent
 				}
 			}
-			.tint(.irfcBlue)
-			.accentColor(.irfcBlue)
 		}
-		.tint(.irfcYellow)
-		.accentColor(.irfcYellow)
+
+		.onAppear {
+			let tabBarAppearance = UITabBarAppearance()
+			tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
+
+			let tabBar = UITabBar.appearance()
+			tabBar.standardAppearance = tabBarAppearance
+			tabBar.scrollEdgeAppearance = tabBarAppearance
+		}
+	}
+
+	var tabbarContent: some View {
+		Group {
+			NavigationView {
+				ProgramView()
+					.navigationTitle("Programm")
+					.navigationBarTitleDisplayMode(.inline)
+			}
+			.navigationViewStyle(.stack)
+			.tabItem {
+				Label("Program", image: "program")
+			}
+
+			NavigationView {
+				VoteView()
+					.navigationTitle("Voting")
+			}
+			.navigationViewStyle(.stack)
+			.tabItem {
+				Label("Vote", image: "vote")
+			}
+
+			NavigationView {
+				MapView()
+					.navigationTitle("Karte")
+					.navigationBarTitleDisplayMode(.inline)
+			}
+			.navigationViewStyle(.stack)
+			.tabItem {
+				Label("Karte", image: "map")
+			}
+
+			NavigationView {
+				MoreView()
+					.navigationTitle("Über uns")
+			}
+			.navigationViewStyle(.stack)
+			.tabItem {
+				Label("More", systemImage: "ellipsis")
+			}
+		}
 	}
 }
 
@@ -85,7 +95,17 @@ struct ContentView_Previews: PreviewProvider {
 			.previewDisplayName("ios 16")
 
 		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+			.previewDisplayName("ios 16")
+			.preferredColorScheme(.dark)
+
+		ContentView()
 			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
 			.previewDisplayName("ios 15")
+
+		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+			.previewDisplayName("ios 15")
+			.preferredColorScheme(.dark)
 	}
 }

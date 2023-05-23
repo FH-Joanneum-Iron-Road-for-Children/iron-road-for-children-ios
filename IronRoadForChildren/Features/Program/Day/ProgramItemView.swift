@@ -35,6 +35,7 @@ struct ProgramItemView: View {
 				.lineLimit(1)
 				.fixedSize(horizontal: true, vertical: false)
 		}
+		.foregroundColor(.primary)
 		.background(.background)
 		.overlay(
 			RoundedRectangle(cornerRadius: 16)

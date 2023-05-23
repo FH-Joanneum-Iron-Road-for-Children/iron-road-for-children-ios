@@ -22,15 +22,14 @@ struct ProgramItemView: View {
 				Text("Seiler & Speer")
 					.font(.headline)
 
-				Text("STAGE HAS ALSO A LONG NAME")
+				Text("My STAGE")
 					.font(.body)
 			}
 
 			Spacer()
 
 			Text("16:00 - 16:40")
-				.font(.system(size: 16))
-				.fontWeight(.semibold)
+				.font(.body)
 				.padding(.trailing, 8)
 				.lineLimit(1)
 				.fixedSize(horizontal: true, vertical: false)

@@ -17,21 +17,59 @@ struct ContentView: View {
 		let tabBarAppearance = UITabBarAppearance()
 		tabBarAppearance.configureWithOpaqueBackground()
 		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
-		tabBarAppearance.selectionIndicatorTintColor = UIColor.white
 
 		let tabBar = UITabBar.appearance()
 		tabBar.standardAppearance = tabBarAppearance
 		tabBar.scrollEdgeAppearance = tabBarAppearance
-
-		tabBar.backgroundColor = UIColor(.irfcBlue)
-		tabBar.unselectedItemTintColor = UIColor.white
-		tabBar.barTintColor = UIColor(.irfcBlue)
-		tabBar.tintColor = UIColor(.irfcBlue)
 	}
 
 	var body: some View {
-		TabView {
-			Group {
+		if #available(iOS 16, *) {
+			TabView {
+				Group {
+					NavigationStack {
+						ProgramView()
+							.navigationTitle("Programm")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Program", image: "program")
+					}
+
+					NavigationStack {
+						VoteView()
+							.navigationTitle("Voting")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Vote", image: "vote")
+					}
+
+					NavigationStack {
+						MapView()
+							.navigationTitle("Karte")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Karte", image: "map")
+					}
+
+					NavigationStack {
+						MoreView()
+							.navigationTitle("Über uns")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("More", systemImage: "ellipsis")
+					}
+				}
+				.tint(.irfcAccentColor)
+			}
+			.tint(.irfcYellow)
+		} else {
+			TabView {
 				NavigationView {
 					ProgramView()
 						.navigationTitle("Programm")
@@ -67,14 +105,10 @@ struct ContentView: View {
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {
-					Label("More", systemImage: "ellipsis")
+					Label("Mehr", systemImage: "ellipsis")
 				}
 			}
-			.tint(.irfcBlue)
-			.accentColor(.irfcBlue)
 		}
-		.tint(.irfcYellow)
-		.accentColor(.irfcYellow)
 	}
 }
 
@@ -85,7 +119,17 @@ struct ContentView_Previews: PreviewProvider {
 			.previewDisplayName("ios 16")
 
 		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+			.previewDisplayName("ios 16")
+			.preferredColorScheme(.dark)
+
+		ContentView()
 			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
 			.previewDisplayName("ios 15")
+
+		ContentView()
+			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+			.previewDisplayName("ios 15")
+			.preferredColorScheme(.dark)
 	}
 }

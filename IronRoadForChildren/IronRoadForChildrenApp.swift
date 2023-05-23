@@ -15,7 +15,3 @@ struct IronRoadForChildrenApp: App {
 		}
 	}
 }
-
-extension Color {
-	static let irfcAccentColor = Color("accentColor")
-}

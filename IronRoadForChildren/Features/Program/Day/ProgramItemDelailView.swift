@@ -19,7 +19,7 @@ struct ProgramItemDelailView: View {
 				.padding(.vertical, 24)
 				.padding(.horizontal, 16)
 
-			Image(systemName: "person.2.fill")
+			Image("seiler-speer")
 				.resizable()
 				.scaledToFill()
 				.frame(width: imageWidth)
@@ -51,12 +51,12 @@ struct ProgramItemDelailView: View {
 				.padding(.horizontal, 16)
 
 			HStack {
-				Image(systemName: "person.2")
+				Image("seiler-speer")
 					.resizable()
 					.scaledToFit()
 					.frame(maxHeight: 100)
 
-				Image(systemName: "photo")
+				Image("seiler-speer")
 					.resizable()
 					.scaledToFit()
 					.frame(maxHeight: 100)
@@ -65,7 +65,8 @@ struct ProgramItemDelailView: View {
 		}
 		.background(
 			RoundedRectangle(cornerRadius: 10)
-				.stroke(lineWidth: 2) // Use stroke instead of fill to draw the frame
+				.stroke(lineWidth: 1)
+				.foregroundColor(.gray)
 				.shadow(radius: 5, x: 0, y: 5)
 		)
 		.padding(.horizontal, 16)

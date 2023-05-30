@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct ProgramItemDelailView: View {
-	let horizontalPadding: CGFloat = 16
-	// Calculate image width based on screen width and padding
-	let imageWidth = UIScreen.main.bounds.width - (2 * 16)
-
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			Text("BAND NAME")
@@ -22,9 +18,9 @@ struct ProgramItemDelailView: View {
 			Image("seiler-speer")
 				.resizable()
 				.scaledToFill()
-				.frame(width: imageWidth)
 				.frame(maxHeight: 200)
 				.clipped()
+				.padding(.horizontal, 16)
 				.padding(.bottom, 16)
 
 			Text("Uhrzeit")

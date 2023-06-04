@@ -14,6 +14,18 @@ struct VoteBandItem: View {
 	var body: some View {
 		VStack {
 			VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(bandName)
+                            .font(.title)
+                            .fontWeight(.black)
+                            .foregroundColor(.primary)
+                            .lineLimit(3)
+                    }
+                    .layoutPriority(100)
+
+                    Spacer()
+                }.padding()
 				Image("irfcMap")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
@@ -23,29 +35,23 @@ struct VoteBandItem: View {
 						Text(bandDescription)
 							.font(.headline)
 							.foregroundColor(.secondary)
-						Text(bandName)
-							.font(.title)
-							.fontWeight(.black)
-							.foregroundColor(.primary)
-							.lineLimit(3)
 					}
 					.layoutPriority(100)
 
 					Spacer()
 				}.padding()
-                HStack {
-                    Button(action: {
-                                        choosedBand = !choosedBand
-                                    }, label: {
-                                        Text(choosedBand ? "Abwählen" : "Auswählen").padding()
+				HStack {
+					Button(action: {
+						choosedBand = !choosedBand
+					}, label: {
+						Text(choosedBand ? "Abwählen" : "Auswählen").padding()
 
-                                    }).background(Color.irfcYellow)
-                                        .clipShape(Capsule())
-                    Spacer()
-                }
-				
-				
-					.padding()
+					}).background(Color.irfcYellow)
+						.clipShape(Capsule())
+					Spacer()
+				}
+
+				.padding()
 			}
 			.cornerRadius(10)
 			.overlay(RoundedRectangle(cornerRadius: 10)
@@ -53,12 +59,12 @@ struct VoteBandItem: View {
 			)
 			.background(Color.white)
 		}.cornerRadius(20)
-            .frame(width: 300)
+			.frame(width: 300)
 			.overlay(RoundedRectangle(cornerRadius: 10)
 				.stroke(choosedBand ? Color.irfcYellow : Color.clear, lineWidth: 5)
 			)
 			.padding(4)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+			.clipShape(RoundedRectangle(cornerRadius: 10))
 	}
 }
 

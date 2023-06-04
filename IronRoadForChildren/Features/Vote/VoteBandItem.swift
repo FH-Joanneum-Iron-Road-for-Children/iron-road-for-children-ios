@@ -14,26 +14,21 @@ struct VoteBandItem: View {
 	var body: some View {
 		VStack {
 			VStack {
-				HStack {
-        
-						Text(bandName)
-							.font(.title)
-							.fontWeight(.black)
-							.foregroundColor(.primary)
-							.lineLimit(3)
-
-					Spacer()
-                    
-				}.padding()
 				Image("irfcMap")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
 
 				HStack {
-						Text(bandDescription)
-							.font(.headline)
-							.foregroundColor(.secondary)
-
+                    VStack (alignment: .leading) {
+                        Text(bandDescription)
+                                                .font(.headline)
+                                                .foregroundColor(.secondary)
+                                            Text(bandName)
+                                                .font(.title)
+                                                .fontWeight(.black)
+                                                .foregroundColor(.primary)
+                                                .lineLimit(3)
+                    }
 					Spacer()
 				}.padding()
 				HStack {

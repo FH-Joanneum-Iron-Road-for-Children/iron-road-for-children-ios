@@ -14,29 +14,25 @@ struct VoteBandItem: View {
 	var body: some View {
 		VStack {
 			VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(bandName)
-                            .font(.title)
-                            .fontWeight(.black)
-                            .foregroundColor(.primary)
-                            .lineLimit(3)
-                    }
-                    .layoutPriority(100)
+				HStack {
+        
+						Text(bandName)
+							.font(.title)
+							.fontWeight(.black)
+							.foregroundColor(.primary)
+							.lineLimit(3)
 
-                    Spacer()
-                }.padding()
+					Spacer()
+                    
+				}.padding()
 				Image("irfcMap")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
 
 				HStack {
-					VStack(alignment: .leading) {
 						Text(bandDescription)
 							.font(.headline)
 							.foregroundColor(.secondary)
-					}
-					.layoutPriority(100)
 
 					Spacer()
 				}.padding()
@@ -53,11 +49,9 @@ struct VoteBandItem: View {
 
 				.padding()
 			}
-			.cornerRadius(10)
 			.overlay(RoundedRectangle(cornerRadius: 10)
-				.stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 5)
+				.stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 4)
 			)
-			.background(Color.white)
 		}.cornerRadius(20)
 			.frame(width: 300)
 			.overlay(RoundedRectangle(cornerRadius: 10)

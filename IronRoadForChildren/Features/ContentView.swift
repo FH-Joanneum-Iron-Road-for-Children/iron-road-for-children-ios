@@ -26,7 +26,7 @@ struct ContentView: View {
 
 					NavigationStack {
 						VoteView()
-							.navigationTitle("Voting 🗳️")
+							.navigationTitle("Voting")
 					}
 					.navigationViewStyle(.stack)
 					.tabItem {
@@ -35,7 +35,7 @@ struct ContentView: View {
 
 					NavigationStack {
 						MapView()
-							.navigationTitle("Karten 🗺️")
+							.navigationTitle("Karten")
 							.navigationBarTitleDisplayMode(.inline)
 					}
 					.navigationViewStyle(.stack)
@@ -69,7 +69,7 @@ struct ContentView: View {
 
 				NavigationView {
 					VoteView()
-						.navigationTitle("Voting 🗳️")
+						.navigationTitle("Voting")
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {
@@ -78,7 +78,7 @@ struct ContentView: View {
 
 				NavigationView {
 					MapView()
-						.navigationTitle("Karten 🗺️")
+						.navigationTitle("Karten")
 						.navigationBarTitleDisplayMode(.inline)
 				}
 				.navigationViewStyle(.stack)

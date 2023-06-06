@@ -5,12 +5,14 @@
 //  Created by Daniel Zellner on 25.04.23.
 //
 
+import CoreUI
 import SwiftUI
 
 struct VoteBandItem: View {
 	@State var bandName: String = "Bandname"
 	@State var bandDescription: String = "Band description test test"
-	@State var choosedBand: Bool = false
+	@State var choosenBand: Bool = false
+
 	var body: some View {
 		VStack {
 			VStack {
@@ -19,41 +21,44 @@ struct VoteBandItem: View {
 					.aspectRatio(contentMode: .fit)
 
 				HStack {
-                    VStack (alignment: .leading) {
-                        Text(bandDescription)
-                                                .font(.headline)
-                                                .foregroundColor(.secondary)
-                                            Text(bandName)
-                                                .font(.title)
-                                                .fontWeight(.black)
-                                                .foregroundColor(.primary)
-                                                .lineLimit(3)
-                    }
-					Spacer()
-				}.padding()
-				HStack {
-					Button(action: {
-						choosedBand = !choosedBand
-					}, label: {
-						Text(choosedBand ? "Abwählen" : "Auswählen").padding()
+					VStack(alignment: .leading) {
+						Text(bandDescription)
+							.font(.headline)
+							.foregroundColor(.secondary)
 
-					}).background(Color.irfcYellow)
-						.clipShape(Capsule())
+						Text(bandName)
+							.font(.title)
+							.fontWeight(.black)
+							.foregroundColor(.primary)
+							.lineLimit(3)
+					}
+
 					Spacer()
 				}
+				.padding()
 
+				HStack {
+					Button(action: {
+						choosenBand = !choosenBand
+					}) {
+						Text(choosenBand ? "Abwählen" : "Auswählen")
+							.padding(4)
+					}
+					.buttonStyle(IrfcYellowRoundedButton())
+
+					Spacer()
+				}
 				.padding()
 			}
-			.overlay(RoundedRectangle(cornerRadius: 10)
+			.overlay(RoundedRectangle(cornerRadius: 20)
 				.stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 4)
 			)
-		}.cornerRadius(20)
-			.frame(width: 300)
-			.overlay(RoundedRectangle(cornerRadius: 10)
-				.stroke(choosedBand ? Color.irfcYellow : Color.clear, lineWidth: 5)
-			)
-			.padding(4)
-			.clipShape(RoundedRectangle(cornerRadius: 10))
+		}
+		.overlay(RoundedRectangle(cornerRadius: 20)
+			.stroke(choosenBand ? Color.irfcYellow : Color.clear, lineWidth: 5)
+		)
+		.cornerRadius(20)
+		.padding()
 	}
 }
 

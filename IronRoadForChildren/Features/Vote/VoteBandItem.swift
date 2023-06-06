@@ -9,13 +9,13 @@ import CoreUI
 import SwiftUI
 
 struct VoteBandItem: View {
-	@State var bandName: String = "Bandname"
-	@State var bandDescription: String = "Band description test test"
+	@State var bandName: String = "Bandnameasdfasd fasd"
+	@State var bandDescription: String = "Band description test test test test"
 	@State var choosenBand: Bool = false
 
 	var body: some View {
 		VStack {
-			VStack {
+			VStack(spacing: 10) {
 				Image("irfcMap")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
@@ -30,7 +30,7 @@ struct VoteBandItem: View {
 							.font(.title)
 							.fontWeight(.black)
 							.foregroundColor(.primary)
-							.lineLimit(3)
+							.lineLimit(1)
 					}
 
 					Spacer()
@@ -65,5 +65,6 @@ struct VoteBandItem: View {
 struct VoteBandItem_Previews: PreviewProvider {
 	static var previews: some View {
 		VoteBandItem()
+			.frame(height: 300)
 	}
 }

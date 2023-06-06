@@ -34,7 +34,7 @@ struct ContentView: View {
 					}
 
 					NavigationStack {
-						MapView()
+						EventMapView()
 							.navigationTitle("Karten")
 							.navigationBarTitleDisplayMode(.inline)
 					}
@@ -77,7 +77,7 @@ struct ContentView: View {
 				}
 
 				NavigationView {
-					MapView()
+					EventMapView()
 						.navigationTitle("Karten")
 						.navigationBarTitleDisplayMode(.inline)
 				}

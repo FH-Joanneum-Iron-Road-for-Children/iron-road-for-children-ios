@@ -11,31 +11,34 @@ struct VoteView: View {
 	@State private var index = 0
 
 	var body: some View {
-		ScrollView {
-			VStack {
-				VoteHeader()
+		GeometryReader { proxy in
+			ScrollView {
+				VStack(spacing: 0) {
+					VoteHeader()
 
-				TabView(selection: $index) {
-					ForEach(0 ..< 10, id: \.self) { _ in
-						VoteBandItem()
+					TabView(selection: $index) {
+						ForEach(0 ..< 10, id: \.self) { _ in
+							VoteBandItem()
+						}
 					}
-				}
-				.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+					.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+					.frame(height: proxy.size.width + 100)
 
-				HStack {
-					ForEach(0 ..< 10, id: \.self) { index in
-						Circle()
-							.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
-							.frame(width: 10, height: 10)
+					HStack {
+						ForEach(0 ..< 10, id: \.self) { index in
+							Circle()
+								.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
+								.frame(width: 10, height: 10)
+						}
 					}
-				}
 
-				Button(action: {}) {
-					Text("Stimme abgeben").padding()
+					Button(action: {}) {
+						Text("Stimme abgeben").padding()
+					}
+					.background(Color.irfcYellow)
+					.clipShape(Capsule())
+					.padding()
 				}
-				.background(Color.irfcYellow)
-				.clipShape(Capsule())
-				.padding()
 			}
 		}
 	}

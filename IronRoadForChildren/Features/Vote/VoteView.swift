@@ -2,14 +2,36 @@
 //  VoteView.swift
 //  IronRoadForChildren
 //
-//  Created by Alexander Kauer on 15.03.23.
+//  Created by Daniel Zellner on 25.04.23
 //
 
 import SwiftUI
 
 struct VoteView: View {
+	@State private var index = 0
 	var body: some View {
-		Text("Hello, Vote!")
+		VStack {
+			VoteHeader()
+			TabView(selection: $index) {
+				ForEach(0 ..< 10, id: \.self) { _ in
+					VoteBandItem()
+				}
+			}
+			.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+			HStack(spacing: 3) {
+				ForEach(0 ..< 10, id: \.self) { index in
+					Circle()
+						.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
+						.frame(width: 10, height: 10)
+				}
+			}
+			Button(action: {}, label: {
+				Text("Stimme abgeben").padding()
+
+			}).background(Color.irfcYellow)
+				.clipShape(Capsule())
+				.padding()
+		}
 	}
 }
 

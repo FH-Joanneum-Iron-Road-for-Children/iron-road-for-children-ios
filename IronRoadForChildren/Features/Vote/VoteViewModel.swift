@@ -2,7 +2,7 @@
 //  VoteViewModel.swift
 //  IronRoadForChildren
 //
-//  Created by Alexander Kauer on 15.03.23.
+//  Created by Daniel Zellner on 25.04.23
 //
 
 import Foundation

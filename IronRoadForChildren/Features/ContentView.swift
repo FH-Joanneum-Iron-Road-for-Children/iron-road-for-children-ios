@@ -10,19 +10,6 @@ import ExampleMVVM
 import SwiftUI
 
 struct ContentView: View {
-	private let irfcYellow = UIColor(.irfcYellow)
-	private let irfcBlue = UIColor(.irfcBlue)
-
-	init() {
-		let tabBarAppearance = UITabBarAppearance()
-		tabBarAppearance.configureWithOpaqueBackground()
-		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
-
-		let tabBar = UITabBar.appearance()
-		tabBar.standardAppearance = tabBarAppearance
-		tabBar.scrollEdgeAppearance = tabBarAppearance
-	}
-
 	var body: some View {
 		if #available(iOS 16, *) {
 			TabView {
@@ -47,8 +34,8 @@ struct ContentView: View {
 					}
 
 					NavigationStack {
-						MapView()
-							.navigationTitle("Karte")
+						EventMapView()
+							.navigationTitle("Karten")
 							.navigationBarTitleDisplayMode(.inline)
 					}
 					.navigationViewStyle(.stack)
@@ -90,13 +77,13 @@ struct ContentView: View {
 				}
 
 				NavigationView {
-					MapView()
-						.navigationTitle("Karte")
+					EventMapView()
+						.navigationTitle("Karten")
 						.navigationBarTitleDisplayMode(.inline)
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {
-					Label("Karte", image: "map")
+					Label("Karten", image: "map")
 				}
 
 				NavigationView {

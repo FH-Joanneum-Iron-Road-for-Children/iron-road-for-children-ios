@@ -51,6 +51,8 @@ struct MoreView: View {
 						Text("Impressum")
 						Spacer()
 						Image(systemName: "chevron.right")
+							.imageScale(.small)
+							.font(.body.weight(.semibold))
 					}
 				}
 
@@ -60,6 +62,8 @@ struct MoreView: View {
 						Text("Datenschutz")
 						Spacer()
 						Image(systemName: "chevron.right")
+							.imageScale(.small)
+							.font(.body.weight(.semibold))
 					}
 				}
 			}

@@ -9,15 +9,13 @@ import SwiftUI
 
 struct VoteHeader: View {
 	var textHeader = """
-	Hier hast du die Möglichkeit für deine Lieblingsband einmalig abzustimmen
-
-	Die Band mit den meisten Stimmen bekommt die Möglichkeit bei NovaRock aufzutreten
+	Hier hast du die Möglichkeit für deine Lieblingsband einmalig abzustimmen.
+	Die Band mit den meisten Stimmen bekommt die Möglichkeit bei NovaRock aufzutreten.
 	"""
 
 	var body: some View {
-		Section {
-			Text(textHeader)
-		}
+		Text(textHeader)
+			.padding()
 	}
 }
 

@@ -16,9 +16,13 @@ struct FiltersRowView: View {
 				ForEach(programViewModel.eventCategories, id: \.eventCategoryId) { category in
 					FilterButtonView(
 						buttonText: category.name,
-						isActive: category.eventCategoryId == programViewModel.filteredCategorie?.eventCategoryId,
+						isActive: category == programViewModel.filteredCategorie,
 						click: {
-							programViewModel.filteredCategorie = category
+							if programViewModel.filteredCategorie == category {
+								programViewModel.filteredCategorie = nil
+							} else {
+								programViewModel.filteredCategorie = category
+							}
 						}
 					)
 				}

@@ -23,7 +23,7 @@ struct Event: Codable, Identifiable {
 	}
 }
 
-struct EventCategory: Codable, Identifiable {
+struct EventCategory: Codable, Identifiable, Equatable {
 	let eventCategoryId: Int
 	let name: String
 

@@ -21,7 +21,6 @@ struct ProgramView: View {
 			)
 
 			FiltersRowView()
-				.padding(16)
 
 			TabView(selection: $selectedTab) {
 				DayView()

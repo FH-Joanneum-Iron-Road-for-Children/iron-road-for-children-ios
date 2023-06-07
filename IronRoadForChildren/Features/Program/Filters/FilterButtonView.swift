@@ -5,6 +5,7 @@
 //  Created by Robert Zavaczki on 05.06.23.
 //
 
+import CoreUI
 import SwiftUI
 
 struct FilterButtonView: View {
@@ -12,22 +13,16 @@ struct FilterButtonView: View {
 	@Binding var isActive: Bool
 
 	var body: some View {
-		Button(action: {
-			isActive = true
+		Button(buttonText) {
+			isActive.toggle()
 			print("\(buttonText) was filtered")
-		}) {
-			Text(buttonText)
-				.font(.headline)
-				.foregroundColor(isActive ? Color.black : Color.primary)
-				.padding(.vertical, 8)
-				.padding(.horizontal, 24)
-				.background(isActive ? Color.irfcYellow : Color.clear)
-				.cornerRadius(20)
-				.overlay(
-					RoundedRectangle(cornerRadius: 20)
-						.stroke(Color.gray, lineWidth: 1)
-						.shadow(radius: 3, x: 0, y: 2)
-				)
+		}
+		.padding()
+		.ifTrue(isActive) { view in
+			view.buttonStyle(IrfcYellowRoundedButton())
+		}
+		.ifTrue(!isActive) { view in
+			view.buttonStyle(IrfcWhiteRoundedButton())
 		}
 	}
 }

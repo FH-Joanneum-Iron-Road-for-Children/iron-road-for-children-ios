@@ -37,7 +37,7 @@ public struct IrfcWhiteRoundedButton: ButtonStyle {
 			)
 			.overlay(
 				RoundedRectangle(cornerRadius: 32)
-					.stroke(Color.textColor, lineWidth: 2)
+					.stroke(Color.textColor, lineWidth: 1)
 			)
 			.opacity(configuration.isPressed ? 0.7 : 1.0)
 	}

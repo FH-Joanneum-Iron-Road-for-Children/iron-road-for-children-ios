@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FiltersRowView: View {
-	let filterCategories: [String] = ["Musik", "Tattoo", "Ausfahrt", "Essen"]
+	let filterCategories = ["Musik", "Tattoo", "Ausfahrt", "Essen"]
 	@State private var selectedFilter: String?
 
 	var body: some View {
@@ -19,7 +19,6 @@ struct FiltersRowView: View {
 						get: { selectedFilter == category },
 						set: { if $0 { selectedFilter = category } }
 					))
-					.padding(.horizontal)
 				}
 			}
 		}

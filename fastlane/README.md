@@ -39,6 +39,14 @@ Sync certificates
 
 
 
+### ios release_irfc_beta
+
+```sh
+[bundle exec] fastlane ios release_irfc_beta
+```
+
+
+
 ### ios start_ci
 
 ```sh

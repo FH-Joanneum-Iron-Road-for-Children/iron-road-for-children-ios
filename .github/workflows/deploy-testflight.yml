@@ -40,7 +40,7 @@ jobs:
           spec: project.yml
           use-cache: true
 
-      - name: Publish to TestFlight
+      - name: Publish Beta to TestFlight
         run: bundle exec fastlane release_irfc_beta
         env:
           FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}

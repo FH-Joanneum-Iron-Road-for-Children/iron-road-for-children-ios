@@ -23,6 +23,8 @@ public struct IrfcYellowRoundedButton: ButtonStyle {
 }
 
 public struct IrfcWhiteRoundedButton: ButtonStyle {
+	@Environment(\.colorScheme) private var colorScheme
+
 	public init() {}
 
 	public func makeBody(configuration: Configuration) -> some View {
@@ -33,12 +35,16 @@ public struct IrfcWhiteRoundedButton: ButtonStyle {
 			.background(
 				RoundedRectangle(cornerRadius: 32)
 					.fill(Color.whiteBlack)
-					.shadow(color: .gray, radius: 2, x: 0, y: 2)
+					.ifTrue(colorScheme == .light) { view in
+						view.shadow(radius: 3)
+					}
 			)
-			.overlay(
-				RoundedRectangle(cornerRadius: 32)
-					.stroke(Color.textColor, lineWidth: 1)
-			)
+			.ifTrue(colorScheme == .dark) { view in
+				view.overlay(
+					RoundedRectangle(cornerRadius: 32)
+						.stroke(Color.textColor, lineWidth: 1)
+				)
+			}
 			.opacity(configuration.isPressed ? 0.7 : 1.0)
 	}
 }

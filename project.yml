@@ -46,11 +46,6 @@ targets:
       - package: ExampleMVVM/ExampleMVVMTests
         randomExecutionOrder: true
         parallelizable: true
-    sources:
-    - IronRoadForChildren
-    dependencies:
-    - package: CoreUI
-    - package: ExampleMVVM
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app
@@ -64,6 +59,23 @@ targets:
         DEBUG:
           ONLY_ACTIVE_ARCH: 'YES'
           PROVISIONING_PROFILE_SPECIFIER: match Development at.irfc.app
+          CODE_SIGN_IDENTITY: iPhone Developer
+  IronRoadForChildrenBeta:
+    templates:
+      - AppTarget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app.beta
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: IronRoadForChildrenBeta
+      configs:
+        RELEASE:
+          ONLY_ACTIVE_ARCH: 'NO'
+          PROVISIONING_PROFILE_SPECIFIER: match AppStore at.irfc.app.beta
+          CODE_SIGN_IDENTITY: iPhone Distribution
+        DEBUG:
+          ONLY_ACTIVE_ARCH: 'YES'
+          PROVISIONING_PROFILE_SPECIFIER: match Development at.irfc.app.beta
           CODE_SIGN_IDENTITY: iPhone Developer
   IronRoadForChildrenTests:
     type: bundle.unit-test
@@ -95,6 +107,11 @@ targetTemplates:
     type: application
     platform: iOS
     deploymentTarget: '15.0'
+    sources:
+    - IronRoadForChildren
+    dependencies:
+    - package: CoreUI
+    - package: ExampleMVVM
     settings:
       base:
         CURRENT_PROJECT_VERSION: 26

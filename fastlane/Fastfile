@@ -90,6 +90,23 @@ platform :ios do
     )
   end
 
+  lane :release_irfc_beta do
+    sync_certificates
+
+    build_app(
+        project: "IronRoadForChildren.xcodeproj",
+        scheme: "IronRoadForChildren",
+        output_name: "IronRoadForChildren.ipa",
+        output_directory: "./build/",
+        export_method: "app-store"
+    )
+
+    upload_to_testflight(
+      ipa: "./build/IronRoadForChildren.ipa",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
   desc "Updates build number and version. Creates a new tag based on those and pushes it to origin"
   lane :start_ci do |options|
     UI.message("Starting to create new version ...")

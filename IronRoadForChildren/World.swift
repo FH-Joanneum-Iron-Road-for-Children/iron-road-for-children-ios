@@ -10,20 +10,10 @@ import Foundation
 var world = World()
 
 struct World {
-	private var serverURLComponents: URLComponents
-
-	var serverURL: URL {
-		serverURLComponents.url!
-	}
-
-	init() {
-		serverURLComponents = URLComponents()
-		serverURLComponents.scheme = "https"
-		serverURLComponents.host = "backend.irfc-test.fh-joanneum.at"
-	}
+	private(set) var config = Config()
 
 	func serverUrlWith(path: String) -> URL {
-		var components = serverURLComponents
+		var components = config.serverURLComponents
 		components.path = path
 		return components.url!
 	}

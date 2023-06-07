@@ -40,6 +40,15 @@ jobs:
           spec: project.yml
           use-cache: true
 
+      - name: Publish Beta to TestFlight
+        run: bundle exec fastlane release_irfc_beta
+        env:
+          FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
       - name: Publish to TestFlight
         run: bundle exec fastlane release_irfc
         env:

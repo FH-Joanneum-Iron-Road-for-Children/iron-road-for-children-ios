@@ -86,6 +86,7 @@ platform :ios do
 
     upload_to_testflight(
       ipa: "./build/IronRoadForChildren.ipa",
+      app_identifier: "at.irfc.app",
       skip_waiting_for_build_processing: true
     )
   end
@@ -103,6 +104,7 @@ platform :ios do
 
     upload_to_testflight(
       ipa: "./build/IronRoadForChildrenBeta.ipa",
+      app_identifier: "at.irfc.app.beta",
       skip_waiting_for_build_processing: true
     )
   end

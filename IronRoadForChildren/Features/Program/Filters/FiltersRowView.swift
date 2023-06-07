@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct FiltersRowView: View {
-	let filterCategories = ["Musik", "Tattoo", "Ausfahrt", "Essen"]
-	@State private var selectedFilter: String?
+	@EnvironmentObject var programViewModel: ProgramViewModel
 
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack {
-				ForEach(filterCategories, id: \.self) { category in
-					FilterButtonView(buttonText: category, isActive: Binding(
-						get: { selectedFilter == category },
-						set: { if $0 { selectedFilter = category } }
-					))
+				ForEach(programViewModel.eventCategories, id: \.eventCategoryId) { category in
+					FilterButtonView(
+						buttonText: category.name,
+						isActive: category.eventCategoryId == programViewModel.filteredCategorie?.eventCategoryId,
+						click: {
+							programViewModel.filteredCategorie = category
+						}
+					)
 				}
 			}
 		}
@@ -28,5 +30,6 @@ struct FiltersRowView: View {
 struct FiltersRowView_Previews: PreviewProvider {
 	static var previews: some View {
 		FiltersRowView()
+			.environmentObject(ProgramViewModel())
 	}
 }

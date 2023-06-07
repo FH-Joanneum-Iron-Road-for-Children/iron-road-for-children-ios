@@ -23,9 +23,13 @@ struct Event: Codable, Identifiable {
 	}
 }
 
-struct EventCategory: Codable {
+struct EventCategory: Codable, Identifiable {
 	let eventCategoryId: Int
 	let name: String
+
+	var id: Int {
+		return eventCategoryId
+	}
 }
 
 struct EventLocation: Codable {
@@ -42,7 +46,7 @@ struct EventInfo: Codable {
 struct EventDay: Equatable {
 	let id = UUID()
 	let name: String
-	let events: [Event]
+	var events: [Event]
 
 	static func == (lhs: EventDay, rhs: EventDay) -> Bool {
 		lhs.id == rhs.id

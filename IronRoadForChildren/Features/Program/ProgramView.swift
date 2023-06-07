@@ -14,9 +14,7 @@ struct ProgramView: View {
 
 	var body: some View {
 		VStack {
-			if viewModel.isLoadingEvents {
-				ProgressView()
-			} else if let errorDesc = viewModel.error {
+			if let errorDesc = viewModel.error {
 				VStack {
 					Text("Es ist ein Fehler aufgetreten.")
 						.multilineTextAlignment(.center)
@@ -37,28 +35,36 @@ struct ProgramView: View {
 				}
 			} else {
 				VStack(spacing: 0) {
-					ProgramTabBarHeader(
-						currentTab: $selectedTab,
-						tabBarOptions: viewModel.dayEvents.map { $0.name }
-					)
+					if !viewModel.dayEvents.isEmpty {
+						ProgramTabBarHeader(
+							currentTab: $selectedTab,
+							tabBarOptions: viewModel.dayEvents.map { $0.name }
+						)
+					}
 
 					if viewModel.isLoadingCategories {
 						ProgressView()
 							.padding()
 					} else {
 						FiltersRowView()
+							.environmentObject(viewModel)
 					}
 
-					TabView(selection: $selectedTab) {
-						ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
-							DayView(events: day.events)
-								.tag(index)
+					if viewModel.isLoadingEvents {
+						Spacer()
+						ProgressView()
+						Spacer()
+					} else {
+						TabView(selection: $selectedTab) {
+							ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
+								DayView(events: day.events)
+									.tag(index)
+							}
 						}
+						.tabViewStyle(.page(indexDisplayMode: .never))
+						.animation(.easeInOut(duration: 0.3), value: selectedTab)
 					}
-					.tabViewStyle(.page(indexDisplayMode: .never))
-					.animation(.easeInOut(duration: 0.3), value: selectedTab)
 				}
-				.animation(.easeIn, value: viewModel.dayEvents)
 			}
 		}
 	}
@@ -66,12 +72,10 @@ struct ProgramView: View {
 
 struct ProgramView_Previews: PreviewProvider {
 	static var previews: some View {
-		ProgramView()
-			.previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-			.previewDisplayName("ios 16")
-
-		ProgramView()
-			.previewDevice(PreviewDevice(rawValue: "iPhone 13"))
-			.previewDisplayName("ios 15")
+		NavigationView {
+			ProgramView()
+				.navigationTitle("Program")
+				.navigationBarTitleDisplayMode(.inline)
+		}
 	}
 }

@@ -97,7 +97,7 @@ targetTemplates:
     deploymentTarget: '15.0'
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 25
+        CURRENT_PROJECT_VERSION: 26
         MARKETING_VERSION: 1.1.0
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist

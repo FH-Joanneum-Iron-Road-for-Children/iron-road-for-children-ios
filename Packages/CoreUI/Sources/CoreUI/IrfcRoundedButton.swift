@@ -23,18 +23,28 @@ public struct IrfcYellowRoundedButton: ButtonStyle {
 }
 
 public struct IrfcWhiteRoundedButton: ButtonStyle {
+	@Environment(\.colorScheme) private var colorScheme
+
 	public init() {}
 
 	public func makeBody(configuration: Configuration) -> some View {
 		configuration.label
-			.foregroundColor(.black)
+			.foregroundColor(.textColor)
 			.padding(8)
 			.padding(.horizontal, 16)
 			.background(
 				RoundedRectangle(cornerRadius: 32)
-					.fill(Color.white)
-					.shadow(color: .gray, radius: 2, x: 0, y: 2)
+					.fill(Color.whiteBlack)
+					.ifTrue(colorScheme == .light) { view in
+						view.shadow(radius: 3)
+					}
 			)
+			.ifTrue(colorScheme == .dark) { view in
+				view.overlay(
+					RoundedRectangle(cornerRadius: 32)
+						.stroke(Color.textColor, lineWidth: 1)
+				)
+			}
 			.opacity(configuration.isPressed ? 0.7 : 1.0)
 	}
 }

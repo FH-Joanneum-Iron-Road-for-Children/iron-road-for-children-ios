@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Codable, Identifiable {
+struct Event: Codable, Equatable, Identifiable {
 	let eventId: Int
 	let title: String
 	//    let pricture: Picture // add later
@@ -17,13 +17,12 @@ struct Event: Codable, Identifiable {
 	let eventCategory: EventCategory
 	let eventInfo: EventInfo
 
-	// TODO: maybe replace with coding keys
 	var id: Int {
 		return eventId
 	}
 }
 
-struct EventCategory: Codable, Identifiable, Equatable {
+struct EventCategory: Codable, Equatable, Identifiable {
 	let eventCategoryId: Int
 	let name: String
 
@@ -32,23 +31,27 @@ struct EventCategory: Codable, Identifiable, Equatable {
 	}
 }
 
-struct EventLocation: Codable {
+struct EventLocation: Codable, Equatable, Identifiable {
 	let eventLocationId: Int
 	let name: String
+
+	var id: Int {
+		return eventLocationId
+	}
 }
 
-struct EventInfo: Codable {
+struct EventInfo: Codable, Equatable, Identifiable {
 	let eventInfoId: Int
 	let infoText: String
 	//    let pictures: [Pictures] // add later
+
+	var id: Int {
+		return eventInfoId
+	}
 }
 
-struct EventDay: Equatable {
+struct EventDay: Equatable, Identifiable {
 	let id = UUID()
 	let name: String
 	var events: [Event]
-
-	static func == (lhs: EventDay, rhs: EventDay) -> Bool {
-		lhs.id == rhs.id
-	}
 }

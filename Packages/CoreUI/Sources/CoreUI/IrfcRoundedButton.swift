@@ -27,13 +27,17 @@ public struct IrfcWhiteRoundedButton: ButtonStyle {
 
 	public func makeBody(configuration: Configuration) -> some View {
 		configuration.label
-			.foregroundColor(.black)
+			.foregroundColor(.textColor)
 			.padding(8)
 			.padding(.horizontal, 16)
 			.background(
 				RoundedRectangle(cornerRadius: 32)
-					.fill(Color.white)
+					.fill(Color.whiteBlack)
 					.shadow(color: .gray, radius: 2, x: 0, y: 2)
+			)
+			.overlay(
+				RoundedRectangle(cornerRadius: 32)
+					.stroke(Color.textColor, lineWidth: 2)
 			)
 			.opacity(configuration.isPressed ? 0.7 : 1.0)
 	}

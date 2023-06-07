@@ -39,7 +39,12 @@ struct EventInfo: Codable {
 	//    let pictures: [Pictures] // add later
 }
 
-struct EventDay {
+struct EventDay: Equatable {
+	let id = UUID()
 	let name: String
 	let events: [Event]
+
+	static func == (lhs: EventDay, rhs: EventDay) -> Bool {
+		lhs.id == rhs.id
+	}
 }

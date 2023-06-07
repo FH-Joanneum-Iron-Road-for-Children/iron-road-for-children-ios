@@ -12,25 +12,28 @@ struct ProgramView: View {
 	@State var selectedTab: Int = 0
 
 	var body: some View {
-		if viewModel.isLoadingEvents {
-			ProgressView()
-		} else {
-			VStack(spacing: 0) {
-				ProgramTabBarHeader(
-					currentTab: $selectedTab,
-					tabBarOptions: viewModel.dayEvents.map { $0.name }
-				)
+		VStack {
+			if viewModel.isLoadingEvents {
+				ProgressView()
+			} else {
+				VStack(spacing: 0) {
+					ProgramTabBarHeader(
+						currentTab: $selectedTab,
+						tabBarOptions: viewModel.dayEvents.map { $0.name }
+					)
 
-				FiltersRowView()
+					FiltersRowView()
 
-				TabView(selection: $selectedTab) {
-					ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
-						DayView(events: day.events)
-							.tag(index)
+					TabView(selection: $selectedTab) {
+						ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
+							DayView(events: day.events)
+								.tag(index)
+						}
 					}
+					.tabViewStyle(.page(indexDisplayMode: .never))
+					.animation(.easeInOut(duration: 0.3), value: selectedTab)
 				}
-				.tabViewStyle(.page(indexDisplayMode: .never))
-				.animation(.easeInOut(duration: 0.3), value: selectedTab)
+				.animation(.easeIn, value: viewModel.dayEvents)
 			}
 		}
 	}

@@ -13,8 +13,8 @@ class ProgramViewModel: ObservableObject {
 	@Published var selectedTab = 0
 
 	@Published var dayEvents: [EventDay] = []
-
 	@Published var isLoadingEvents = false
+
 	@Published var eventsError: String = ""
 
 	init() {
@@ -22,9 +22,9 @@ class ProgramViewModel: ObservableObject {
 	}
 
 	private func loadEvents() {
-		Task {
+		Task.detached { @MainActor in
 			do {
-				try await fetchEvents()
+				try await self.fetchEvents()
 			} catch {
 				self.eventsError = error.localizedDescription
 			}

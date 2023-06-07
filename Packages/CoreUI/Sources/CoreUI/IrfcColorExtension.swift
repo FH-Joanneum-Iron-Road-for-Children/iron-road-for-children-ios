@@ -13,4 +13,5 @@ public extension Color {
 	static let irfcYellow = Color("irfcYellow", bundle: .module)
 	static let irfcBlue = Color("irfcBlue", bundle: .module)
 	static let textColor = Color("textColor", bundle: .module)
+	static let whiteBlack = Color("whiteBlack", bundle: .module)
 }

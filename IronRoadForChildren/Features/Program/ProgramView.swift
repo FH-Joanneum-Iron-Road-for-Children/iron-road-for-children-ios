@@ -20,6 +20,8 @@ struct ProgramView: View {
 				tabBarOptions: titles
 			)
 
+			FiltersRowView()
+
 			TabView(selection: $selectedTab) {
 				DayView()
 					.tag(0)

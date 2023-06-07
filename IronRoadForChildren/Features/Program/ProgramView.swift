@@ -16,7 +16,7 @@ struct ProgramView: View {
 		VStack {
 			if viewModel.isLoadingEvents {
 				ProgressView()
-			} else if let errorDesc = viewModel.eventsError {
+			} else if let errorDesc = viewModel.error {
 				VStack {
 					Text("Es ist ein Fehler aufgetreten.")
 						.multilineTextAlignment(.center)
@@ -42,7 +42,12 @@ struct ProgramView: View {
 						tabBarOptions: viewModel.dayEvents.map { $0.name }
 					)
 
-					FiltersRowView()
+					if viewModel.isLoadingCategories {
+						ProgressView()
+							.padding()
+					} else {
+						FiltersRowView()
+					}
 
 					TabView(selection: $selectedTab) {
 						ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in

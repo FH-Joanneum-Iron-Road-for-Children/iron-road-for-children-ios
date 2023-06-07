@@ -17,6 +17,6 @@ struct Config: BaseConfig {
 	init() {
 		serverURLComponents = URLComponents()
 		serverURLComponents.scheme = "https"
-		serverURLComponents.host = "backend.irfc.st-ki.at"
+		serverURLComponents.host = "backend.irfc.fh-joanneum.at"
 	}
 }

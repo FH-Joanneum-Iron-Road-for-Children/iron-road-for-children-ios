@@ -5,6 +5,7 @@
 //  Created by Alexander Kauer on 15.03.23.
 //
 
+import CoreUI
 import SwiftUI
 
 struct ProgramView: View {
@@ -15,6 +16,25 @@ struct ProgramView: View {
 		VStack {
 			if viewModel.isLoadingEvents {
 				ProgressView()
+			} else if let errorDesc = viewModel.eventsError {
+				VStack {
+					Text("Es ist ein Fehler aufgetreten.")
+						.multilineTextAlignment(.center)
+						.padding(.horizontal)
+
+					Text(errorDesc)
+						.multilineTextAlignment(.center)
+						.font(.caption)
+						.padding()
+						.padding(.horizontal)
+						.padding(.horizontal)
+
+					Button("Erneut versuchen") {
+						viewModel.loadEvents()
+					}
+					.buttonStyle(IrfcYellowRoundedButton())
+					.padding(.horizontal)
+				}
 			} else {
 				VStack(spacing: 0) {
 					ProgramTabBarHeader(

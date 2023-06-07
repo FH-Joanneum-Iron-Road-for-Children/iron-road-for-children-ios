@@ -15,17 +15,19 @@ class ProgramViewModel: ObservableObject {
 	@Published var dayEvents: [EventDay] = []
 	@Published var isLoadingEvents = false
 
-	@Published var eventsError: String = ""
+	@Published var eventsError: String? = nil
 
 	init() {
 		loadEvents()
 	}
 
-	private func loadEvents() {
+	func loadEvents() {
 		Task.detached { @MainActor in
 			do {
+				self.eventsError = nil
 				try await self.fetchEvents()
 			} catch {
+				self.isLoadingEvents = false
 				self.eventsError = error.localizedDescription
 			}
 		}

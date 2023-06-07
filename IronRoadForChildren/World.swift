@@ -19,7 +19,7 @@ struct World {
 	init() {
 		serverURLComponents = URLComponents()
 		serverURLComponents.scheme = "https"
-		serverURLComponents.host = "backend.irfc.st-ki.at"
+		serverURLComponents.host = "backend.irfc-test.fh-joanneum.at"
 	}
 
 	func serverUrlWith(path: String) -> URL {

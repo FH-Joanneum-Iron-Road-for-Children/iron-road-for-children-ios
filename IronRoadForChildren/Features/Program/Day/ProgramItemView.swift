@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProgramItemView: View {
+	let event: Event
+
 	private let rowHeight: CGFloat = 100
 
 	var body: some View {
@@ -19,16 +21,16 @@ struct ProgramItemView: View {
 				.clipped()
 
 			VStack(alignment: .leading, spacing: 5) {
-				Text("Seiler & Speer")
+				Text(event.title)
 					.font(.headline)
 
-				Text("My STAGE")
+				Text(event.eventLocation.name)
 					.font(.body)
 			}
 
 			Spacer()
 
-			Text("16:00 - 16:40")
+			Text("\(DateFormatter.localTime(of: event.startDateTimeInUTC)) - \(DateFormatter.localTime(of: event.endDateTimeInUTC))")
 				.font(.body)
 				.padding(.trailing, 8)
 				.lineLimit(1)
@@ -46,13 +48,23 @@ struct ProgramItemView: View {
 	}
 }
 
-struct ProgramItemView_Previews: PreviewProvider {
-	static var previews: some View {
-		ProgramItemView()
-			.padding(8)
+extension DateFormatter {
+	static func localTime(of utcDate: Date) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.current // Use the device's current time zone
+		dateFormatter.dateFormat = "HH:mm" // Format the date and time as desired
 
-		ProgramItemView()
-			.padding(8)
-			.preferredColorScheme(.dark)
+		return dateFormatter.string(from: utcDate)
 	}
 }
+
+// struct ProgramItemView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ProgramItemView()
+//			.padding(8)
+//
+//		ProgramItemView()
+//			.padding(8)
+//			.preferredColorScheme(.dark)
+//	}
+// }

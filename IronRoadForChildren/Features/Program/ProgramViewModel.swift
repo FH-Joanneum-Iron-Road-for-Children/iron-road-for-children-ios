@@ -12,7 +12,8 @@ import Networking
 class ProgramViewModel: ObservableObject {
 	@Published var selectedTab = 0
 
-	@Published var events: [Event] = []
+	@Published var dayEvents: [EventDay] = []
+
 	@Published var isLoadingEvents = false
 	@Published var eventsError: String = ""
 
@@ -34,9 +35,15 @@ class ProgramViewModel: ObservableObject {
 		isLoadingEvents = true
 
 		let url = world.serverUrlWith(path: "/api/events")
-		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: Event.self)
+		let (body, response) = try await URLSession.shared.dataArray(.get, from: url, responseType: Event.self)
 
-		events = body
+		guard response.statusCode == 200 else {
+			eventsError = "Daten konnten nicht geladen werden"
+			isLoadingEvents = false
+			return
+		}
+
+		dayEvents = [EventDay(name: "Testday", events: body)]
 		isLoadingEvents = false
 	}
 }

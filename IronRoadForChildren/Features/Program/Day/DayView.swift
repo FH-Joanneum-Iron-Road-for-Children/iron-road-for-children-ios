@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct DayView: View {
+	@State var events: [Event] = []
+
 	var body: some View {
 		ScrollView {
 			VStack {
-				ForEach(0 ..< 10) { _ in
+				ForEach(events) { event in
 					NavigationLink(destination: ProgramItemDelailView()) {
-						ProgramItemView()
+						ProgramItemView(event: event)
 							.padding(.top, 8)
 							.padding(.horizontal, 16)
 					}

@@ -9,31 +9,29 @@ import SwiftUI
 
 struct ProgramView: View {
 	@StateObject var viewModel = ProgramViewModel()
-
-	var titles = ["Freitag", "Samstag", "Sonntag"]
 	@State var selectedTab: Int = 0
 
 	var body: some View {
-		VStack(spacing: 0) {
-			ProgramTabBarHeader(
-				currentTab: $selectedTab,
-				tabBarOptions: titles
-			)
+		if viewModel.isLoadingEvents {
+			ProgressView()
+		} else {
+			VStack(spacing: 0) {
+				ProgramTabBarHeader(
+					currentTab: $selectedTab,
+					tabBarOptions: viewModel.dayEvents.map { $0.name }
+				)
 
-			FiltersRowView()
+				FiltersRowView()
 
-			TabView(selection: $selectedTab) {
-				DayView()
-					.tag(0)
-
-				DayView()
-					.tag(1)
-
-				DayView()
-					.tag(2)
+				TabView(selection: $selectedTab) {
+					ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
+						DayView(events: day.events)
+							.tag(index)
+					}
+				}
+				.tabViewStyle(.page(indexDisplayMode: .never))
+				.animation(.easeInOut(duration: 0.3), value: selectedTab)
 			}
-			.tabViewStyle(.page(indexDisplayMode: .never))
-			.animation(.easeInOut(duration: 0.3), value: selectedTab)
 		}
 	}
 }

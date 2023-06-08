@@ -45,7 +45,7 @@ struct VoteView: View {
 				}
 			}
 		} else {
-			Text("Diese Funktion ist derzeit noch nicht Verfügbar.")
+			Text("Diese Funktion ist derzeit noch nicht verfügbar.")
 				.padding()
 		}
 	}

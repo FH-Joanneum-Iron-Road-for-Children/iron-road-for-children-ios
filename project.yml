@@ -119,7 +119,7 @@ targetTemplates:
     - package: ExampleMVVM
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 31
+        CURRENT_PROJECT_VERSION: 32
         MARKETING_VERSION: 1.1.0
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
@@ -131,7 +131,7 @@ targetTemplates:
         GENERATE_INFOPLIST_FILE: true
         TARGETED_DEVICE_FAMILY: '1,2'
         DEVELOPMENT_ASSET_PATHS: IronRoadForChildren/SupportingFiles/PreviewContent
-        INFOPLIST_KEY_UILaunchStoryboardName: "LaunchScreen.storyboard"
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen.storyboard
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait

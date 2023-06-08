@@ -131,7 +131,7 @@ targetTemplates:
         GENERATE_INFOPLIST_FILE: true
         TARGETED_DEVICE_FAMILY: '1,2'
         DEVELOPMENT_ASSET_PATHS: IronRoadForChildren/SupportingFiles/PreviewContent
-        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen.storyboard
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait

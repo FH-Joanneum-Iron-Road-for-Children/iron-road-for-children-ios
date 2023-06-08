@@ -67,6 +67,7 @@ targets:
     - AppTarget
     sources:
     - Targets/Beta
+    scheme: {}
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app.beta

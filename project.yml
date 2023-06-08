@@ -64,9 +64,10 @@ targets:
           CODE_SIGN_IDENTITY: iPhone Developer
   IronRoadForChildrenBeta:
     templates:
-      - AppTarget
+    - AppTarget
     sources:
     - Targets/Beta
+    scheme: {}
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: at.irfc.app.beta
@@ -118,7 +119,7 @@ targetTemplates:
     - package: ExampleMVVM
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 26
+        CURRENT_PROJECT_VERSION: 31
         MARKETING_VERSION: 1.1.0
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist

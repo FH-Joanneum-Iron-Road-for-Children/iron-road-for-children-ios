@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/test-ios.yml
-  publish:
+  publish-prod:
     needs: test
     runs-on: macos-latest
     steps:
@@ -42,6 +42,46 @@ jobs:
 
       - name: Publish to TestFlight
         run: bundle exec fastlane release_irfc
+        env:
+          FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+  publish-beta:
+    needs: test
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby '2.7.7'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.7'
+          bundler-cache: true
+
+      - name: Extract secrets
+        run: |
+          cd fastlane
+          mkdir .keys
+          echo -n "${{secrets.APPSTORE_API_PRIVATE_KEY}}" | base64 --decode -o .keys/api_key.p8
+          cd ..
+
+      # # match has an issue that the key is only used for pulling but not pushing -> key is added manually to the ssh-agent (https://github.com/fastlane/fastlane/issues/19266)
+      - name: Add deploy key to ssh-agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY_GITHUB }}
+
+      - name: Setup xcodegen and init xcode project
+        uses: xavierLowmiller/xcodegen-action@1.1.2
+        with:
+          spec: project.yml
+          use-cache: true
+          
+      - name: Publish Beta to TestFlight
+        run: bundle exec fastlane release_irfc_beta
         env:
           FASTLANE_CERTIFICATES_GIT_URL: ${{ secrets.FASTLANE_CERTIFICATES_GIT_URL }}
           APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}

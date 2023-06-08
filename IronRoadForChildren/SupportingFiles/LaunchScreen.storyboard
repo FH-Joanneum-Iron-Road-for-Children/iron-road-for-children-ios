@@ -78,7 +78,7 @@ Studiengang Mobile Software Development</string>
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="2684" height="3508"/>
+        <image name="bg" width="1500" height="1960"/>
         <image name="fhj" width="2501" height="512"/>
         <image name="irfcLaunch" width="512" height="417"/>
         <namedColor name="irfcBlue">

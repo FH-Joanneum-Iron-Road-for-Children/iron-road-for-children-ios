@@ -47,6 +47,9 @@ Open the IronRoadForChildren.xcodeproj in Xcode and start coding 💻😃
 ### MVVM Example
 An MVVM Example can be found in [ExampleMVVM](Packages/ExampleMVVM/) folder.
 
+### Targets
+This app consists of two targets `IronRoadForChildren` and `IronRoadForChildrenBeta`. Both targets are connected to a different backend. If those backends URLs need to be updated, this needs to be done in `Targets/Prod/Config.swift` and `Targets/Beta/Config.swift`. Always ensure that they conform to the `BaseConfig` protocol. New properties must be added in `BaseConfig` protocol first. 
+
 ### Fastlane
 [Fastlane](https://github.com/fastlane/fastlane) is our app automation tool. 
 

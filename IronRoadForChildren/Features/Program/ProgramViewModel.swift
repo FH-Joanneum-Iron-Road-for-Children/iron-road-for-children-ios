@@ -99,7 +99,7 @@ class ProgramViewModel: ObservableObject {
 		var eventDays: [EventDay] = []
 		eventsByDaysSorted.forEach { day in
 			guard let weekday = world.localDateToWeekday(from: day.key) else { return }
-			eventDays.append(EventDay(name: weekday, events: day.value))
+			eventDays.append(EventDay(name: weekday, events: day.value.sorted(by: { $0.startDateTimeInUTC < $1.startDateTimeInUTC })))
 		}
 
 		withAnimation {

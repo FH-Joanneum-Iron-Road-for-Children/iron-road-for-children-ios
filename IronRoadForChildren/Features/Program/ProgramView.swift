@@ -50,8 +50,15 @@ struct ProgramView: View {
 
 			TabView(selection: $selectedTab) {
 				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
-					DayView(events: day.events)
+					if let filteredCategorie = viewModel.filteredCategorie {
+						DayView(
+							events: day.events.filter { $0.eventCategory.id == filteredCategorie.id }
+						)
 						.tag(index)
+					} else {
+						DayView(events: day.events)
+							.tag(index)
+					}
 				}
 			}
 			.tabViewStyle(.page(indexDisplayMode: .never))

@@ -18,6 +18,7 @@ class ProgramViewModel: ObservableObject {
 	@Published var isLoadingEvents = false
 
 	@Published var eventDays: [EventDay] = []
+
 	@Published var eventCategories: [EventCategory] = []
 	@Published var filteredCategorie: EventCategory? = nil
 
@@ -101,21 +102,8 @@ class ProgramViewModel: ObservableObject {
 			eventDays.append(EventDay(name: weekday, events: day.value))
 		}
 
-		guard let filteredCategorie = filteredCategorie else {
-			withAnimation {
-				self.eventDays = eventDays
-			}
-			return
-		}
-
-		var days = eventDays
-
-		for (index, day) in eventDays.enumerated() {
-			days[index].events = day.events.filter { $0.eventCategory.eventCategoryId == filteredCategorie.eventCategoryId }
-		}
-
 		withAnimation {
-			self.eventDays = days
+			self.eventDays = eventDays
 		}
 	}
 }

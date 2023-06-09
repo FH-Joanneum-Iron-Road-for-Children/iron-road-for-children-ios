@@ -30,7 +30,7 @@ struct ProgramItemView: View {
 
 			Spacer()
 
-			Text("\(DateFormatter.localTime(of: event.startDateTimeInUTC)) - \(DateFormatter.localTime(of: event.endDateTimeInUTC))")
+			Text("\(world.localTimeHourMinute(of: event.startDateTimeInUTC)) - \(world.localTimeHourMinute(of: event.endDateTimeInUTC))")
 				.font(.body)
 				.padding(.trailing, 8)
 				.lineLimit(1)
@@ -45,16 +45,6 @@ struct ProgramItemView: View {
 		.cornerRadius(16)
 		.frame(height: rowHeight)
 		.shadow(color: .gray.opacity(0.20), radius: 4)
-	}
-}
-
-extension DateFormatter {
-	static func localTime(of utcDate: Date) -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.timeZone = TimeZone.current // Use the device's current time zone
-		dateFormatter.dateFormat = "HH:mm" // Format the date and time as desired
-
-		return dateFormatter.string(from: utcDate)
 	}
 }
 

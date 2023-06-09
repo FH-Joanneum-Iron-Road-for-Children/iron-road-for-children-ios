@@ -76,7 +76,24 @@ class ProgramViewModel: ObservableObject {
 		}
 
 		// TODO: Add logic here
-		let dayEvents = [EventDay(name: "Testday", events: allEvents)]
+		var daysData: [String: [Event]] = [:]
+
+		allEvents.forEach { event in
+			let date = world.localDate(of: event.startDateTimeInUTC)
+
+			if daysData.contains(where: { $0.key == date }) {
+				daysData[date]?.append(event)
+			} else {
+				let newEvents = [event]
+				daysData[date] = newEvents
+			}
+		}
+
+		var dayEvents: [EventDay] = []
+		daysData.forEach { day in
+			guard let weekday = world.localDateToWeekday(from: day.key) else { return }
+			dayEvents.append(EventDay(name: weekday, events: day.value))
+		}
 
 		guard let filteredCategorie = filteredCategorie else {
 			withAnimation {

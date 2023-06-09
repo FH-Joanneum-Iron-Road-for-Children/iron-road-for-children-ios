@@ -37,7 +37,10 @@ public extension URLSession {
 			throw NetworkingError.httpURLResponseParseError
 		}
 
-		let responseBody = try JSONDecoder().decode(R.self, from: data)
+		let jsonDecoder = JSONDecoder()
+		jsonDecoder.dateDecodingStrategy = .secondsSince1970
+
+		let responseBody = try jsonDecoder.decode(R.self, from: data)
 
 		return (responseBody, urlResponse)
 	}
@@ -72,7 +75,10 @@ public extension URLSession {
 			throw NetworkingError.httpURLResponseParseError
 		}
 
-		let responseBody = try JSONDecoder().decode([R].self, from: data)
+		let jsonDecoder = JSONDecoder()
+		jsonDecoder.dateDecodingStrategy = .secondsSince1970
+
+		let responseBody = try jsonDecoder.decode([R].self, from: data)
 
 		return (responseBody, urlResponse)
 	}

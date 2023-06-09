@@ -10,12 +10,12 @@ import SwiftUI
 
 struct FilterButtonView: View {
 	var buttonText: String
-	@Binding var isActive: Bool
+	var isActive: Bool
+	var click: () -> Void
 
 	var body: some View {
 		Button(buttonText) {
-			isActive.toggle()
-			print("\(buttonText) was filtered")
+			click()
 		}
 		.padding()
 		.ifTrue(isActive) { view in
@@ -31,6 +31,6 @@ struct FilterButtonView_Previews: PreviewProvider {
 	@State static var activeFilter = false
 
 	static var previews: some View {
-		FilterButtonView(buttonText: "Filter", isActive: $activeFilter)
+		FilterButtonView(buttonText: "Filter", isActive: activeFilter) {}
 	}
 }

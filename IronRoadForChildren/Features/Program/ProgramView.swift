@@ -24,7 +24,7 @@ struct ProgramView: View {
 						viewModel.loadEvents()
 					}
 				)
-			} else if viewModel.dayEvents.isEmpty {
+			} else if viewModel.eventDays.isEmpty {
 				ErrorRetryView(
 					title: "Derzeit gibt es noch kein Programm für die IRFC2023.",
 					desc: nil,
@@ -42,14 +42,14 @@ struct ProgramView: View {
 		VStack(spacing: 0) {
 			ProgramTabBarHeader(
 				currentTab: $selectedTab,
-				tabBarOptions: viewModel.dayEvents.map { $0.name }
+				tabBarOptions: viewModel.eventDays.map { $0.name }
 			)
 
 			FiltersRowView()
 				.environmentObject(viewModel)
 
 			TabView(selection: $selectedTab) {
-				ForEach(Array(viewModel.dayEvents.enumerated()), id: \.offset) { index, day in
+				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
 					DayView(events: day.events)
 						.tag(index)
 				}

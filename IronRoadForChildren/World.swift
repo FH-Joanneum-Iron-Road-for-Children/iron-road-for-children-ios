@@ -51,4 +51,16 @@ struct World {
 
 		return weekdayName
 	}
+
+	func dateStringToDate(from dateString: String) -> Date? {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "dd.MM.yyyy"
+
+		guard let date = formatter.date(from: dateString) else {
+			print("Invalid date format")
+			return nil
+		}
+
+		return date
+	}
 }

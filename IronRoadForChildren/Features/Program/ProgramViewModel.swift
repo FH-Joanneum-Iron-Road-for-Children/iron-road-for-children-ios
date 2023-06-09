@@ -17,7 +17,7 @@ class ProgramViewModel: ObservableObject {
 
 	@Published var isLoadingEvents = false
 
-	@Published var dayEvents: [EventDay] = []
+	@Published var eventDays: [EventDay] = []
 	@Published var eventCategories: [EventCategory] = []
 	@Published var filteredCategorie: EventCategory? = nil
 
@@ -70,46 +70,52 @@ class ProgramViewModel: ObservableObject {
 
 		guard !allEvents.isEmpty else {
 			withAnimation {
-				self.dayEvents = []
+				self.eventDays = []
 			}
 			return
 		}
 
-		// TODO: Add logic here
-		var daysData: [String: [Event]] = [:]
+		var eventsByDays: [String: [Event]] = [:]
 
 		allEvents.forEach { event in
 			let date = world.localDate(of: event.startDateTimeInUTC)
 
-			if daysData.contains(where: { $0.key == date }) {
-				daysData[date]?.append(event)
+			if eventsByDays.contains(where: { $0.key == date }) {
+				eventsByDays[date]?.append(event)
 			} else {
 				let newEvents = [event]
-				daysData[date] = newEvents
+				eventsByDays[date] = newEvents
 			}
 		}
 
-		var dayEvents: [EventDay] = []
-		daysData.forEach { day in
+		let eventsByDaysSorted = eventsByDays.sorted(by: {
+			let lhs = world.dateStringToDate(from: $0.key) ?? Date()
+			let rhs = world.dateStringToDate(from: $1.key) ?? Date()
+
+			return lhs < rhs
+		})
+
+		var eventDays: [EventDay] = []
+		eventsByDaysSorted.forEach { day in
 			guard let weekday = world.localDateToWeekday(from: day.key) else { return }
-			dayEvents.append(EventDay(name: weekday, events: day.value))
+			eventDays.append(EventDay(name: weekday, events: day.value))
 		}
 
 		guard let filteredCategorie = filteredCategorie else {
 			withAnimation {
-				self.dayEvents = dayEvents
+				self.eventDays = eventDays
 			}
 			return
 		}
 
-		var days = dayEvents
+		var days = eventDays
 
-		for (index, day) in dayEvents.enumerated() {
+		for (index, day) in eventDays.enumerated() {
 			days[index].events = day.events.filter { $0.eventCategory.eventCategoryId == filteredCategorie.eventCategoryId }
 		}
 
 		withAnimation {
-			self.dayEvents = days
+			self.eventDays = days
 		}
 	}
 }

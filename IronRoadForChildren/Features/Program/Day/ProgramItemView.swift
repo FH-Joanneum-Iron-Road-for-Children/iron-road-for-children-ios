@@ -14,11 +14,17 @@ struct ProgramItemView: View {
 
 	var body: some View {
 		HStack(spacing: 10) {
-			Image("seiler-speer")
-				.resizable()
-				.scaledToFill()
-				.frame(width: rowHeight, height: rowHeight)
-				.clipped()
+			if let url = URL(string: event.picture.path) {
+				AsyncImage(url: url) { image in
+					image
+						.resizable()
+						.scaledToFill()
+						.frame(width: rowHeight, height: rowHeight)
+						.clipped()
+				} placeholder: {
+					Color.gray.opacity(0.3)
+				}
+			}
 
 			VStack(alignment: .leading, spacing: 5) {
 				Text(event.title)
@@ -47,14 +53,3 @@ struct ProgramItemView: View {
 		.shadow(color: .gray.opacity(0.20), radius: 4)
 	}
 }
-
-// struct ProgramItemView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		ProgramItemView()
-//			.padding(8)
-//
-//		ProgramItemView()
-//			.padding(8)
-//			.preferredColorScheme(.dark)
-//	}
-// }

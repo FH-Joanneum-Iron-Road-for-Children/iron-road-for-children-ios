@@ -14,7 +14,7 @@ struct DayView: View {
 		ScrollView {
 			VStack {
 				ForEach(events) { event in
-					NavigationLink(destination: ProgramItemDelailView()) {
+					NavigationLink(destination: ProgramItemDetailView(event: event)) {
 						ProgramItemView(event: event)
 							.padding(.top, 8)
 							.padding(.horizontal, 16)

@@ -59,7 +59,7 @@ struct ProgramItemDetailView: View {
 					.padding(.horizontal)
 
 				ScrollView(.horizontal) {
-					HStack {
+					LazyHStack {
 						ForEach(event.eventInfo.pictures, id: \.id) { picture in
 							if let url = URL(string: picture.path) {
 								AsyncImage(url: url) { image in

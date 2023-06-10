@@ -48,32 +48,24 @@ struct ProgramView: View {
 			FiltersRowView()
 				.environmentObject(viewModel)
 
-			if let filteredCategorie = viewModel.filteredCategorie {
-				TabView(selection: $selectedTab) {
-					ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
+			TabView(selection: $selectedTab) {
+				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
+
+					if let filteredCategorie = viewModel.filteredCategorie {
 						DayView(
 							events: day.events.filter {
 								$0.eventCategory.id == filteredCategorie.id
 							}
 						)
 						.tag(index)
-
+					} else {
 						DayView(events: day.events)
 							.tag(index)
 					}
 				}
-				.tabViewStyle(.page(indexDisplayMode: .never))
-				.animation(.easeInOut(duration: 0.3), value: selectedTab)
-			} else {
-				TabView(selection: $selectedTab) {
-					ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
-						DayView(events: day.events)
-							.tag(index)
-					}
-				}
-				.tabViewStyle(.page(indexDisplayMode: .never))
-				.animation(.easeInOut(duration: 0.3), value: selectedTab)
 			}
+			.tabViewStyle(.page(indexDisplayMode: .never))
+			.animation(.easeInOut(duration: 0.3), value: selectedTab)
 		}
 	}
 }

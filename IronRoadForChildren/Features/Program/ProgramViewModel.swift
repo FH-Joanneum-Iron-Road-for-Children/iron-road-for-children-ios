@@ -15,7 +15,7 @@ class ProgramViewModel: ObservableObject {
 
 	private var allEvents: [Event] = []
 
-	@Published var isLoadingEvents = false
+	@Published var isLoadingEvents = true
 
 	@Published var eventDays: [EventDay] = []
 

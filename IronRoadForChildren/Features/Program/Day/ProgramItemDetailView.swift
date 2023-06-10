@@ -26,7 +26,12 @@ struct ProgramItemDetailView: View {
 							.padding(.horizontal)
 							.padding(.bottom)
 					} placeholder: {
-						Color.gray.opacity(0.3)
+						ZStack {
+							Color.gray.opacity(0.1)
+								.frame(height: 200)
+
+							ProgressView()
+						}
 					}
 				}
 
@@ -63,7 +68,12 @@ struct ProgramItemDetailView: View {
 										.scaledToFit()
 										.frame(maxHeight: 100)
 								} placeholder: {
-									Color.gray.opacity(0.3)
+									ZStack {
+										Color.gray.opacity(0.1)
+											.frame(height: 100)
+
+										ProgressView()
+									}
 								}
 							}
 						}

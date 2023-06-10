@@ -18,10 +18,12 @@ struct FiltersRowView: View {
 						buttonText: category.name,
 						isActive: category == programViewModel.filteredCategorie,
 						click: {
-							if programViewModel.filteredCategorie == category {
-								programViewModel.filteredCategorie = nil
-							} else {
-								programViewModel.filteredCategorie = category
+							withAnimation {
+								if programViewModel.filteredCategorie == category {
+									programViewModel.filteredCategorie = nil
+								} else {
+									programViewModel.filteredCategorie = category
+								}
 							}
 						}
 					)

@@ -15,6 +15,8 @@ packages:
     path: "./Packages/ExampleMVVM"
   Networking:
     path: "./Packages/Networking"
+  KeychainWrapper:
+    path: "./Packages/KeychainWrapper"
 options:
   bundleIdPrefix: at.irfc.app
   createIntermediateGroups: true
@@ -46,6 +48,9 @@ targets:
         randomExecutionOrder: true
         parallelizable: true
       - package: ExampleMVVM/ExampleMVVMTests
+        randomExecutionOrder: true
+        parallelizable: true
+      - package: KeychainWrapper/KeychainWrapperTests
         randomExecutionOrder: true
         parallelizable: true
     settings:
@@ -117,6 +122,8 @@ targetTemplates:
     dependencies:
     - package: CoreUI
     - package: ExampleMVVM
+    - package: Networking
+    - package: KeychainWrapper
     settings:
       base:
         CURRENT_PROJECT_VERSION: 37

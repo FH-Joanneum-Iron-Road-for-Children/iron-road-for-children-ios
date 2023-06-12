@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import KeychainWrapper
 
 var world = World()
 
 struct World {
 	private let config = Config()
+
+	let keychain = KeychainWrapper()
 
 	func serverUrlWith(path: String) -> URL {
 		var components = config.serverURLComponents

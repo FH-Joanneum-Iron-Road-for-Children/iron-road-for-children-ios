@@ -9,48 +9,50 @@ import Foundation
 import Networking
 import SwiftUI
 
-@MainActor
 class ProgramViewModel: ObservableObject {
 	@Published var selectedTab = 0
 
 	private var allEvents: [Event] = []
 
-	@Published var isLoadingEvents = false
+	@Published var isLoadingEvents = true
 
 	@Published var eventDays: [EventDay] = []
+
 	@Published var eventCategories: [EventCategory] = []
 	@Published var filteredCategorie: EventCategory? = nil
 
-	@Published var error: String? = nil
+	@Published var errorMessage: String? = nil
 
 	init() {
-		loadEvents()
+		Task {
+			await loadEvents()
+		}
 	}
 
-	func loadEvents() {
-		Task.detached { @MainActor in
-			do {
-				withAnimation {
-					self.isLoadingEvents = true
-				}
+	@MainActor
+	func loadEvents() async {
+		do {
+			withAnimation {
+				isLoadingEvents = true
+			}
 
-				self.error = nil
-				try await self.fetchCategories()
-				try await self.fetchEvents()
-				await self.separateEventToDays()
+			errorMessage = nil
+			try await fetchCategories()
+			try await fetchEvents()
+			await separateEventToDays()
 
-				withAnimation {
-					self.isLoadingEvents = false
-				}
-			} catch {
-				withAnimation {
-					self.isLoadingEvents = false
-					self.error = error.localizedDescription
-				}
+			withAnimation {
+				isLoadingEvents = false
+			}
+		} catch {
+			withAnimation {
+				isLoadingEvents = false
+				self.errorMessage = error.localizedDescription
 			}
 		}
 	}
 
+	@MainActor
 	private func fetchEvents() async throws {
 		let url = world.serverUrlWith(path: "/api/events")
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: Event.self)
@@ -58,6 +60,7 @@ class ProgramViewModel: ObservableObject {
 		allEvents = body
 	}
 
+	@MainActor
 	private func fetchCategories() async throws {
 		let url = world.serverUrlWith(path: "/api/eventCategories")
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: EventCategory.self)
@@ -65,6 +68,7 @@ class ProgramViewModel: ObservableObject {
 		eventCategories = body
 	}
 
+	@MainActor
 	private func separateEventToDays() async {
 		let allEvents = allEvents
 
@@ -101,21 +105,8 @@ class ProgramViewModel: ObservableObject {
 			eventDays.append(EventDay(name: weekday, events: day.value.sorted(by: { $0.startDateTimeInUTC < $1.startDateTimeInUTC })))
 		}
 
-		guard let filteredCategorie = filteredCategorie else {
-			withAnimation {
-				self.eventDays = eventDays
-			}
-			return
-		}
-
-		var days = eventDays
-
-		for (index, day) in eventDays.enumerated() {
-			days[index].events = day.events.filter { $0.eventCategory.eventCategoryId == filteredCategorie.eventCategoryId }
-		}
-
 		withAnimation {
-			self.eventDays = days
+			self.eventDays = eventDays
 		}
 	}
 }

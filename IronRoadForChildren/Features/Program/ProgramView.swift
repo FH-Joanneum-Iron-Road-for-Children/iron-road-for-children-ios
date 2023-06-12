@@ -16,12 +16,14 @@ struct ProgramView: View {
 		VStack {
 			if viewModel.isLoadingEvents {
 				ProgressView()
-			} else if let errorDesc = viewModel.error {
+			} else if let errorDesc = viewModel.errorMessage {
 				ErrorRetryView(
 					title: "Es ist ein Fehler aufgetreten.",
 					desc: errorDesc,
 					retry: {
-						viewModel.loadEvents()
+						Task {
+							await viewModel.loadEvents()
+						}
 					}
 				)
 			} else if viewModel.eventDays.isEmpty {
@@ -29,7 +31,9 @@ struct ProgramView: View {
 					title: "Derzeit gibt es noch kein Programm für die IRFC2023.",
 					desc: nil,
 					retry: {
-						viewModel.loadEvents()
+						Task {
+							await viewModel.loadEvents()
+						}
 					}
 				)
 			} else {
@@ -50,8 +54,18 @@ struct ProgramView: View {
 
 			TabView(selection: $selectedTab) {
 				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
-					DayView(events: day.events)
+
+					if let filteredCategorie = viewModel.filteredCategorie {
+						DayView(
+							events: day.events.filter {
+								$0.eventCategory.id == filteredCategorie.id
+							}
+						)
 						.tag(index)
+					} else {
+						DayView(events: day.events)
+							.tag(index)
+					}
 				}
 			}
 			.tabViewStyle(.page(indexDisplayMode: .never))

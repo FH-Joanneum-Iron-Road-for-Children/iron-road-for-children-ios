@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22113.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_7" orientation="portrait" appearance="dark"/>
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22089"/>
@@ -14,17 +14,17 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="bg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-hf-SVB">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="irfcLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="wyr-59-5ai">
-                                <rect key="frame" x="0.0" y="97" width="428" height="417"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="100" verticalCompressionResistancePriority="100" image="irfcLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="wyr-59-5ai">
+                                <rect key="frame" x="0.0" y="74" width="1024" height="417"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-Qy-LsS">
-                                <rect key="frame" x="0.0" y="801.33333333333337" width="428" height="40.666666666666629"/>
+                                <rect key="frame" x="0.0" y="1255" width="1024" height="41"/>
                                 <string key="text">Zur Verfügung gestellt vom FH JOANNEUM 
 Studiengang Mobile Software Development</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -32,14 +32,14 @@ Studiengang Mobile Software Development</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" image="fhj" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U09-vw-Gck">
-                                <rect key="frame" x="89" y="524" width="250" height="100"/>
+                                <rect key="frame" x="387" y="501" width="250" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="rZV-Fy-hsx"/>
                                     <constraint firstAttribute="height" constant="100" id="tOc-jW-7iA"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock. Ride. Help. #IRFC2023" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXZ-0T-SXH">
-                                <rect key="frame" x="0.0" y="654" width="428" height="27.666666666666629"/>
+                                <rect key="frame" x="0.0" y="631" width="1024" height="27.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -66,6 +66,7 @@ Studiengang Mobile Software Development</string>
                             <constraint firstItem="U09-vw-Gck" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iYi-fe-0Cb"/>
                             <constraint firstItem="O6t-hf-SVB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="jCA-0a-HEx"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U09-vw-Gck" secondAttribute="trailing" priority="750" constant="40" id="kOd-fU-8DA"/>
+                            <constraint firstItem="bLW-Qy-LsS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EXZ-0T-SXH" secondAttribute="bottom" constant="20" id="klO-01-l57"/>
                             <constraint firstItem="O6t-hf-SVB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="por-lt-xTE"/>
                             <constraint firstItem="O6t-hf-SVB" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="rgN-bJ-maL"/>
                             <constraint firstItem="EXZ-0T-SXH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xex-HF-dud"/>

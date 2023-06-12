@@ -57,42 +57,44 @@ struct ContentView: View {
 			.tint(.irfcYellow)
 		} else {
 			TabView {
-				NavigationView {
-					ProgramView()
-						.navigationTitle("Programm")
-						.navigationBarTitleDisplayMode(.inline)
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Program", image: "program")
-				}
+				Group {
+					NavigationView {
+						ProgramView()
+							.navigationTitle("Programm")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Program", image: "program")
+					}
 
-				NavigationView {
-					VoteView()
-						.navigationTitle("Voting")
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Vote", image: "vote")
-				}
+					NavigationView {
+						VoteView()
+							.navigationTitle("Voting")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Vote", image: "vote")
+					}
 
-				NavigationView {
-					EventMapView()
-						.navigationTitle("Karten")
-						.navigationBarTitleDisplayMode(.inline)
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Karten", image: "map")
-				}
+					NavigationView {
+						EventMapView()
+							.navigationTitle("Karten")
+							.navigationBarTitleDisplayMode(.inline)
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Karten", image: "map")
+					}
 
-				NavigationView {
-					MoreView()
-						.navigationTitle("Über uns")
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					Label("Mehr", systemImage: "ellipsis")
+					NavigationView {
+						MoreView()
+							.navigationTitle("Über uns")
+					}
+					.navigationViewStyle(.stack)
+					.tabItem {
+						Label("Mehr", systemImage: "ellipsis")
+					}
 				}
 			}
 		}

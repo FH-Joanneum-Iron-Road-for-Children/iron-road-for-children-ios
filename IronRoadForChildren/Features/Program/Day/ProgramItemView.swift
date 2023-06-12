@@ -22,7 +22,12 @@ struct ProgramItemView: View {
 						.frame(width: rowHeight, height: rowHeight)
 						.clipped()
 				} placeholder: {
-					Color.gray.opacity(0.3)
+					ZStack {
+						Color.gray.opacity(0.1)
+							.frame(width: rowHeight, height: rowHeight)
+
+						ProgressView()
+					}
 				}
 			}
 

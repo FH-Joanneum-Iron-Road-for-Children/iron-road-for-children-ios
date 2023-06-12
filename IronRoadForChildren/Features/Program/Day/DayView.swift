@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DayView: View {
-	@State var events: [Event] = []
+	var events: [Event] = []
 
 	var body: some View {
 		ScrollView {
-			VStack {
+			LazyVStack {
 				ForEach(events) { event in
 					NavigationLink(destination: ProgramItemDetailView(event: event)) {
 						ProgramItemView(event: event)

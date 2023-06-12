@@ -17,7 +17,11 @@ struct IronRoadForChildrenApp: App {
 		tabBarAppearance.configureWithOpaqueBackground()
 		tabBarAppearance.backgroundColor = UIColor(.irfcBlue)
 
+		tabBarAppearance.stackedLayoutAppearance.selected.iconColor = irfcYellow
+		tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: irfcYellow]
+
 		let tabBar = UITabBar.appearance()
+		tabBar.tintColor = irfcYellow
 		tabBar.standardAppearance = tabBarAppearance
 		tabBar.scrollEdgeAppearance = tabBarAppearance
 	}

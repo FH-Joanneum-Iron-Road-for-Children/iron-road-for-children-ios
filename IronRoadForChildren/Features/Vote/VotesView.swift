@@ -9,8 +9,25 @@ import Foundation
 import SwiftUI
 
 struct VotesView: View {
+	@StateObject var viewModel = VoteViewModel()
+
 	var body: some View {
-		Text("wuhuu")
+		ScrollView {
+			//            if viewModel.isLoadingVotings {
+			//                ProgressView()
+			//            } else if let msg = viewModel.errorMsg {
+			//                Text(msg)
+			//            } else if viewModel.votings.isEmpty {
+			//                Text("Derzeit gibt es noch keine Votings.")
+			//            } else {
+			ForEach(viewModel.votings, id: \.votingId) { voting in
+				VoteView(voting: voting)
+					.environmentObject(viewModel)
+			}
+		}
+		//            }
+		//        }
+		//        .frame(width: .infinity)
 	}
 }
 

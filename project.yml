@@ -17,6 +17,10 @@ packages:
     path: "./Packages/Networking"
   KeychainWrapper:
     path: "./Packages/KeychainWrapper"
+  SnapToScroll:
+    url: "https://github.com/swiftui-library/hstack-snap-to-scroll.git"
+    from: "1.0.3"
+  
 options:
   bundleIdPrefix: at.irfc.app
   createIntermediateGroups: true
@@ -124,6 +128,7 @@ targetTemplates:
     - package: ExampleMVVM
     - package: Networking
     - package: KeychainWrapper
+    - package: SnapToScroll
     settings:
       base:
         CURRENT_PROJECT_VERSION: 37

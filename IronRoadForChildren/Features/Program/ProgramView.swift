@@ -17,32 +17,40 @@ struct ProgramView: View {
 			if viewModel.isLoadingEvents {
 				ProgressView()
 			} else if let errorDesc = viewModel.errorMessage {
-				ErrorRetryView(
-					title: "Es ist ein Fehler aufgetreten.",
-					desc: errorDesc,
-					retry: {
-						Task {
-							await viewModel.loadEvents()
-						}
-					}
-				)
+				generalError(errorDesc)
 			} else if viewModel.eventDays.isEmpty {
-				ErrorRetryView(
-					title: "Derzeit gibt es noch kein Programm für die IRFC2023.",
-					desc: nil,
-					retry: {
-						Task {
-							await viewModel.loadEvents()
-						}
-					}
-				)
+				noEventsError()
 			} else {
-				programContent
+				programContent()
 			}
 		}
 	}
 
-	var programContent: some View {
+	func generalError(_ errorDesc: String) -> some View {
+		ErrorRetryView(
+			title: "Es ist ein Fehler aufgetreten.",
+			desc: errorDesc,
+			retry: {
+				Task {
+					await viewModel.loadEvents()
+				}
+			}
+		)
+	}
+
+	func noEventsError() -> some View {
+		ErrorRetryView(
+			title: "Derzeit gibt es noch kein Programm für die IRFC2023.",
+			desc: nil,
+			retry: {
+				Task {
+					await viewModel.loadEvents()
+				}
+			}
+		)
+	}
+
+	func programContent() -> some View {
 		VStack(spacing: 0) {
 			ProgramTabBarHeader(
 				currentTab: $selectedTab,

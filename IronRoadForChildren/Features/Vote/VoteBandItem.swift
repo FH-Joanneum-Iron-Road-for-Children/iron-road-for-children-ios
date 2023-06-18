@@ -11,32 +11,35 @@ import SwiftUI
 struct VoteBandItem: View {
 	var name: String
 	var description: String
-
 	@State var choosenBand: Bool = false
+
+	private var cornerRadius: CGFloat = 20
+
+	init(name: String, description: String) {
+		self.name = name
+		self.description = description
+	}
 
 	var body: some View {
 		Button {
 			choosenBand = !choosenBand
 		} label: {
-			VStack {
+			VStack(spacing: 0) {
 				bandName()
 
 				bandImage()
 
 				bandDescription()
 			}
-			.padding(.bottom)
-			.overlay(RoundedRectangle(cornerRadius: 20)
-				.stroke(.gray.opacity(0.3), lineWidth: 4)
+			.overlay(RoundedRectangle(cornerRadius: cornerRadius)
+				.stroke(choosenBand ? Color.irfcYellow : Color.lightGray,
+				        lineWidth: choosenBand ? 5 : 4)
 			)
-			.overlay(RoundedRectangle(cornerRadius: 20)
-				.stroke(choosenBand ? Color.irfcYellow : Color.clear, lineWidth: 5)
-			)
-			.cornerRadius(20)
+			.cornerRadius(cornerRadius)
 		}
 	}
 
-	func bandName() -> some View {
+	private func bandName() -> some View {
 		HStack {
 			Text(name)
 				.font(.title)
@@ -50,13 +53,17 @@ struct VoteBandItem: View {
 		}
 	}
 
-	func bandImage() -> some View {
-		Image("irfcMap")
-			.resizable()
-			.scaledToFill()
+	private func bandImage() -> some View {
+		GeometryReader { geo in
+			Image("irfcMap")
+				.resizable()
+				.scaledToFill()
+				.frame(width: geo.size.width, height: geo.size.height)
+				.clipped()
+		}
 	}
 
-	func bandDescription() -> some View {
+	private func bandDescription() -> some View {
 		HStack {
 			Text(description)
 				.font(.headline)
@@ -71,7 +78,7 @@ struct VoteBandItem: View {
 struct VoteBandItem_Previews: PreviewProvider {
 	static var previews: some View {
 		VoteBandItem(name: "JOSH", description: "FEAT. Herr Speer")
-			.frame(height: 300)
+			.frame(maxWidth: 300, maxHeight: 250)
 			.padding()
 	}
 }

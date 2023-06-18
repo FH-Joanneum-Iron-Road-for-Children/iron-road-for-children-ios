@@ -18,4 +18,5 @@ struct Voting: Codable {
 	let votingId: Int
 	let title: String
 	let active: Bool
+	let events: [Event]
 }

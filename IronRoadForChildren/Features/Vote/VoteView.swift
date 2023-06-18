@@ -5,58 +5,57 @@
 //  Created by Daniel Zellner on 25.04.23
 //
 
+import CoreUI
+import SnapToScroll
 import SwiftUI
 
 struct VoteView: View {
 	@State private var index = 0
+	private var voting: Voting
 
-	@StateObject var viewModel = VoteViewModel()
+	@EnvironmentObject var viewModel: VoteViewModel
+
+	init(voting: Voting) {
+		self.voting = voting
+	}
 
 	var body: some View {
-		GeometryReader { proxy in
-			ScrollView {
-				Text("\(viewModel.alreadyVoted.description)")
-					.font(.headline)
-					.padding()
+		VStack(spacing: 0) {
+			Text(voting.title)
+				.font(.title)
+				.padding(.horizontal)
+				.padding(.top)
 
-				VStack(spacing: 0) {
-					VoteHeader()
-
-					TabView(selection: $index) {
-						ForEach(0 ..< 10, id: \.self) { _ in
-							VoteBandItem(name: "", description: "")
-						}
-					}
-					.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-					.frame(height: proxy.size.width + 100)
-
-					HStack {
-						ForEach(0 ..< 10, id: \.self) { index in
-							Circle()
-								.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
-								.frame(width: 10, height: 10)
-						}
-					}
-
-					Button(action: {
-						Task {
-							await viewModel.vote()
-						}
-					}) {
-						Text("Stimme abgeben")
+			ScrollView(.horizontal) {
+				HStack {
+					ForEach(voting.events) { event in
+						VoteBandItem(name: event.title,
+						             description: event.eventInfo.infoText)
+							.frame(width: 300, height: 250)
 							.padding()
 					}
-					.background(Color.irfcYellow)
-					.clipShape(Capsule())
-					.padding()
 				}
 			}
-		}
-	}
-}
 
-struct VoteView_Previews: PreviewProvider {
-	static var previews: some View {
-		VoteView()
+			HStack {
+				ForEach(0 ..< voting.events.count, id: \.self) { index in
+					Circle()
+						.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
+						.frame(width: 10, height: 10)
+				}
+			}
+			.padding(.bottom)
+
+			Button(action: {
+				Task {
+					await viewModel.vote()
+				}
+			}) {
+				Text("Stimme abgeben")
+					.padding(6)
+			}
+			.buttonStyle(IrfcYellowRoundedButton())
+			.padding()
+		}
 	}
 }

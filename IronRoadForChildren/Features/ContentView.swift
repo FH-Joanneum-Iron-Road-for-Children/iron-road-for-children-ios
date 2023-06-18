@@ -25,7 +25,7 @@ struct ContentView: View {
 					}
 
 					NavigationStack {
-						VoteView()
+						VotesView()
 							.navigationTitle("Voting")
 					}
 					.navigationViewStyle(.stack)
@@ -69,7 +69,7 @@ struct ContentView: View {
 					}
 
 					NavigationView {
-						VoteView()
+						VotesView()
 							.navigationTitle("Voting")
 					}
 					.navigationViewStyle(.stack)

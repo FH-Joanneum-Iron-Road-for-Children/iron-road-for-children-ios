@@ -13,3 +13,9 @@ struct Band: Identifiable {
 	let description: String
 	let status: Int
 }
+
+struct Voting: Codable {
+	let votingId: Int
+	let title: String
+	let active: Bool
+}

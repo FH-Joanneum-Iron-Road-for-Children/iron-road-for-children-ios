@@ -24,7 +24,7 @@ struct VoteView: View {
 
 					TabView(selection: $index) {
 						ForEach(0 ..< 10, id: \.self) { _ in
-							VoteBandItem()
+							VoteBandItem(name: "", description: "")
 						}
 					}
 					.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -39,9 +39,12 @@ struct VoteView: View {
 					}
 
 					Button(action: {
-						viewModel.trigger()
+						Task {
+							await viewModel.vote()
+						}
 					}) {
-						Text("Stimme abgeben").padding()
+						Text("Stimme abgeben")
+							.padding()
 					}
 					.background(Color.irfcYellow)
 					.clipShape(Capsule())

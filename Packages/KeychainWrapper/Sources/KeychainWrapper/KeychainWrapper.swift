@@ -16,6 +16,22 @@ public class KeychainWrapper {
 			try? keychain.set(String(newValue), forKey: alreadyVotedKey)
 		}
 	}
+
+	private var votedDeviceIdKey = "voted_device_id"
+	public var votedDeviceId: String? {
+		get {
+			try? keychain.string(forKey: votedDeviceIdKey)
+		}
+
+		set {
+			guard let newValue = newValue else { return }
+			try? keychain.set(newValue, forKey: votedDeviceIdKey)
+		}
+	}
+
+	public func deleteAll() {
+		try? keychain.deleteAll()
+	}
 }
 
 private extension SimpleKeychain {

@@ -21,7 +21,7 @@ struct ContentView: View {
 					}
 					.navigationViewStyle(.stack)
 					.tabItem {
-						Label("Program", image: "program")
+						Label("Programm", image: "program")
 					}
 
 					NavigationStack {
@@ -30,12 +30,12 @@ struct ContentView: View {
 					}
 					.navigationViewStyle(.stack)
 					.tabItem {
-						Label("Vote", image: "vote")
+						Label("Voting", image: "vote")
 					}
 
 					NavigationStack {
 						EventMapView()
-							.navigationTitle("Karten")
+							.navigationTitle("Karte")
 							.navigationBarTitleDisplayMode(.inline)
 					}
 					.navigationViewStyle(.stack)
@@ -49,7 +49,7 @@ struct ContentView: View {
 					}
 					.navigationViewStyle(.stack)
 					.tabItem {
-						Label("More", systemImage: "ellipsis")
+						Label("Mehr", systemImage: "ellipsis")
 					}
 				}
 				.tint(.irfcAccentColor)
@@ -74,7 +74,7 @@ struct ContentView: View {
 					}
 					.navigationViewStyle(.stack)
 					.tabItem {
-						Label("Vote", image: "vote")
+						Label("Voting", image: "vote")
 					}
 
 					NavigationView {

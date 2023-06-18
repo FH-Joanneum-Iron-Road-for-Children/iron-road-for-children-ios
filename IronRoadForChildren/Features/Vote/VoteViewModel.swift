@@ -6,19 +6,35 @@
 //
 
 import Foundation
+import Networking
 import UIKit
 
 class VoteViewModel: ObservableObject {
 	@Published var alreadyVoted = world.keychain.alreadyVoted
 
-	var deviceID: String? {
-		UIDevice.current.identifierForVendor?.uuidString
+	@Published var isLoadingVotings = true
+
+	init() {
+		Task {
+			await loadVotes()
+		}
 	}
 
-	func trigger() {
-		print(deviceID)
+	func loadVotes() async {}
+
+	func fetchVotes() async throws {}
+
+	@MainActor
+	func vote() async {
+		guard !alreadyVoted else { return }
 
 		world.keychain.alreadyVoted = true
+		world.keychain.votedDeviceId = UIDevice.current.identifierForVendor?.uuidString
+
+		updateValuesFromKeychain()
+	}
+
+	func updateValuesFromKeychain() {
 		alreadyVoted = world.keychain.alreadyVoted
 	}
 }

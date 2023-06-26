@@ -13,21 +13,20 @@ struct VotesView: View {
 
 	var body: some View {
 		ScrollView {
-			//            if viewModel.isLoadingVotings {
-			//                ProgressView()
-			//            } else if let msg = viewModel.errorMsg {
-			//                Text(msg)
-			//            } else if viewModel.votings.isEmpty {
-			//                Text("Derzeit gibt es noch keine Votings.")
-			//            } else {
-			ForEach(viewModel.votings, id: \.votingId) { voting in
-				VoteView(voting: voting)
-					.environmentObject(viewModel)
+			if viewModel.isLoadingVotings {
+				ProgressView()
+			} else if let msg = viewModel.errorMsg {
+				Text(msg)
+			} else if viewModel.votings.isEmpty {
+				Text("Derzeit gibt es noch keine Votings.")
+			} else {
+				ForEach(viewModel.votings, id: \.votingId) { voting in
+					VoteView(voting: voting)
+						.environmentObject(viewModel)
+				}
 			}
 		}
-		//            }
-		//        }
-		//        .frame(width: .infinity)
+		.frame(width: .infinity)
 	}
 }
 

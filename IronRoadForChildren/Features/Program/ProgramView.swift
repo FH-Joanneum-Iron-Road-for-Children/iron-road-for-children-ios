@@ -62,7 +62,6 @@ struct ProgramView: View {
 
 			TabView(selection: $selectedTab) {
 				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
-
 					if let filteredCategorie = viewModel.filteredCategorie {
 						DayView(
 							events: day.events.filter {

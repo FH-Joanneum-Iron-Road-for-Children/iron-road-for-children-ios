@@ -57,7 +57,8 @@ class ProgramViewModel: ObservableObject {
 		let url = world.serverUrlWith(path: "/api/events")
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: Event.self)
 
-		allEvents = body
+		let filterd = body.filter { $0.startDateTimeInUTC > Date() }
+		allEvents = filterd
 	}
 
 	@MainActor

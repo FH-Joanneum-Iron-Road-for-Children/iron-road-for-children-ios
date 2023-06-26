@@ -31,7 +31,7 @@ struct ContentView: View {
 				}
 
 				NavigationStack {
-					votesView() f
+					votesView()
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {

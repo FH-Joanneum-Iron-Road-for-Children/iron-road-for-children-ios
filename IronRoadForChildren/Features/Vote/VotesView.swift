@@ -12,21 +12,20 @@ struct VotesView: View {
 	@StateObject var viewModel = VoteViewModel()
 
 	var body: some View {
-		ScrollView {
-			if viewModel.isLoadingVotings {
-				ProgressView()
-			} else if let msg = viewModel.errorMsg {
-				Text(msg)
-			} else if viewModel.votings.isEmpty {
-				Text("Derzeit gibt es noch keine Votings.")
-			} else {
+		if viewModel.isLoadingVotings {
+			ProgressView()
+		} else if let msg = viewModel.errorMsg {
+			Text(msg)
+		} else if viewModel.votings.isEmpty {
+			Text("Derzeit gibt es noch keine Votings.")
+		} else {
+			ScrollView {
 				ForEach(viewModel.votings, id: \.votingId) { voting in
 					VoteView(voting: voting)
 						.environmentObject(viewModel)
 				}
 			}
 		}
-		.frame(width: .infinity)
 	}
 }
 

@@ -31,7 +31,7 @@ struct ContentView: View {
 				}
 
 				NavigationStack {
-					votesView()
+					votesView() f
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {
@@ -43,7 +43,7 @@ struct ContentView: View {
 				}
 				.navigationViewStyle(.stack)
 				.tabItem {
-					eventMapView()
+					eventMapLabel()
 				}
 
 				NavigationStack {

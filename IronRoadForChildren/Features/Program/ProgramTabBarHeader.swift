@@ -31,7 +31,8 @@ struct ProgramTabBarHeader: View {
 			.frame(maxWidth: .infinity)
 			.frame(height: 30)
 			.padding(.horizontal)
-			.padding(.bottom, 7)
+			.padding(.bottom, 10)
+			.padding(.top)
 
 			Divider()
 		}

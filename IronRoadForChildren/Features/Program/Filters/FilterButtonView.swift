@@ -17,7 +17,8 @@ struct FilterButtonView: View {
 		Button(buttonText) {
 			click()
 		}
-		.padding()
+		.padding(.vertical)
+		.padding(.leading)
 		.ifTrue(isActive) { view in
 			view.buttonStyle(IrfcYellowRoundedButton())
 		}

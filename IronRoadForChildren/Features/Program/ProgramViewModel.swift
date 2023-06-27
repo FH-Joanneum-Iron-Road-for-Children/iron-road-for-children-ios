@@ -23,7 +23,23 @@ class ProgramViewModel: ObservableObject {
 
 	@Published var errorMessage: String? = nil
 
-	init() {
+	init(eventMocks: [Event]? = nil,
+	     eventCategoriesMocks: [EventCategory]? = nil)
+	{
+		if let eventMocks = eventMocks,
+		   let eventCategoriesMocks = eventCategoriesMocks
+		{
+			allEvents = eventMocks
+			eventCategories = eventCategoriesMocks
+			isLoadingEvents = false
+
+			Task {
+				await self.separateEventToDays()
+			}
+
+			return
+		}
+
 		Task {
 			await loadEvents()
 		}

@@ -84,9 +84,14 @@ struct ProgramView: View {
 struct ProgramView_Previews: PreviewProvider {
 	static var previews: some View {
 		NavigationView {
-			ProgramView()
-				.navigationTitle("Program")
-				.navigationBarTitleDisplayMode(.inline)
+			ProgramView(
+				viewModel: ProgramViewModel(
+					eventMocks: Mocks.events,
+					eventCategoriesMocks: Mocks.categories
+				)
+			)
+			.navigationTitle("Program")
+			.navigationBarTitleDisplayMode(.inline)
 		}
 	}
 }

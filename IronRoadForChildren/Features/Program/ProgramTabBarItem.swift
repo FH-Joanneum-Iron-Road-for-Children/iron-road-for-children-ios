@@ -25,13 +25,11 @@ struct ProgramTabBarItem: View {
 						HStack {
 							Text(tabBarItemName)
 								.font(.body)
-							Spacer()
 						}
 
 						HStack {
 							Text("10.10.2023")
 								.font(.caption)
-							Spacer()
 						}
 					}
 

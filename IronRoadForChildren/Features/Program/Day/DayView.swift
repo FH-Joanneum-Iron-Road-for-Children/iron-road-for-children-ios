@@ -13,17 +13,23 @@ struct DayView: View {
 	var body: some View {
 		ScrollView {
 			LazyVStack {
-				ForEach(events) { event in
-					NavigationLink(destination: ProgramItemDetailView(event: event)) {
-						ProgramItemView(event: event)
-							.padding(.top, 8)
-							.padding(.horizontal, 16)
+				if events.isEmpty {
+					Text("Keine Events, versuchen sie es mit einem anderen Filter!")
+						.multilineTextAlignment(.center)
+						.padding()
+				} else {
+					ForEach(events) { event in
+						NavigationLink(destination: ProgramItemDetailView(event: event)) {
+							ProgramItemView(event: event)
+								.padding(.top, 8)
+								.padding(.horizontal, 16)
+						}
+						.buttonStyle(PlainButtonStyle())
 					}
-					.buttonStyle(PlainButtonStyle())
 				}
 			}
-			.padding(.bottom, 16)
 		}
+		.padding(.bottom, 16)
 	}
 }
 

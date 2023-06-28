@@ -9,20 +9,21 @@ import CoreUI
 import SwiftUI
 
 struct VoteBandItem: View {
-	var name: String
-	var description: String
-	@State var choosenBand: Bool = false
+	var event: Event
+	var choosenBand: Bool
+	var click: () -> Void
 
 	private var cornerRadius: CGFloat = 20
 
-	init(name: String, description: String) {
-		self.name = name
-		self.description = description
+	public init(event: Event, choosenBand: Bool, click: @escaping () -> Void) {
+		self.event = event
+		self.choosenBand = choosenBand
+		self.click = click
 	}
 
 	var body: some View {
 		Button {
-			choosenBand = !choosenBand
+			click()
 		} label: {
 			VStack(spacing: 0) {
 				bandName()
@@ -41,7 +42,7 @@ struct VoteBandItem: View {
 
 	private func bandName() -> some View {
 		HStack {
-			Text(name)
+			Text(event.title)
 				.font(.title)
 				.fontWeight(.black)
 				.foregroundColor(.primary)
@@ -53,19 +54,25 @@ struct VoteBandItem: View {
 		}
 	}
 
+	@ViewBuilder
 	private func bandImage() -> some View {
-		GeometryReader { geo in
-			Image("irfcMap")
-				.resizable()
-				.scaledToFill()
-				.frame(width: geo.size.width, height: geo.size.height)
-				.clipped()
+		if let imageUrl = URL(string: event.picture.path) {
+			GeometryReader { geo in
+				AsyncImage(url: imageUrl) { image in
+					image.resizable()
+						.scaledToFill()
+						.frame(width: geo.size.width, height: geo.size.height)
+						.clipped()
+				} placeholder: {
+					ProgressView()
+				}
+			}
 		}
 	}
 
 	private func bandDescription() -> some View {
 		HStack {
-			Text(description)
+			Text(event.eventInfo.infoText)
 				.font(.headline)
 				.foregroundColor(.secondary)
 				.padding()
@@ -77,7 +84,7 @@ struct VoteBandItem: View {
 
 struct VoteBandItem_Previews: PreviewProvider {
 	static var previews: some View {
-		VoteBandItem(name: "JOSH", description: "FEAT. Herr Speer")
+		VoteBandItem(event: Mocks.event, choosenBand: true, click: {})
 			.frame(maxWidth: 300, maxHeight: 250)
 			.padding()
 	}

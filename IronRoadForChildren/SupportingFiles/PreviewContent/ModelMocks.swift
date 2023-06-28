@@ -8,6 +8,17 @@
 import Foundation
 
 struct Mocks {
+	static var votings: [Voting] {
+		return [voting]
+	}
+
+	static var voting: Voting {
+		return Voting(votingId: 1,
+		              title: "Bester Sänger",
+		              active: true,
+		              events: [event2, event3, event4])
+	}
+
 	static var events: [Event] {
 		return [event, event2, event3, event4]
 	}
@@ -24,13 +35,13 @@ struct Mocks {
 		      endDateTimeInUTC: Date() + 1,
 		      eventLocation: eventLocation,
 		      eventCategory: eventCategory,
-		      eventInfo: eventInfo)
+		      eventInfo: eventInfo2)
 	}
 
 	static var event2: Event {
 		Event(eventId: 2,
 		      title: "Musik Event 2",
-		      picture: picture,
+		      picture: picture2,
 		      startDateTimeInUTC: Date() + 3600,
 		      endDateTimeInUTC: Date() + 7200,
 		      eventLocation: eventLocation,
@@ -52,7 +63,7 @@ struct Mocks {
 	static var event4: Event {
 		Event(eventId: 4,
 		      title: "Musik Event",
-		      picture: picture,
+		      picture: picture2,
 		      startDateTimeInUTC: Date() + 110_000,
 		      endDateTimeInUTC: Date() + 120_000,
 		      eventLocation: eventLocation,
@@ -64,6 +75,12 @@ struct Mocks {
 		Picture(pictureId: 1,
 		        altText: "Test alt text wuhuu",
 		        path: "https://www.nasa.gov/sites/default/files/thumbnails/image/spacex_dragon_june_29.jpg")
+	}
+
+	static var picture2: Picture {
+		Picture(pictureId: 2,
+		        altText: "Test alt text wuhuu",
+		        path: "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/afrc2021-0149-02_orig.jpg")
 	}
 
 	static var eventLocation: EventLocation {

@@ -17,7 +17,14 @@ class VoteViewModel: ObservableObject {
 	@Published var votings: [Voting] = []
 	@Published var errorMsg: String?
 
-	init() {
+	init(mockVotings: [Voting]? = nil) {
+		if let mockVotings = mockVotings {
+			isLoadingVotings = false
+			votings = mockVotings
+
+			return
+		}
+
 		Task {
 			await loadVotes()
 		}

@@ -8,16 +8,18 @@
 import SwiftUI
 
 public struct IrfcYellowRoundedButton: ButtonStyle {
+	@Environment(\.isEnabled) var isEnabled
+
 	public init() {}
 
 	public func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.padding(8)
-			.foregroundColor(.black)
+			.foregroundColor(isEnabled ? .black : .gray)
 			.padding(.horizontal, 16)
-			.background(Color.irfcYellow)
+			.background(isEnabled ? Color.irfcYellow : .white)
 			.clipShape(Capsule())
-			.shadow(radius: 3)
+			.shadow(radius: isEnabled ? 3 : 1)
 			.opacity(configuration.isPressed ? 0.7 : 1.0)
 	}
 }
@@ -54,6 +56,10 @@ struct IrfcButton_Previews: PreviewProvider {
 		HStack(spacing: 16) {
 			Button("Konzert") {}
 				.buttonStyle(IrfcYellowRoundedButton())
+
+			Button("Konzert") {}
+				.buttonStyle(IrfcYellowRoundedButton())
+				.disabled(true)
 
 			Button("Konzert") {}
 				.buttonStyle(IrfcWhiteRoundedButton())

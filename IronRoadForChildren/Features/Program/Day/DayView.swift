@@ -24,7 +24,7 @@ struct DayView: View {
 								.padding(.top, 8)
 								.padding(.horizontal, 16)
 						}
-						.buttonStyle(PlainButtonStyle())
+						.buttonStyle(.plain)
 					}
 				}
 			}
@@ -35,6 +35,6 @@ struct DayView: View {
 
 struct DayView_Previews: PreviewProvider {
 	static var previews: some View {
-		DayView()
+		DayView(events: Mocks.events)
 	}
 }

@@ -10,10 +10,11 @@ import SnapToScroll
 import SwiftUI
 
 struct VoteView: View {
-	@State private var index = 0
-	private var voting: Voting
-
 	@EnvironmentObject var viewModel: VoteViewModel
+
+	private var voting: Voting
+	@State private var selectedEvent: Event? = nil
+	@State private var presentConfirmation = false
 
 	init(voting: Voting) {
 		self.voting = voting
@@ -29,33 +30,41 @@ struct VoteView: View {
 			ScrollView(.horizontal) {
 				HStack {
 					ForEach(voting.events) { event in
-						VoteBandItem(name: event.title,
-						             description: event.eventInfo.infoText)
-							.frame(width: 300, height: 250)
-							.padding()
+						VoteBandItem(event: event, choosenBand: selectedEvent == event) {
+							if selectedEvent == event {
+								selectedEvent = nil
+							} else {
+								selectedEvent = event
+							}
+						}
+						.frame(width: 300, height: 250)
+						.padding()
 					}
 				}
 			}
 
-			HStack {
-				ForEach(0 ..< voting.events.count, id: \.self) { index in
-					Circle()
-						.fill(index == self.index ? Color.irfcYellow : Color.irfcYellow.opacity(0.5))
-						.frame(width: 10, height: 10)
-				}
-			}
-			.padding(.bottom)
-
 			Button(action: {
-				Task {
-					await viewModel.vote()
-				}
+				presentConfirmation = true
 			}) {
 				Text("Stimme abgeben")
 					.padding(6)
 			}
+			.disabled(selectedEvent == nil)
 			.buttonStyle(IrfcYellowRoundedButton())
 			.padding()
+			.confirmationDialog("Wollen sie wirklich für abstimmen", isPresented: $presentConfirmation, titleVisibility: .visible) {
+				Button("Ja", role: .destructive) {
+					Task {
+						await viewModel.vote()
+					}
+				}
+			}
 		}
+	}
+}
+
+struct VoteView_Previews: PreviewProvider {
+	static var previews: some View {
+		VoteView(voting: Mocks.voting)
 	}
 }

@@ -31,6 +31,8 @@ struct VotesView: View {
 
 struct VotesView_Previews: PreviewProvider {
 	static var previews: some View {
-		VotesView()
+		VotesView(
+			viewModel: VoteViewModel(mockVotings: Mocks.votings)
+		)
 	}
 }

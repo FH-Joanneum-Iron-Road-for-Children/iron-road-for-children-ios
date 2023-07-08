@@ -5,13 +5,25 @@
 //  Created by Alexander Kauer on 08.07.23.
 //
 
+import AsyncAlgorithms
 import Foundation
 import SimpleKeychain
 
 class KeychainWrapper {
 	private let keychain = SimpleKeychain()
+	private let voteForIdsChannel = AsyncChannel<VoteEvent>()
 
-	init() {}
+	init() {
+		Task {
+			await processvoteForIdsChannel()
+		}
+	}
+
+	private func processvoteForIdsChannel() async {
+		for await voteFor in voteForIdsChannel {
+			storeVote(voteFor)
+		}
+	}
 
 	private var alreadyVotedIdsKey = "already_voted_ids"
 	var alreadyVotedIds: [VoteEvent] {
@@ -19,6 +31,17 @@ class KeychainWrapper {
 			return []
 		}
 		return result
+	}
+
+	func saveVote(_ voteFor: VoteEvent) async {
+		await voteForIdsChannel.send(voteFor)
+		print("Saved vote for \(voteFor)")
+	}
+
+	private func storeVote(_ voteEvent: VoteEvent) {
+		var alreadyVotedIds = self.alreadyVotedIds
+		alreadyVotedIds.append(voteEvent)
+		keychain.setJson(alreadyVotedIds, forKey: alreadyVotedIdsKey)
 	}
 
 	func deleteAll() {

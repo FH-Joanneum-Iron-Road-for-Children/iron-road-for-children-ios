@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct VotesView: View {
-	@StateObject var viewModel = VoteViewModel()
+	@StateObject var viewModel = VotesViewModel()
 
 	var body: some View {
 		if viewModel.isLoadingVotings {
@@ -32,7 +32,7 @@ struct VotesView: View {
 struct VotesView_Previews: PreviewProvider {
 	static var previews: some View {
 		VotesView(
-			viewModel: VoteViewModel(mockVotings: Mocks.votings)
+			viewModel: VotesViewModel(mockVotings: Mocks.votings)
 		)
 	}
 }

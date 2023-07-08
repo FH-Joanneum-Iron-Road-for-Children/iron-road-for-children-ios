@@ -10,9 +10,7 @@ import Networking
 import SwiftUI
 import UIKit
 
-class VoteViewModel: ObservableObject {
-	@Published var alreadyVotedIds = world.keychain.alreadyVotedIds
-
+class VotesViewModel: ObservableObject {
 	@Published var isLoadingVotings = true
 	@Published var votings: [Voting] = []
 	@Published var errorMsg: String?
@@ -58,23 +56,14 @@ class VoteViewModel: ObservableObject {
 	}
 
 	@MainActor
-	func vote(for voteId: EventVote) async {
-		var votedIds = world.keychain.alreadyVotedIds
-		guard !votedIds.contains(voteId) else { return }
-
-//		world.keychain.alreadyVoted = true
-//		world.keychain.votedDeviceId = UIDevice.current.identifierForVendor?.uuidString
+	func vote(for voteForEvent: VoteEvent) async -> Bool {
+		let votedForEvents = world.keychain.alreadyVotedIds
+		guard !votedForEvents.contains(voteForEvent) else { return false }
 
 		// TODO: send voting be request
+		// TODO: handle loading state and show indicator
 
-		votedIds.append(voteId)
-
-		updateValuesFromKeychain()
+		await world.keychain.saveVote(voteForEvent)
+		return true
 	}
-
-	func updateValuesFromKeychain() {
-//		alreadyVoted = world.keychain.alreadyVoted
-	}
-
-	private func hasAlreadyVoted(for _: Int) -> Bool {}
 }

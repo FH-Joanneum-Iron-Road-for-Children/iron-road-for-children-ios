@@ -19,14 +19,23 @@ struct Voting: Codable {
 	let title: String
 	let active: Bool
 	let events: [Event]
+
+	var hasAlreadyVotedFor: VoteEvent? {
+		world.keychain.alreadyVotedIds.first(where: { $0.voteId == votingId })
+	}
 }
 
-struct VoteEvent: Codable {
+struct VoteEvent: Codable, Equatable {
 	let voteId: Int
 	let eventId: Int
 
 	init(vote: Voting, event: Event) {
 		voteId = vote.votingId
 		eventId = event.eventId
+	}
+
+	init(voteId: Int, eventId: Int) {
+		self.voteId = voteId
+		self.eventId = eventId
 	}
 }

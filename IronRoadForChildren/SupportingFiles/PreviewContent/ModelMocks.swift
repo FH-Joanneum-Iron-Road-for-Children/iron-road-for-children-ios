@@ -21,6 +21,10 @@ struct Mocks {
 		)
 	}
 
+	static var voteEvent: VoteEvent {
+		return VoteEvent(voteId: 1, eventId: 1)
+	}
+
 	static var events: [Event] {
 		return [event, event2, event3, event4]
 	}

@@ -39,3 +39,9 @@ struct VoteEvent: Codable, Equatable {
 		self.eventId = eventId
 	}
 }
+
+struct Vote: Codable {
+	let votingId: Int
+	let eventId: Int
+	let deviceId: String
+}

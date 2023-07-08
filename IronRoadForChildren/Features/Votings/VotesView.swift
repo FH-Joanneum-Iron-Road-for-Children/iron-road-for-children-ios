@@ -21,12 +21,14 @@ struct VotesView: View {
 		} else {
 			ScrollView {
 				ForEach(Array(viewModel.votings.enumerated()), id: \.offset) { index, voting in
-					VoteView(voting: voting)
-						.environmentObject(viewModel)
+					if voting.active {
+						VoteView(voting: voting)
+							.environmentObject(viewModel)
 
-					if viewModel.votings.count != index + 1 {
-						Divider()
-							.padding([.top, .horizontal])
+						if viewModel.votings.count != index + 1 {
+							Divider()
+								.padding([.top, .horizontal])
+						}
 					}
 				}
 			}

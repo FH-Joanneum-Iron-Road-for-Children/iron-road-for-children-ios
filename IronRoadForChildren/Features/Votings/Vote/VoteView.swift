@@ -25,7 +25,13 @@ struct VoteView: View {
 
 			eventList()
 
-			voteButton()
+			if viewModel.votedFor == nil {
+				voteButton()
+			} else {
+				alreadyVotedError()
+			}
+
+			error()
 		}
 	}
 
@@ -45,7 +51,7 @@ struct VoteView: View {
 					VoteItem(
 						event: event,
 						choosenEvent: isChoosenEvent(event),
-						clickable: viewModel.votedFor == nil
+						clickable: viewModel.votedFor == nil && !viewModel.isLoading
 					) {
 						selectEvent(event)
 					}
@@ -58,28 +64,44 @@ struct VoteView: View {
 
 	@ViewBuilder
 	func voteButton() -> some View {
-		if viewModel.votedFor == nil {
-			Button(action: {
-				presentConfirmation = true
-			}) {
+		Button(action: {
+			presentConfirmation = true
+		}) {
+			if viewModel.isLoading {
+				ProgressView()
+					.padding(6)
+			} else {
 				Text("Stimme abgeben")
 					.padding(6)
 			}
-			.disabled(selectedEvent == nil)
-			.buttonStyle(IrfcYellowRoundedButton())
-			.padding()
-			.confirmationDialog("Wollen sie wirklich für \(selectedEvent?.title ?? "unbekannt") abstimmen?", isPresented: $presentConfirmation, titleVisibility: .visible) {
-				Button("Ja", role: .destructive) {
-					Task {
-						guard let selectedEvent = selectedEvent else { return }
-						await viewModel.vote(for: selectedEvent)
-					}
+		}
+		.disabled(selectedEvent == nil || viewModel.isLoading)
+		.buttonStyle(IrfcYellowRoundedButton())
+		.padding()
+		.confirmationDialog("Wollen sie wirklich für \(selectedEvent?.title ?? "unbekannt") abstimmen?", isPresented: $presentConfirmation, titleVisibility: .visible) {
+			Button("Ja", role: .destructive) {
+				Task {
+					guard let selectedEvent = selectedEvent else { return }
+					await viewModel.vote(for: selectedEvent)
 				}
 			}
-		} else {
-			Text("Sie haben in dieser Kategorie bereits abgestimmt.")
-				.multilineTextAlignment(.center)
+		}
+	}
+
+	func alreadyVotedError() -> some View {
+		Text("Sie haben in dieser Kategorie bereits abgestimmt.")
+			.multilineTextAlignment(.center)
+			.font(.caption)
+	}
+
+	@ViewBuilder
+	func error() -> some View {
+		if viewModel.voteError != nil {
+			Text("Es ist ein Fehler aufgetreten, bitte stimmen Sie erneut ab.")
+				.multilineTextAlignment(.leading)
 				.font(.caption)
+				.foregroundColor(.red)
+				.padding()
 		}
 	}
 

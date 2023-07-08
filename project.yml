@@ -15,8 +15,12 @@ packages:
     path: "./Packages/ExampleMVVM"
   Networking:
     path: "./Packages/Networking"
-  KeychainWrapper:
-    path: "./Packages/KeychainWrapper"
+  AsyncAlgorithms:
+    url: "https://github.com/apple/swift-async-algorithms.git"
+    from: "0.1.0"
+  SimpleKeychain:
+    url: "https://github.com/auth0/SimpleKeychain"
+    from: "1.0.1"
   
 options:
   bundleIdPrefix: at.irfc.app
@@ -49,9 +53,6 @@ targets:
         randomExecutionOrder: true
         parallelizable: true
       - package: ExampleMVVM/ExampleMVVMTests
-        randomExecutionOrder: true
-        parallelizable: true
-      - package: KeychainWrapper/KeychainWrapperTests
         randomExecutionOrder: true
         parallelizable: true
     settings:
@@ -124,7 +125,9 @@ targetTemplates:
     - package: CoreUI
     - package: ExampleMVVM
     - package: Networking
-    - package: KeychainWrapper
+    - package: AsyncAlgorithms
+      product: AsyncAlgorithms
+    - package: SimpleKeychain
     settings:
       base:
         CURRENT_PROJECT_VERSION: 37

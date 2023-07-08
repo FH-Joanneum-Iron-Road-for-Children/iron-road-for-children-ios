@@ -6,7 +6,6 @@
 //
 
 import CoreUI
-import SnapToScroll
 import SwiftUI
 
 struct VoteView: View {
@@ -55,7 +54,8 @@ struct VoteView: View {
 			.confirmationDialog("Wollen sie wirklich für abstimmen", isPresented: $presentConfirmation, titleVisibility: .visible) {
 				Button("Ja", role: .destructive) {
 					Task {
-						await viewModel.vote()
+						guard let id = selectedEvent?.id else { return }
+						await viewModel.vote(for: id)
 					}
 				}
 			}

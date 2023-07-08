@@ -20,3 +20,13 @@ struct Voting: Codable {
 	let active: Bool
 	let events: [Event]
 }
+
+struct VoteEvent: Codable {
+	let voteId: Int
+	let eventId: Int
+
+	init(vote: Voting, event: Event) {
+		voteId = vote.votingId
+		eventId = event.eventId
+	}
+}

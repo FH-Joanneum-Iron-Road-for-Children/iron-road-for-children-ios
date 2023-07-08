@@ -11,7 +11,7 @@ import SwiftUI
 import UIKit
 
 class VoteViewModel: ObservableObject {
-	@Published var alreadyVoted = world.keychain.alreadyVoted
+	@Published var alreadyVotedIds = world.keychain.alreadyVotedIds
 
 	@Published var isLoadingVotings = true
 	@Published var votings: [Voting] = []
@@ -58,16 +58,23 @@ class VoteViewModel: ObservableObject {
 	}
 
 	@MainActor
-	func vote() async {
-		guard !alreadyVoted else { return }
+	func vote(for voteId: EventVote) async {
+		var votedIds = world.keychain.alreadyVotedIds
+		guard !votedIds.contains(voteId) else { return }
 
-		world.keychain.alreadyVoted = true
-		world.keychain.votedDeviceId = UIDevice.current.identifierForVendor?.uuidString
+//		world.keychain.alreadyVoted = true
+//		world.keychain.votedDeviceId = UIDevice.current.identifierForVendor?.uuidString
+
+		// TODO: send voting be request
+
+		votedIds.append(voteId)
 
 		updateValuesFromKeychain()
 	}
 
 	func updateValuesFromKeychain() {
-		alreadyVoted = world.keychain.alreadyVoted
+//		alreadyVoted = world.keychain.alreadyVoted
 	}
+
+	private func hasAlreadyVoted(for _: Int) -> Bool {}
 }

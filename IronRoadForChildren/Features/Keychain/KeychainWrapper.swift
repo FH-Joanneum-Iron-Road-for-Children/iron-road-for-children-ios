@@ -19,6 +19,15 @@ class KeychainWrapper {
 		}
 	}
 
+	func saveVote(_ voteFor: VoteEvent) async {
+		await voteForIdsChannel.send(voteFor)
+		print("Saved vote for \(voteFor)")
+	}
+
+	func deleteAll() {
+		try? keychain.deleteAll()
+	}
+
 	private func processvoteForIdsChannel() async {
 		for await voteFor in voteForIdsChannel {
 			storeVote(voteFor)
@@ -33,19 +42,10 @@ class KeychainWrapper {
 		return result
 	}
 
-	func saveVote(_ voteFor: VoteEvent) async {
-		await voteForIdsChannel.send(voteFor)
-		print("Saved vote for \(voteFor)")
-	}
-
 	private func storeVote(_ voteEvent: VoteEvent) {
 		var alreadyVotedIds = self.alreadyVotedIds
 		alreadyVotedIds.append(voteEvent)
 		keychain.setJson(alreadyVotedIds, forKey: alreadyVotedIdsKey)
-	}
-
-	func deleteAll() {
-		try? keychain.deleteAll()
 	}
 }
 

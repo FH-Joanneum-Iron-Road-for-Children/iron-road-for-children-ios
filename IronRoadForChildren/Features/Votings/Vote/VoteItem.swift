@@ -8,21 +8,24 @@
 import CoreUI
 import SwiftUI
 
-struct VoteBandItem: View {
+struct VoteItem: View {
 	var event: Event
 	var choosenBand: Bool
+	var clickable: Bool
 	var click: () -> Void
 
 	private var cornerRadius: CGFloat = 20
 
-	public init(event: Event, choosenBand: Bool, click: @escaping () -> Void) {
+	public init(event: Event, choosenEvent: Bool, clickable: Bool, click: @escaping () -> Void) {
 		self.event = event
-		self.choosenBand = choosenBand
+		choosenBand = choosenEvent
+		self.clickable = clickable
 		self.click = click
 	}
 
 	var body: some View {
 		Button {
+			guard clickable else { return }
 			click()
 		} label: {
 			VStack(spacing: 0) {
@@ -38,6 +41,7 @@ struct VoteBandItem: View {
 			)
 			.cornerRadius(cornerRadius)
 		}
+		.disabled(!clickable)
 	}
 
 	private func bandName() -> some View {
@@ -84,7 +88,7 @@ struct VoteBandItem: View {
 
 struct VoteBandItem_Previews: PreviewProvider {
 	static var previews: some View {
-		VoteBandItem(event: Mocks.event, choosenBand: true, click: {})
+		VoteItem(event: Mocks.event, choosenEvent: true, clickable: true, click: {})
 			.frame(maxWidth: 300, maxHeight: 250)
 			.padding()
 	}

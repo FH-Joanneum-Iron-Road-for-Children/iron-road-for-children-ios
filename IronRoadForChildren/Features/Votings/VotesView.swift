@@ -20,9 +20,14 @@ struct VotesView: View {
 			Text("Derzeit gibt es noch keine Votings.")
 		} else {
 			ScrollView {
-				ForEach(viewModel.votings, id: \.votingId) { voting in
+				ForEach(Array(viewModel.votings.enumerated()), id: \.offset) { index, voting in
 					VoteView(voting: voting)
 						.environmentObject(viewModel)
+
+					if viewModel.votings.count != index + 1 {
+						Divider()
+							.padding([.top, .horizontal])
+					}
 				}
 			}
 		}

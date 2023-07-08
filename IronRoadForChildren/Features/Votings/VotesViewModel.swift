@@ -54,16 +54,4 @@ class VotesViewModel: ObservableObject {
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: Voting.self)
 		return body
 	}
-
-	@MainActor
-	func vote(for voteForEvent: VoteEvent) async -> Bool {
-		let votedForEvents = world.keychain.alreadyVotedIds
-		guard !votedForEvents.contains(voteForEvent) else { return false }
-
-		// TODO: send voting be request
-		// TODO: handle loading state and show indicator
-
-		await world.keychain.saveVote(voteForEvent)
-		return true
-	}
 }

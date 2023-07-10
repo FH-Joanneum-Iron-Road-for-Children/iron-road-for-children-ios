@@ -8,6 +8,7 @@ fileGroups:
 - fastlane
 - command-line-tools
 - ".github/workflows"
+- .gitignore
 packages:
   CoreUI:
     path: "./Packages/CoreUI"

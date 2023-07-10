@@ -12,92 +12,131 @@ import SwiftUI
 struct ContentView: View {
 	var body: some View {
 		if #available(iOS 16, *) {
-			TabView {
-				Group {
-					NavigationStack {
-						ProgramView()
-							.navigationTitle("Programm")
-							.navigationBarTitleDisplayMode(.inline)
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Program", image: "program")
-					}
-
-					NavigationStack {
-						VoteView()
-							.navigationTitle("Voting")
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Vote", image: "vote")
-					}
-
-					NavigationStack {
-						EventMapView()
-							.navigationTitle("Karten")
-							.navigationBarTitleDisplayMode(.inline)
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Karte", image: "map")
-					}
-
-					NavigationStack {
-						MoreView()
-							.navigationTitle("Über uns")
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("More", systemImage: "ellipsis")
-					}
-				}
-				.tint(.irfcAccentColor)
-			}
-			.tint(.irfcYellow)
+			iOS16UpView()
 		} else {
-			TabView {
-				Group {
-					NavigationView {
-						ProgramView()
-							.navigationTitle("Programm")
-							.navigationBarTitleDisplayMode(.inline)
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Program", image: "program")
-					}
+			iOS15View()
+		}
+	}
 
-					NavigationView {
-						VoteView()
-							.navigationTitle("Voting")
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Vote", image: "vote")
-					}
+	@available(iOS 16, *)
+	private func iOS16UpView() -> some View {
+		TabView {
+			Group {
+				NavigationStack {
+					programView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					programLabel()
+				}
 
-					NavigationView {
-						EventMapView()
-							.navigationTitle("Karten")
-							.navigationBarTitleDisplayMode(.inline)
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Karten", image: "map")
-					}
+				NavigationStack {
+					votesView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					votesLabel()
+				}
 
-					NavigationView {
-						MoreView()
-							.navigationTitle("Über uns")
-					}
-					.navigationViewStyle(.stack)
-					.tabItem {
-						Label("Mehr", systemImage: "ellipsis")
-					}
+				NavigationStack {
+					eventMapView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					eventMapLabel()
+				}
+
+				NavigationStack {
+					moreView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					moreLabel()
+				}
+			}
+			.tint(.irfcAccentColor)
+		}
+		.tint(.irfcYellow)
+	}
+
+	private func iOS15View() -> some View {
+		TabView {
+			Group {
+				NavigationView {
+					programView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					programLabel()
+				}
+
+				NavigationView {
+					votesView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					votesLabel()
+				}
+
+				NavigationView {
+					eventMapView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					eventMapLabel()
+				}
+
+				NavigationView {
+					moreView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem {
+					moreLabel()
 				}
 			}
 		}
+	}
+
+	private func programView() -> some View {
+		ProgramView()
+			.navigationTitle("Programm")
+			.navigationBarTitleDisplayMode(.inline)
+			.navigationViewStyle(.stack)
+	}
+
+	private func programLabel() -> some View {
+		Label("Program", image: "program")
+	}
+
+	private func votesView() -> some View {
+		VotesView()
+			.navigationTitle("Voting")
+			.navigationViewStyle(.stack)
+	}
+
+	private func votesLabel() -> some View {
+		Label("Voting", image: "vote")
+	}
+
+	private func eventMapView() -> some View {
+		EventMapView()
+			.navigationTitle("Karte")
+			.navigationBarTitleDisplayMode(.inline)
+			.navigationViewStyle(.stack)
+	}
+
+	private func eventMapLabel() -> some View {
+		Label("Karte", image: "map")
+	}
+
+	private func moreView() -> some View {
+		MoreView()
+			.navigationTitle("Über uns")
+			.navigationViewStyle(.stack)
+	}
+
+	private func moreLabel() -> some View {
+		Label("Mehr", systemImage: "ellipsis")
 	}
 }
 

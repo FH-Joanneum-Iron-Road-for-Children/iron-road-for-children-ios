@@ -17,9 +17,27 @@ struct ProgramTabBarItem: View {
 		Button {
 			self.currentTab = tab
 		} label: {
-			VStack {
+			VStack(spacing: 0) {
+				HStack {
+					Spacer()
+
+					VStack {
+						HStack {
+							Text(tabBarItemName)
+								.font(.body)
+						}
+
+						HStack {
+							Text("10.10.2023")
+								.font(.caption)
+						}
+					}
+
+					Spacer()
+				}
+
 				Spacer()
-				Text(tabBarItemName)
+
 				if currentTab == tab {
 					Color.yellow
 						.frame(height: 2)

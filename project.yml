@@ -15,6 +15,12 @@ packages:
     path: "./Packages/ExampleMVVM"
   Networking:
     path: "./Packages/Networking"
+  AsyncAlgorithms:
+    url: https://github.com/apple/swift-async-algorithms.git
+    from: 0.1.0
+  SimpleKeychain:
+    url: https://github.com/auth0/SimpleKeychain
+    from: 1.0.1
 options:
   bundleIdPrefix: at.irfc.app
   createIntermediateGroups: true
@@ -117,10 +123,14 @@ targetTemplates:
     dependencies:
     - package: CoreUI
     - package: ExampleMVVM
+    - package: Networking
+    - package: AsyncAlgorithms
+      product: AsyncAlgorithms
+    - package: SimpleKeychain
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 37
-        MARKETING_VERSION: 1.1.0
+        CURRENT_PROJECT_VERSION: 38
+        MARKETING_VERSION: 1.1.1
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
         ENABLE_PREVIEWS: true

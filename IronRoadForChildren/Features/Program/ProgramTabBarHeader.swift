@@ -20,7 +20,6 @@ struct ProgramTabBarHeader: View {
 					Array(zip(self.tabBarOptions.indices, self.tabBarOptions)),
 					id: \.0
 				) { index, name in
-
 					ProgramTabBarItem(
 						currentTab: self.$currentTab,
 						namespace: namespace.self,
@@ -32,7 +31,8 @@ struct ProgramTabBarHeader: View {
 			.frame(maxWidth: .infinity)
 			.frame(height: 30)
 			.padding(.horizontal)
-			.padding(.bottom, 7)
+			.padding(.bottom, 10)
+			.padding(.top)
 
 			Divider()
 		}

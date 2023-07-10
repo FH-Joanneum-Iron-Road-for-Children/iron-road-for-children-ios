@@ -13,31 +13,13 @@ struct ProgramItemDetailView: View {
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 8) {
-				Text(event.title)
-					.font(.title2)
-					.padding()
+				eventTitle()
 
-				titleImage()
+				eventImage()
 
 				timeAndDate()
 
-				EqualIconWidthDomain {
-					Label(event.eventLocation.name, systemImage: "mappin")
-						.font(.body)
-						.padding(.horizontal)
-						.imageScale(.small)
-
-					Label(event.eventCategory.name, systemImage: "tag")
-						.font(.body)
-						.padding(.horizontal)
-						.imageScale(.small)
-				}
-
-				Text(event.eventInfo.infoText)
-					.font(.body)
-					.lineLimit(4)
-					.padding(.horizontal)
-					.padding(.top)
+				eventDescription()
 
 				imageGallery()
 			}
@@ -51,8 +33,14 @@ struct ProgramItemDetailView: View {
 		}
 	}
 
+	func eventTitle() -> some View {
+		Text(event.title)
+			.font(.title2)
+			.padding()
+	}
+
 	@ViewBuilder
-	func titleImage() -> some View {
+	func eventImage() -> some View {
 		if let url = URL(string: event.picture.path) {
 			AsyncImage(url: url) { image in
 				image
@@ -94,6 +82,38 @@ struct ProgramItemDetailView: View {
 			}
 		}
 		.padding()
+	}
+
+	@ViewBuilder
+	func locationAndCategory() -> some View {
+		EqualIconWidthDomain {
+			Label(event.eventLocation.name, systemImage: "mappin")
+				.font(.body)
+				.padding(.horizontal)
+				.imageScale(.small)
+
+			Label(event.eventCategory.name, systemImage: "tag")
+				.font(.body)
+				.padding(.horizontal)
+				.imageScale(.small)
+		}
+	}
+
+	@ViewBuilder
+	func eventDescription() -> some View {
+		if let attributedString = event.eventInfo.infoText.attributedMarkdownString {
+			Text(attributedString)
+				.font(.body)
+				.lineLimit(4)
+				.padding(.horizontal)
+				.padding(.top)
+		} else {
+			Text(event.eventInfo.infoText)
+				.font(.body)
+				.lineLimit(4)
+				.padding(.horizontal)
+				.padding(.top)
+		}
 	}
 
 	@ViewBuilder

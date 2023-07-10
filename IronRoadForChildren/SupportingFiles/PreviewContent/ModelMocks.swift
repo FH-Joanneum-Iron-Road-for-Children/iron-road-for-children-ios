@@ -125,7 +125,7 @@ struct Mocks {
 	static var eventInfo: EventInfo {
 		EventInfo(
 			eventInfoId: 1,
-			infoText: "My event info",
+			infoText: "My event info **bold** text und link [Test](https://google.com)",
 			pictures: []
 		)
 	}
@@ -133,7 +133,7 @@ struct Mocks {
 	static var eventInfo2: EventInfo {
 		EventInfo(
 			eventInfoId: 2,
-			infoText: "My event info",
+			infoText: "My event info **bold** text und link [Test](https://google.com)",
 			pictures: [picture, picture2]
 		)
 	}

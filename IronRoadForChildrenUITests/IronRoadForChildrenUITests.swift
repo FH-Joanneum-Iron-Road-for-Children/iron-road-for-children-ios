@@ -1,9 +1,4 @@
-//
-//  IronRoadForChildrenUITests.swift
-//  IronRoadForChildrenUITests
-//
-//  Created by Alexander Kauer on 08.03.23.
-//
+// Copyright © 2023 IRFC
 
 import XCTest
 

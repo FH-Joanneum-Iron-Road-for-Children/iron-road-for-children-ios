@@ -53,15 +53,20 @@ struct MoreView: View {
 			}
 
 			Section {
-				HStack {
-					Spacer()
+				VStack {
+					HStack {
+						Spacer()
+//
+						Text(creatorText)
+							.font(.caption)
+							.multilineTextAlignment(.center)
 
-					Text(creatorText)
-						.font(.caption)
-						.multilineTextAlignment(.center)
+						Spacer()
+					}
+
+					Text("Version: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))")
 						.padding()
-
-					Spacer()
+						.font(.caption2)
 				}
 			}
 			.listRowBackground(Color.clear)

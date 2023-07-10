@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProgramItemView: View {
+struct ProgramListItemView: View {
 	let event: Event
 
 	private let rowHeight: CGFloat = 100
@@ -56,5 +56,11 @@ struct ProgramItemView: View {
 		.cornerRadius(16)
 		.frame(height: rowHeight)
 		.shadow(color: .gray.opacity(0.20), radius: 4)
+	}
+}
+
+struct ProgramItemView_Previews: PreviewProvider {
+	static var previews: some View {
+		ProgramListItemView(event: Mocks.event)
 	}
 }

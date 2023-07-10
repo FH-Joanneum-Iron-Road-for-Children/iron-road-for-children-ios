@@ -134,7 +134,7 @@ struct Mocks {
 		EventInfo(
 			eventInfoId: 2,
 			infoText: "My event info",
-			pictures: [picture, picture]
+			pictures: [picture, picture2]
 		)
 	}
 }

@@ -254,14 +254,11 @@ xcuserdata/
 *.xccheckout
 
 ### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcodeproj/project.xcworkspace/
-!*.xcworkspace/contents.xcworkspacedata
+IronRoadForChildren.xcodeproj/*
+!IronRoadForChildren.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+!IronRoadForChildren.xcodeproj/xcshareddata/IDETemplateMacros.plist
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,visualstudiocode,macos,xcode,ruby,fastlane
-IronRoadForChildren.xcodeproj
 fastlane/.keys

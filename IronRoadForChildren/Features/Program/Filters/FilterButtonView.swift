@@ -1,9 +1,4 @@
-//
-//  FilterButtonView.swift
-//  IronRoadForChildren
-//
-//  Created by Robert Zavaczki on 05.06.23.
-//
+// Copyright © 2023 IRFC
 
 import CoreUI
 import SwiftUI

@@ -1,9 +1,4 @@
-//
-//  ProgramItemView.swift
-//  IronRoadForChildren
-//
-//  Created by Robert Zavaczki on 18.04.23.
-//
+// Copyright © 2023 IRFC
 
 import SwiftUI
 

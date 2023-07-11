@@ -1,9 +1,4 @@
-//
-//  IrfcFontExtenstion.swift
-//
-//
-//  Created by Alexander Kauer on 25.04.23.
-//
+// Copyright © 2023 IRFC
 
 import Foundation
 import SwiftUI

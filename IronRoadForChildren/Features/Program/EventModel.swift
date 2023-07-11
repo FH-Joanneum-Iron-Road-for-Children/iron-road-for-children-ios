@@ -1,9 +1,4 @@
-//
-//  EventModel.swift
-//  IronRoadForChildren
-//
-//  Created by Alexander Kauer on 24.04.23.
-//
+// Copyright © 2023 IRFC
 
 import Foundation
 

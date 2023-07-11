@@ -1,9 +1,4 @@
-//
-//  IrfcRoundedButton.swift
-//
-//
-//  Created by Alexander Kauer on 24.03.23.
-//
+// Copyright © 2023 IRFC
 
 import SwiftUI
 

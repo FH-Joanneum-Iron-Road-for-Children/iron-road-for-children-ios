@@ -1,9 +1,4 @@
-//
-//  BaseConfig.swift
-//  IronRoadForChildren
-//
-//  Created by Alexander Kauer on 07.06.23.
-//
+// Copyright © 2023 IRFC
 
 import Foundation
 

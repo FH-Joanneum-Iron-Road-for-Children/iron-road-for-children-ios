@@ -1,9 +1,4 @@
-//
-//  PhotoDetailView.swift
-//  IronRoadForChildren
-//
-//  Created by Alexander Kauer on 06.06.23.
-//
+// Copyright © 2023 IRFC
 
 import PDFKit
 import SwiftUI

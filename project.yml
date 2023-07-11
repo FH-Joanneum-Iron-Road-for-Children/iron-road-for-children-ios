@@ -8,6 +8,7 @@ fileGroups:
 - fastlane
 - command-line-tools
 - ".github/workflows"
+- ".gitignore"
 packages:
   CoreUI:
     path: "./Packages/CoreUI"
@@ -129,7 +130,7 @@ targetTemplates:
     - package: SimpleKeychain
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 38
+        CURRENT_PROJECT_VERSION: 39
         MARKETING_VERSION: 1.1.1
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist

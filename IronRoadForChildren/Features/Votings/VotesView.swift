@@ -1,9 +1,4 @@
-//
-//  VotesView.swift
-//  IronRoadForChildren
-//
-//  Created by Alexander Kauer on 12.06.23.
-//
+// Copyright © 2023 IRFC
 
 import Foundation
 import SwiftUI

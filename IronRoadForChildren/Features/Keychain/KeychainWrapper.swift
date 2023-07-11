@@ -1,9 +1,4 @@
-//
-//  KeychainWrapper.swift
-//  IronRoadForChildren
-//
-//  Created by Alexander Kauer on 08.07.23.
-//
+// Copyright © 2023 IRFC
 
 import AsyncAlgorithms
 import Foundation

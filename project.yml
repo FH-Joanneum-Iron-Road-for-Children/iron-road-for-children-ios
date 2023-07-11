@@ -22,6 +22,9 @@ packages:
   SimpleKeychain:
     url: https://github.com/auth0/SimpleKeychain
     from: 1.0.1
+  AckGen:
+    url: https://github.com/MartinP7r/AckGen
+    from: 0.1.6
 options:
   bundleIdPrefix: at.irfc.app
   createIntermediateGroups: true
@@ -121,6 +124,7 @@ targetTemplates:
     deploymentTarget: '15.0'
     sources:
     - IronRoadForChildren
+    - Acknowledgements.plist
     dependencies:
     - package: CoreUI
     - package: ExampleMVVM
@@ -128,6 +132,20 @@ targetTemplates:
     - package: AsyncAlgorithms
       product: AsyncAlgorithms
     - package: SimpleKeychain
+    - package: AckGen
+      product: AckGen
+    - package: AckGen
+      product: AckGenUI
+    prebuildScripts:
+    - script: |
+        DIR=$PROJECT_TEMP_DIR/../../../SourcePackages/checkouts/AckGen
+        if [ -d "$DIR" ]; then
+          cd $DIR
+          SDKROOT=(xcrun --sdk macosx --show-sdk-path)
+          swift run ackgen
+        else
+          echo "warning: AckGen not found. Please install the package via SPM (https://github.com/MartinP7r/AckGen#installation)"
+        fi
     settings:
       base:
         CURRENT_PROJECT_VERSION: 39

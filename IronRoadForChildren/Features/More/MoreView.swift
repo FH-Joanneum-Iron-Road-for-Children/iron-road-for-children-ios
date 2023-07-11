@@ -4,14 +4,6 @@ import CoreUI
 import SwiftUI
 
 struct MoreView: View {
-	let text = """
-	Die Iron Road for Children, kurz IRFC, ist Österreichs größtes markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.
-	Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.
-	Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live Konzerten, einem Kinderbereich und einer Tattoo-Area wird den Besuchern auch eine große Austeller- und Streetfood-Area geboten.
-	In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".
-	Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher.
-	"""
-
 	@Environment(\.openURL) var openURL
 
 	var body: some View {
@@ -40,54 +32,63 @@ struct MoreView: View {
 			.listRowBackground(Color.clear)
 
 			Section {
-				Link(destination: URL(string: "https://irfc.at/kontakt/impressum/")!) {
-					HStack {
-						Image(systemName: "info.circle")
-						Text("Impressum")
-						Spacer()
-						Image(systemName: "chevron.right")
-							.imageScale(.small)
-							.font(.body.weight(.semibold))
-					}
+				Link(destination: impressumURL) {
+					Label("Impressum", systemImage: "info.circle")
 				}
 
-				Link(destination: URL(string: "https://irfc.at/kontakt/datenschutz/")!) {
-					HStack {
-						Image(systemName: "shield")
-						Text("Datenschutz")
-						Spacer()
-						Image(systemName: "chevron.right")
-							.imageScale(.small)
-							.font(.body.weight(.semibold))
-					}
+				Link(destination: dataPrivacyURL) {
+					Label("Datenschutz", systemImage: "shield")
+				}
+
+				NavigationLink {
+					AcknowView()
+				} label: {
+					Label("Acknowledgements", systemImage: "hands.clap")
 				}
 			}
 
 			Section {
-				HStack {
-					Spacer()
+				VStack {
+					HStack {
+						Spacer()
+//
+						Text(creatorText)
+							.font(.caption)
+							.multilineTextAlignment(.center)
 
-					Text("""
-					     Zur Verfügung gestellt vom FH JOANNEUM
-					     Studiengang Mobile Software Development.
-					""")
-					.font(.caption)
-					.multilineTextAlignment(.center)
-					.padding()
+						Spacer()
+					}
 
-					Spacer()
+					Text("Version: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))")
+						.padding()
+						.font(.caption2)
 				}
 			}
 			.listRowBackground(Color.clear)
 		}
 	}
+
+	private let impressumURL = URL(string: "https://irfc.at/kontakt/impressum/")!
+	private let dataPrivacyURL = URL(string: "https://irfc.at/kontakt/datenschutz/")!
+
+	private let text = """
+	Die Iron Road for Children, kurz IRFC, ist Österreichs größtes markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.
+	Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.
+	Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live Konzerten, einem Kinderbereich und einer Tattoo-Area wird den Besuchern auch eine große Austeller- und Streetfood-Area geboten.
+	In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".
+	Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher.
+	"""
+
+	private let creatorText = """
+	Zur Verfügung gestellt vom FH JOANNEUM
+	 Studiengang Mobile Software Development.
+	"""
 }
 
 struct MoreView_Previews: PreviewProvider {
 	static var previews: some View {
-		MoreView()
-
-		MoreView()
-			.preferredColorScheme(.dark)
+		NavigationView {
+			MoreView()
+		}
 	}
 }

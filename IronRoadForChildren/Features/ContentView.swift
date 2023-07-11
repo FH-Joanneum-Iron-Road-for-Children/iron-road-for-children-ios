@@ -6,55 +6,6 @@ import SwiftUI
 
 struct ContentView: View {
 	var body: some View {
-		if #available(iOS 16, *) {
-			iOS16UpView()
-		} else {
-			iOS15View()
-		}
-	}
-
-	@available(iOS 16, *)
-	private func iOS16UpView() -> some View {
-		TabView {
-			Group {
-				NavigationStack {
-					programView()
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					programLabel()
-				}
-
-				NavigationStack {
-					votesView()
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					votesLabel()
-				}
-
-				NavigationStack {
-					eventMapView()
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					eventMapLabel()
-				}
-
-				NavigationStack {
-					moreView()
-				}
-				.navigationViewStyle(.stack)
-				.tabItem {
-					moreLabel()
-				}
-			}
-			.tint(.irfcAccentColor)
-		}
-		.tint(.irfcYellow)
-	}
-
-	private func iOS15View() -> some View {
 		TabView {
 			Group {
 				NavigationView {

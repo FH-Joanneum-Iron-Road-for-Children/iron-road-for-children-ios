@@ -15,7 +15,7 @@ struct DayView: View {
 				} else {
 					ForEach(events) { event in
 						NavigationLink(destination: ProgramItemDetailView(event: event)) {
-							ProgramItemView(event: event)
+							ProgramListItemView(event: event)
 								.padding(.top, 8)
 								.padding(.horizontal, 16)
 						}

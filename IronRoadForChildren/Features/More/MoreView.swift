@@ -21,6 +21,7 @@ struct MoreView: View {
 					}) {
 						HStack {
 							Image("donate")
+								.imageScale(.medium)
 							Text("Spenden")
 						}
 					}
@@ -28,8 +29,26 @@ struct MoreView: View {
 
 					Spacer()
 				}
+
+				HStack {
+					Spacer()
+
+					Button(action: {
+						openURL(URL(string: "https://irfc.at/app/app-gewinnspiel/")!)
+					}) {
+						HStack {
+							Image(systemName: "cube")
+								.imageScale(.medium)
+							Text("Zum Gewinnspiel")
+						}
+					}
+					.buttonStyle(IrfcWhiteRoundedButton())
+
+					Spacer()
+				}
 			}
 			.listRowBackground(Color.clear)
+			.listRowSeparator(.hidden)
 
 			Section {
 				Link(destination: impressumURL) {
@@ -51,7 +70,7 @@ struct MoreView: View {
 				VStack {
 					HStack {
 						Spacer()
-//
+
 						Text(creatorText)
 							.font(.caption)
 							.multilineTextAlignment(.center)

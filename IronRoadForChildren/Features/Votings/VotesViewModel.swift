@@ -11,8 +11,6 @@ class VotesViewModel: ObservableObject {
 	@Published var errorMsg: String?
 
 	init(mockVotings: [Voting]? = nil) {
-		world.keychain.deleteAll()
-
 		if let mockVotings = mockVotings {
 			isLoadingVotings = false
 			votings = mockVotings

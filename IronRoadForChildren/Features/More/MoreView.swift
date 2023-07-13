@@ -39,7 +39,7 @@ struct MoreView: View {
 						HStack {
 							Image(systemName: "cube")
 								.imageScale(.medium)
-							Text("Gewinnspiel")
+							Text("Zum Gewinnspiel")
 						}
 					}
 					.buttonStyle(IrfcWhiteRoundedButton())

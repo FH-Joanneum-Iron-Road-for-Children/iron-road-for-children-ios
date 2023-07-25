@@ -18,9 +18,9 @@ struct ProgramTabBarHeader: View {
 					ProgramTabBarItem(
 						currentTab: self.$currentTab,
 						namespace: namespace.self,
-            tabBarItemName: option.name,
+						tabBarItemName: option.name,
 						tab: index,
-            date: option.date
+						date: option.date
 					)
 				}
 			}
@@ -38,15 +38,15 @@ struct ProgramTabBarHeader: View {
 struct ProgramTabbarHeader_Previews: PreviewProvider {
 	static var previews: some View {
 		ProgramTabBarHeader(
-      currentTab: .constant(1), tabBarOptions: [
-        ProgramTabBarOption(name: "me", date: Date()),
-        ProgramTabBarOption(name: "other", date: Date().addingTimeInterval(24 * 60 * 60))
-      ]
+			currentTab: .constant(1), tabBarOptions: [
+				ProgramTabBarOption(name: "me", date: Date()),
+				ProgramTabBarOption(name: "other", date: Date().addingTimeInterval(24 * 60 * 60)),
+			]
 		)
 	}
 }
 
 struct ProgramTabBarOption {
-  let name: String
-  let date: Date
+	let name: String
+	let date: Date
 }

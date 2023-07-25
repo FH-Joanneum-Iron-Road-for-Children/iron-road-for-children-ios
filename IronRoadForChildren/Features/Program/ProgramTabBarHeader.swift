@@ -41,6 +41,7 @@ struct ProgramTabbarHeader_Previews: PreviewProvider {
 			currentTab: .constant(1), tabBarOptions: [
 				ProgramTabBarOption(name: "me", date: Date()),
 				ProgramTabBarOption(name: "other", date: Date().addingTimeInterval(24 * 60 * 60)),
+				ProgramTabBarOption(name: "other", date: nil),
 			]
 		)
 	}
@@ -48,5 +49,5 @@ struct ProgramTabbarHeader_Previews: PreviewProvider {
 
 struct ProgramTabBarOption {
 	let name: String
-	let date: Date
+	let date: Date?
 }

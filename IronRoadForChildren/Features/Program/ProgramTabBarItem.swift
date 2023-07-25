@@ -7,7 +7,7 @@ struct ProgramTabBarItem: View {
 	let namespace: Namespace.ID
 	var tabBarItemName: String
 	var tab: Int
-	var date: Date
+	var date: Date?
 
 	var body: some View {
 		Button {
@@ -24,8 +24,10 @@ struct ProgramTabBarItem: View {
 						}
 
 						HStack {
-							Text(world.localDate(of: date))
-								.font(.caption)
+							if let date = date {
+								Text(world.localDate(of: date))
+									.font(.caption)
+							}
 						}
 					}
 

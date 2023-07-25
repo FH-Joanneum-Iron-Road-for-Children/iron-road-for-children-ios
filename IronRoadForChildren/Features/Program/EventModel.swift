@@ -49,6 +49,9 @@ struct EventDay: Equatable, Identifiable {
 	let id = UUID()
 	let name: String
 	var events: [Event]
+  var date: Date {
+    events.first!.startDateTimeInUTC
+  }
 }
 
 struct Picture: Codable, Equatable, Identifiable {

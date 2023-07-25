@@ -6,7 +6,7 @@ struct ProgramTabBarHeader: View {
 	@Namespace var namespace
 
 	@Binding var currentTab: Int
-	var tabBarOptions: [String]
+	var tabBarOptions: [ProgramTabBarOption]
 
 	var body: some View {
 		VStack(spacing: 0) {
@@ -14,12 +14,13 @@ struct ProgramTabBarHeader: View {
 				ForEach(
 					Array(zip(self.tabBarOptions.indices, self.tabBarOptions)),
 					id: \.0
-				) { index, name in
+				) { index, option in
 					ProgramTabBarItem(
 						currentTab: self.$currentTab,
 						namespace: namespace.self,
-						tabBarItemName: name,
-						tab: index
+            tabBarItemName: option.name,
+						tab: index,
+            date: option.date
 					)
 				}
 			}
@@ -37,7 +38,15 @@ struct ProgramTabBarHeader: View {
 struct ProgramTabbarHeader_Previews: PreviewProvider {
 	static var previews: some View {
 		ProgramTabBarHeader(
-			currentTab: .constant(1), tabBarOptions: ["me", "other"]
+      currentTab: .constant(1), tabBarOptions: [
+        ProgramTabBarOption(name: "me", date: Date()),
+        ProgramTabBarOption(name: "other", date: Date().addingTimeInterval(24 * 60 * 60))
+      ]
 		)
 	}
+}
+
+struct ProgramTabBarOption {
+  let name: String
+  let date: Date
 }

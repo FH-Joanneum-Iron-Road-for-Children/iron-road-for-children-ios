@@ -49,7 +49,7 @@ struct ProgramView: View {
 		VStack(spacing: 0) {
 			ProgramTabBarHeader(
 				currentTab: $selectedTab,
-				tabBarOptions: viewModel.eventDays.map { $0.name }
+        tabBarOptions: viewModel.eventDays.map { ProgramTabBarOption(name: $0.name, date: $0.date) }
 			)
 
 			FiltersRowView()

@@ -1,6 +1,7 @@
 // Copyright © 2023 IRFC
 
 import CoreUI
+import NukeUI
 import SwiftUI
 
 struct VoteItem: View {
@@ -53,17 +54,20 @@ struct VoteItem: View {
 		}
 	}
 
-	@ViewBuilder
+	@MainActor @ViewBuilder
 	private func bandImage() -> some View {
 		if let imageUrl = URL(string: event.picture.path) {
 			GeometryReader { geo in
-				AsyncImage(url: imageUrl) { image in
-					image.resizable()
-						.scaledToFill()
-						.frame(width: geo.size.width, height: geo.size.height)
-						.clipped()
-				} placeholder: {
-					ProgressView()
+				LazyImage(url: imageUrl) { state in
+					if let image = state.image {
+						image
+							.resizable()
+							.scaledToFill()
+							.frame(width: geo.size.width, height: geo.size.height)
+							.clipped()
+					} else if state.error == nil {
+						ProgressView()
+					}
 				}
 			}
 		}

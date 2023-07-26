@@ -25,6 +25,9 @@ packages:
   AckGen:
     url: https://github.com/MartinP7r/AckGen
     from: 0.1.6
+  Nuke:
+    url: https://github.com/kean/Nuke
+    from: 12.1.4
 options:
   bundleIdPrefix: at.irfc.app
   createIntermediateGroups: true
@@ -136,6 +139,8 @@ targetTemplates:
       product: AckGen
     - package: AckGen
       product: AckGenUI
+    - package: Nuke
+      product: NukeUI
     prebuildScripts:
     - script: |
         DIR=$PROJECT_TEMP_DIR/../../../SourcePackages/checkouts/AckGen

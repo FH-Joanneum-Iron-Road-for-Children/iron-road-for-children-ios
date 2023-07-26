@@ -5,6 +5,7 @@
 //  Created by Robert Zavaczki on 18.04.23.
 //
 
+import NukeUI
 import SwiftUI
 
 struct ProgramItemDetailView: View {
@@ -39,22 +40,26 @@ struct ProgramItemDetailView: View {
 			.padding()
 	}
 
-	@ViewBuilder
+	@MainActor @ViewBuilder
 	func eventImage() -> some View {
 		if let url = URL(string: event.picture.path) {
-			AsyncImage(url: url) { image in
-				image
-					.resizable()
-					.scaledToFit()
-					.clipped()
-					.padding(.horizontal)
-					.padding(.bottom)
-			} placeholder: {
-				ZStack {
-					Color.gray.opacity(0.1)
-						.frame(width: .infinity, height: 200)
+			LazyImage(url: url) { state in
+				if let image = state.image {
+					image
+						.resizable()
+						.scaledToFit()
+						.clipped()
+						.padding(.horizontal)
+						.padding(.bottom)
+				} else {
+					ZStack {
+						Color.gray.opacity(0.1)
+							.frame(width: .infinity, height: 200)
 
-					ProgressView()
+						if state.error == nil {
+							ProgressView()
+						}
+					}
 				}
 			}
 		}

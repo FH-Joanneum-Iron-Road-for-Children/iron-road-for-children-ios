@@ -1,5 +1,6 @@
 // Copyright © 2023 IRFC
 
+import NukeUI
 import SwiftUI
 
 struct ProgramListItemView: View {
@@ -10,18 +11,22 @@ struct ProgramListItemView: View {
 	var body: some View {
 		HStack(spacing: 10) {
 			if let url = URL(string: event.picture.path) {
-				AsyncImage(url: url) { image in
-					image
-						.resizable()
-						.scaledToFill()
-						.frame(width: rowHeight, height: rowHeight)
-						.clipped()
-				} placeholder: {
-					ZStack {
-						Color.gray.opacity(0.1)
+				LazyImage(url: url) { state in
+					if let image = state.image {
+						image
+							.resizable()
+							.scaledToFill()
 							.frame(width: rowHeight, height: rowHeight)
+							.clipped()
+					} else {
+						ZStack {
+							Color.gray.opacity(0.1)
+								.frame(width: rowHeight, height: rowHeight)
 
-						ProgressView()
+							if state.error == nil {
+								ProgressView()
+							}
+						}
 					}
 				}
 			}

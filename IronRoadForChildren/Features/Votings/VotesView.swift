@@ -11,8 +11,8 @@ struct VotesView: View {
 			ProgressView()
 		} else if let msg = viewModel.errorMsg {
 			Text(msg)
-		} else if viewModel.votings.isEmpty {
-			Text("Derzeit gibt es noch keine Votings.")
+		} else if viewModel.votings.isEmpty || viewModel.votings.filter({ $0.active }).isEmpty {
+			Text("Derzeit gibt es keine Votings.")
 		} else {
 			ScrollView {
 				ForEach(Array(viewModel.votings.enumerated()), id: \.offset) { index, voting in

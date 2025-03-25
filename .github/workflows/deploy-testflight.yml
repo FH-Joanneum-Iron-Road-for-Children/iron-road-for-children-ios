@@ -55,10 +55,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Ruby '2.7.7'
+      - name: Setup Ruby '3.3.1'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.7'
+          ruby-version: '3.3.1'
           bundler-cache: true
 
       - name: Extract secrets

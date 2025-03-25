@@ -16,8 +16,8 @@ extension URLRequest {
 		setValue("application/json", forHTTPHeaderField: "Content-Type")
 
 		guard let headers = headers else { return }
-		headers.forEach { header in
-			self.setValue(header.value, forHTTPHeaderField: header.key)
+		for header in headers {
+			setValue(header.value, forHTTPHeaderField: header.key)
 		}
 	}
 

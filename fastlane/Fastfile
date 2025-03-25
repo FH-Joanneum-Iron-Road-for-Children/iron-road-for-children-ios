@@ -21,14 +21,7 @@ build_yml_position="targetTemplates.AppTarget.settings.base.CURRENT_PROJECT_VERS
 platform :ios do
 desc "Run all iOS unit and ui tests."
   lane :test do
-    run_tests(
-      scheme: "IronRoadForChildren",
-      devices: ["iPhone 14"],  # Specify a device to avoid duplicate destination issues
-      output_types: "html,junit",
-      clean: true,
-      include_simulator_logs: true,
-      result_bundle: true
-    )
+    run_tests(scheme: "IronRoadForChildren")
   end
 
   desc "Sync certificates"

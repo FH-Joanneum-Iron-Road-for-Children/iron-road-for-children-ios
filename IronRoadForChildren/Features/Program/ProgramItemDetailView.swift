@@ -1,5 +1,5 @@
 //
-//  ProgramItemDelailView.swift
+//  ProgramItemDetailView.swift
 //  IronRoadForChildren
 //
 //  Created by Robert Zavaczki on 18.04.23.

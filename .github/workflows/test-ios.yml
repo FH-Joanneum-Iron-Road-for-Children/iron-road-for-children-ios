@@ -16,6 +16,11 @@ jobs:
         with:
           ruby-version: '3.3.5'
           bundler-cache: true
+          
+      - Install dependencies
+        run: |
+          gem install bundler
+          bundle install
     
       - name: Setup xcodegen and init xcode project
         uses: xavierLowmiller/xcodegen-action@1.1.2

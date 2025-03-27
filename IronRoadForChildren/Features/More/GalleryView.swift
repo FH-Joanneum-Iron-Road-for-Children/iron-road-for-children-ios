@@ -6,7 +6,7 @@ struct GalleryView: View {
 	@State private var isDetailViewPresented = false
 	@State private var lastViewedID: String? = nil
 
-	let backgroundColor = Color(red: 0.16, green: 0.18, blue: 0.31)
+	let backgroundColor = Color("irfcRed")
 
 	private let columns = [
 		GridItem(.flexible(), spacing: 10),

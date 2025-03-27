@@ -9,7 +9,6 @@ struct HomeView: View {
 	@Environment(\.openURL) var openURL
 
 	var body: some View {
-		ScrollView {
 			VStack(spacing: 4) {
 				videoPlaceholderView
 
@@ -19,7 +18,7 @@ struct HomeView: View {
 				ZStack {
 					Image("irfcHome")
 						.resizable()
-						.aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
 
 					// Social media icons overlaid on the banner
 					VStack {
@@ -56,7 +55,6 @@ struct HomeView: View {
 
 				websiteLinkView
 			}
-		}
 	}
 
 	private var videoPlaceholderView: some View {

@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Mocks {
+enum Mocks {
 	static var votings: [Voting] {
 		return [voting]
 	}

@@ -1,4 +1,3 @@
-// Copyright © 2023 IRFC
 
 import CoreUI
 import SwiftUI
@@ -43,6 +42,21 @@ struct MoreView: View {
 						}
 					}
 					.buttonStyle(IrfcWhiteRoundedButton())
+
+					Spacer()
+				}
+
+				HStack {
+					Spacer()
+
+					NavigationLink(destination: GalleryView()) {
+						HStack {
+							Image(systemName: "photo.on.rectangle")
+								.imageScale(.medium)
+							Text("Zur Galerie")
+						}
+					}
+					.buttonStyle(IrfcYellowRoundedButton())
 
 					Spacer()
 				}

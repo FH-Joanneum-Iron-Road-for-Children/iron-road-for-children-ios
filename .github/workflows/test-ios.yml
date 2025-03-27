@@ -23,10 +23,12 @@ jobs:
           bundle install
     
       - name: Setup xcodegen and init xcode project
-        uses: xavierLowmiller/xcodegen-action@1.1.2
+        uses: xavierLowmiller/xcodegen-action@1.2.4
         with:
           spec: project.yml
           use-cache: true
+          quiet: true
+          version 2.42.0
 
       - name: Run tests with fastlane
         run: bundle exec fastlane test

@@ -1,9 +1,13 @@
+
 import SwiftUI
 
 struct ImageDetailView: View {
 	let images: [GalleryImage]
 	let selectedImage: GalleryImage
 	@Binding var isPresented: Bool
+
+	// Die Farbe der unteren Navigationsleiste
+	let navbarBackgroundColor = Color(red: 0.16, green: 0.18, blue: 0.31)
 
 	@State private var currentIndex: Int
 
@@ -26,54 +30,36 @@ struct ImageDetailView: View {
 					isPresented = false
 				} label: {
 					Text("Zurück")
+						.foregroundColor(.white)
 						.padding()
 				}
 
 				Spacer()
 
-				Text("Bild \(currentIndex + 1)")
+				Text("IRFC25")
+					.foregroundColor(.white)
 					.bold()
 					.padding()
 			}
-			.background(Color(UIColor.systemBackground))
+			.background(navbarBackgroundColor)
 
-			// Bilder im TabView
+			// Bilder im TabView mit dem gleichen Hintergrund wie die Navigationsleiste
 			TabView(selection: $currentIndex) {
 				ForEach(0 ..< images.count, id: \.self) { index in
-					BasicImageView(imageURL: images[index].download_url)
-						.tag(index)
+					ZoomableImageView(
+						imageURL: images[index].download_url,
+						backgroundColor: navbarBackgroundColor
+					)
+					.tag(index)
+					.contentShape(Rectangle())
 				}
 			}
 			.tabViewStyle(PageTabViewStyle())
-			.background(Color.black)
+			.background(navbarBackgroundColor)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.contentShape(Rectangle())
 		}
+		.background(navbarBackgroundColor)
 		.edgesIgnoringSafeArea(.bottom)
-	}
-}
-
-// Eine extrem einfache View nur für das Bild
-struct BasicImageView: View {
-	let imageURL: String
-
-	var body: some View {
-		AsyncImage(url: URL(string: imageURL)) { phase in
-			switch phase {
-			case .empty:
-				ProgressView()
-			case let .success(image):
-				image
-					.resizable()
-					.scaledToFit()
-					.frame(maxWidth: .infinity, maxHeight: .infinity)
-			case .failure:
-				Image(systemName: "photo")
-					.font(.largeTitle)
-			@unknown default:
-				EmptyView()
-			}
-		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.background(Color.black)
 	}
 }

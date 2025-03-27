@@ -1,7 +1,9 @@
 import SwiftUI
 
+// ZoomableImageView mit angepasstem Hintergrund
 struct ZoomableImageView: View {
-	let image: GalleryImage
+	let imageURL: String
+	let backgroundColor: Color
 
 	@State private var scale: CGFloat = 1.0
 	@State private var lastScale: CGFloat = 1.0
@@ -9,21 +11,21 @@ struct ZoomableImageView: View {
 	@State private var lastOffset: CGSize = .zero
 
 	var body: some View {
-		// Zoombare Bildansicht ohne Autor-Text
 		GeometryReader { geometry in
-			AsyncImage(url: URL(string: image.download_url)) { phase in
+			AsyncImage(url: URL(string: imageURL)) { phase in
 				switch phase {
 				case .empty:
 					ProgressView()
+						.foregroundColor(.white)
 						.frame(width: geometry.size.width, height: geometry.size.height)
-				case let .success(loadedImage):
-					loadedImage
+				case let .success(image):
+					image
 						.resizable()
 						.aspectRatio(contentMode: .fit)
 						.frame(width: geometry.size.width, height: geometry.size.height)
 						.scaleEffect(scale)
 						.offset(offset)
-						.contentShape(Rectangle()) // Macht die gesamte Fläche für Gesten verfügbar
+						.contentShape(Rectangle())
 						.gesture(
 							MagnificationGesture()
 								.onChanged { value in
@@ -65,22 +67,17 @@ struct ZoomableImageView: View {
 					VStack {
 						Image(systemName: "exclamationmark.triangle")
 							.font(.largeTitle)
-							.foregroundColor(.red)
+							.foregroundColor(.white)
 						Text("Bild konnte nicht geladen werden")
+							.foregroundColor(.white)
 					}
-					.frame(width: geometry.size.width, height: geometry.size.height)
 				@unknown default:
-					Text("Unbekannter Status")
+					EmptyView()
 				}
 			}
+			.frame(width: geometry.size.width, height: geometry.size.height)
+			.contentShape(Rectangle())
 		}
-		.contentShape(Rectangle()) // Wichtig: Macht die gesamte Fläche für Gesten verfügbar
-	}
-}
-
-// Hilfserweiterung für sichere Array-Indizierung
-extension Array {
-	subscript(safe index: Index) -> Element? {
-		return indices.contains(index) ? self[index] : nil
+		.background(backgroundColor)
 	}
 }

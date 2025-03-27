@@ -6,6 +6,8 @@ struct GalleryView: View {
 	@State private var isDetailViewPresented = false
 	@State private var lastViewedID: String? = nil
 
+	let backgroundColor = Color(red: 0.16, green: 0.18, blue: 0.31)
+
 	private let columns = [
 		GridItem(.flexible(), spacing: 10),
 		GridItem(.flexible(), spacing: 10),
@@ -14,6 +16,8 @@ struct GalleryView: View {
 	var body: some View {
 		ScrollViewReader { proxy in
 			ZStack {
+				backgroundColor
+					.edgesIgnoringSafeArea(.all)
 				if viewModel.isLoading {
 					ProgressView("Loading gallery...")
 				} else if let errorMessage = viewModel.errorMessage {
@@ -53,6 +57,7 @@ struct GalleryView: View {
 				}
 			}
 			.navigationTitle("Galerie")
+			.foregroundColor(.white)
 			.onAppear {
 				// Only load images if we haven't already
 				if viewModel.images.isEmpty && !viewModel.isLoading {

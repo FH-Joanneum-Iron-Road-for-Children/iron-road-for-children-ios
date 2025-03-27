@@ -28,7 +28,13 @@ jobs:
           spec: project.yml
           use-cache: true
           quiet: true
-          version: 2.15.1
+          version: 2.42.0
+          
+      - name: Check dependencies
+        run: |
+          xcodegen --version
+          xcodebuild -version
+          ruby --version
 
       - name: Run tests with fastlane
         run: bundle exec fastlane test

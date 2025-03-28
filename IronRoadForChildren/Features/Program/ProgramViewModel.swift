@@ -17,10 +17,14 @@ class ProgramViewModel: ObservableObject {
 	@Published var filteredCategorie: EventCategory? = nil
 
 	@Published var errorMessage: String? = nil
+    
+    @Published var favoriteEventIDs = Set<Int>()
 
 	init(eventMocks: [Event]? = nil,
 	     eventCategoriesMocks: [EventCategory]? = nil)
 	{
+        loadFavoritesFromUserDefaults()
+        
 		if let eventMocks = eventMocks,
 		   let eventCategoriesMocks = eventCategoriesMocks
 		{
@@ -62,6 +66,47 @@ class ProgramViewModel: ObservableObject {
 			}
 		}
 	}
+    
+    // Prüft, ob ein Event favorisiert ist
+    func isFavorite(_ event: Event) -> Bool {
+        // TODO
+        return favoriteEventIDs.contains(event.id)
+    }
+    
+    // Setzt ein Event auf Favorit oder entfernt es daraus
+    func toggleFavorit(event: Event) {
+        if favoriteEventIDs.contains(event.id) {
+            favoriteEventIDs.remove(event.id)
+        } else {
+            favoriteEventIDs.insert(event.id)
+        }
+        saveFavoritesToUserDefaults()
+    }
+    
+    // lädt Favoriten aus UserDefaults
+    func loadFavoritesFromUserDefaults() {
+        let key = "favoriteEventIDs"
+        guard let data = UserDefaults.standard.data(forKey: key) else { return }
+        
+        do {
+            let decoded = try JSONDecoder().decode(Set<Int>.self, from: data)
+            favoriteEventIDs = decoded
+        } catch {
+            print("Fehler beim decodieren der Favoriten: \(error)")
+        }
+    }
+    
+    // speichert Favoriten in UserDefaults
+    func saveFavoritesToUserDefaults() {
+        let key = "favoriteEventIDs"
+        do {
+            let data = try JSONEncoder().encode(favoriteEventIDs)
+            UserDefaults.standard.set(data, forKey: key)
+        } catch {
+            print("Fehler beim Codieren der Favoriten: \(error)")
+        }
+    }
+    
 
 	@MainActor
 	private func fetchEvents() async throws {
@@ -77,6 +122,9 @@ class ProgramViewModel: ObservableObject {
 		let (body, _) = try await URLSession.shared.dataArray(.get, from: url, responseType: EventCategory.self)
 
 		eventCategories = body
+        
+        let favoritesCategory = EventCategory(eventCategoryId: -1, name: "Favoriten")
+        eventCategories.append(favoritesCategory)
 	}
 
 	@MainActor

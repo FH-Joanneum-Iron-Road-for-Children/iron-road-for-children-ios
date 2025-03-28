@@ -11,17 +11,25 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Ruby 2.7.7
+      - name: Setup Ruby 3.3.5
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.7'
+          ruby-version: '3.3.5'
           bundler-cache: true
-    
+          
       - name: Setup xcodegen and init xcode project
-        uses: xavierLowmiller/xcodegen-action@1.1.2
+        uses: xavierLowmiller/xcodegen-action@1.2.4
         with:
           spec: project.yml
           use-cache: true
+          quiet: true
+          version: 2.42.0
+          
+      - name: Check dependencies
+        run: |
+          xcodegen --version
+          xcodebuild -version
+          ruby --version
 
       - name: Run tests with fastlane
         run: bundle exec fastlane test

@@ -8,7 +8,14 @@ class GalleryViewModel: ObservableObject {
 	// API URL
 	private let apiUrl = "https://picsum.photos/v2/list?page=1&limit=30"
 
-	func loadImages() {
+	init() {
+		// Configure URLCache with appropriate size
+		let memoryCapacity = 10 * 1024 * 1024 // 10MB
+		let diskCapacity = 50 * 1024 * 1024 // 50MB
+		URLCache.shared = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity)
+	}
+
+	func loadImages(forceRefresh: Bool = false) {
 		isLoading = true
 		errorMessage = nil
 
@@ -18,11 +25,14 @@ class GalleryViewModel: ObservableObject {
 			return
 		}
 
-		print("Fetching images from: \(apiUrl)")
-
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+		// Set cache policy based on whether we're forcing a refresh
+		request.cachePolicy = forceRefresh ? .reloadIgnoringLocalCacheData : .returnCacheDataElseLoad
+
+		print("Fetching images from: \(apiUrl)")
 
 		URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
 			guard let self = self else { return }
@@ -43,10 +53,11 @@ class GalleryViewModel: ObservableObject {
 				}
 
 				do {
-					// Direkt als GalleryImage dekodieren
+					// Decode as GalleryImage
 					let dbImages = try JSONDecoder().decode([GalleryImage].self, from: data)
 					print("Successfully decoded \(dbImages.count) images")
-					// Validiere URLs vor dem Speichern
+
+					// Validate URLs before saving
 					self.images = dbImages.filter { image in
 						guard let _ = URL(string: image.download_url) else {
 							print("Invalid URL found: \(image.download_url)")

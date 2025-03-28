@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct GalleryView: View {
@@ -6,8 +7,7 @@ struct GalleryView: View {
 	@State private var isDetailViewPresented = false
 	@State private var lastViewedID: String? = nil
 
-	let backgroundColor = Color("irfcRed")
-
+	// Define two columns with equal width
 	private let columns = [
 		GridItem(.flexible(), spacing: 10),
 		GridItem(.flexible(), spacing: 10),
@@ -16,8 +16,6 @@ struct GalleryView: View {
 	var body: some View {
 		ScrollViewReader { proxy in
 			ZStack {
-				backgroundColor
-					.edgesIgnoringSafeArea(.all)
 				if viewModel.isLoading {
 					ProgressView("Loading gallery...")
 				} else if let errorMessage = viewModel.errorMessage {
@@ -36,12 +34,14 @@ struct GalleryView: View {
 					Text("No images found")
 				} else {
 					ScrollView {
+						// This is the key part - a proper LazyVGrid with correct spacing
 						LazyVGrid(columns: columns, spacing: 10) {
 							ForEach(viewModel.images) { image in
+								// Use your existing GalleryImageView but with fixed dimensions
 								GalleryImageView(image: image)
 									.id(image.id)
-									.frame(height: 150)
-									.cornerRadius(15)
+									// Don't set any additional frame here since your GalleryImageView
+									// already sets its own frame constraints
 									.onTapGesture {
 										selectedImage = image
 										lastViewedID = image.id
@@ -57,7 +57,6 @@ struct GalleryView: View {
 				}
 			}
 			.navigationTitle("Galerie")
-			.foregroundColor(.white)
 			.onAppear {
 				// Only load images if we haven't already
 				if viewModel.images.isEmpty && !viewModel.isLoading {
@@ -74,7 +73,7 @@ struct GalleryView: View {
 				}
 			}
 		}
-		// Präsentiere die Detail-Ansicht als Sheet
+		// Present the detail view as sheet
 		.sheet(isPresented: $isDetailViewPresented) {
 			if let selectedImage = selectedImage {
 				ImageDetailView(

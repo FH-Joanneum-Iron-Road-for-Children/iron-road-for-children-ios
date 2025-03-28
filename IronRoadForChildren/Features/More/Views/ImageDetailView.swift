@@ -31,7 +31,7 @@ struct ImageDetailView: View {
 
 				Spacer()
 
-				Text("IRFC25")
+				Text("#IRFC25")
 					.foregroundColor(.white)
 					.bold()
 					.padding()

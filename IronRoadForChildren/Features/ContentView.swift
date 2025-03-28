@@ -9,6 +9,12 @@ struct ContentView: View {
 		TabView {
 			Group {
 				NavigationView {
+					homeView()
+				}
+				.navigationViewStyle(.stack)
+				.tabItem { homeLabel() }
+
+				NavigationView {
 					programView()
 				}
 				.navigationViewStyle(.stack)
@@ -41,6 +47,17 @@ struct ContentView: View {
 				}
 			}
 		}
+	}
+
+	private func homeView() -> some View {
+		HomeView()
+			.navigationTitle("Home")
+			.navigationBarTitleDisplayMode(.inline)
+			.navigationViewStyle(.stack)
+	}
+
+	private func homeLabel() -> some View {
+		Label("Home", systemImage: "house.fill")
 	}
 
 	private func programView() -> some View {

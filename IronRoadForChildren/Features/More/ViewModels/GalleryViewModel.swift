@@ -59,8 +59,8 @@ class GalleryViewModel: ObservableObject {
 
 					// Validate URLs before saving
 					self.images = dbImages.filter { image in
-						guard let _ = URL(string: image.download_url) else {
-							print("Invalid URL found: \(image.download_url)")
+						guard let _ = URL(string: image.downloadURL) else {
+							print("Invalid URL found: \(image.downloadURL)")
 							return false
 						}
 						return true

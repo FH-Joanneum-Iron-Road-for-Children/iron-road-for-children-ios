@@ -7,7 +7,7 @@ struct GalleryImage: Codable, Identifiable {
 	let width: Int
 	let height: Int
 	let url: String
-	let download_url: String
+	let downloadURL: String
 
 	var title: String? { return author }
 }

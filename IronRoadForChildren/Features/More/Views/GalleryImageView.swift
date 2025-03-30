@@ -33,7 +33,7 @@ struct GalleryImageView: View {
 	}
 
 	private func loadImage() {
-		guard let url = URL(string: image.download_url) else { return }
+		guard let url = URL(string: image.downloadURL) else { return }
 
 		// Check cache first
 		let cacheKey = NSString(string: url.absoluteString)

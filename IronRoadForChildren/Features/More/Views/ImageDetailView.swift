@@ -41,7 +41,7 @@ struct ImageDetailView: View {
 			TabView(selection: $currentIndex) {
 				ForEach(0 ..< images.count, id: \.self) { index in
 					ZoomableImageView(
-						imageURL: images[index].download_url,
+						imageURL: images[index].downloadURL,
 						backgroundColor: navbarBackgroundColor,
 						isZoomed: $isZoomed
 					)

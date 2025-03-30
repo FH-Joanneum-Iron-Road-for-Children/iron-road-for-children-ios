@@ -10,15 +10,7 @@ struct HomeView: View {
 
 	var body: some View {
 		VStack(spacing: 4) {
-<<<<<<< HEAD
 			videoPlaceholderView
-=======
-			VideoPlayerView(
-				videoURL: URL(
-					string:
-					"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-				)!)
->>>>>>> develop
 
 			countdownView
 
@@ -33,14 +25,7 @@ struct HomeView: View {
 					Spacer()
 
 					HStack {
-<<<<<<< HEAD
 						Link(destination: URL(string: "https://facebook.com/irfcat")!) {
-=======
-						Link(
-							destination: URL(
-								string: "https://facebook.com/irfcat")!
-						) {
->>>>>>> develop
 							Image("facebook")
 								.resizable()
 								.frame(width: 30, height: 30)
@@ -51,14 +36,7 @@ struct HomeView: View {
 
 						Spacer()
 
-<<<<<<< HEAD
 						Link(destination: URL(string: "https://instagram.com/irfcat")!) {
-=======
-						Link(
-							destination: URL(
-								string: "https://instagram.com/irfcat")!
-						) {
->>>>>>> develop
 							Image("insta")
 								.resizable()
 								.frame(width: 30, height: 30)
@@ -73,7 +51,6 @@ struct HomeView: View {
 			}
 			.onTapGesture {
 				openURL(URL(string: "https://irfc.at")!)
-<<<<<<< HEAD
 			}
 
 			websiteLinkView
@@ -93,11 +70,7 @@ struct HomeView: View {
 					.resizable()
 					.frame(width: 50, height: 50)
 					.foregroundColor(.yellow)
-=======
->>>>>>> develop
 			}
-
-			websiteLinkView
 		}
 	}
 
@@ -118,18 +91,10 @@ struct HomeView: View {
 
 				VStack(spacing: 0) {
 					HStack(spacing: 0) {
-						CountdownItem(
-							value: countdownViewModel.days, label: "DAYS"
-						)
-						CountdownItem(
-							value: countdownViewModel.hours, label: "HOURS"
-						)
-						CountdownItem(
-							value: countdownViewModel.minutes, label: "MIN."
-						)
-						CountdownItem(
-							value: countdownViewModel.seconds, label: "SEC."
-						)
+						CountdownItem(value: countdownViewModel.days, label: "DAYS")
+						CountdownItem(value: countdownViewModel.hours, label: "HOURS")
+						CountdownItem(value: countdownViewModel.minutes, label: "MIN.")
+						CountdownItem(value: countdownViewModel.seconds, label: "SEC.")
 					}
 					.padding(.vertical)
 					.padding(.horizontal, 24)

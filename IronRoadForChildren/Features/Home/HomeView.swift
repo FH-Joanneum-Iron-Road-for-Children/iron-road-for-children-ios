@@ -9,68 +9,61 @@ struct HomeView: View {
 	@Environment(\.openURL) var openURL
 
 	var body: some View {
-			VStack(spacing: 4) {
-				videoPlaceholderView
+		VStack(spacing: 4) {
+			VideoPlayerView(
+				videoURL: URL(
+					string:
+					"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+				)!)
 
-				countdownView
+			countdownView
 
-				// Main Banner Image with social media icons
-				ZStack {
-					Image("irfcHome")
-						.resizable()
-                        .aspectRatio(contentMode: .fill)
+			// Main Banner Image with social media icons
+			ZStack {
+				Image("irfcHome")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
 
-					// Social media icons overlaid on the banner
-					VStack {
+				// Social media icons overlaid on the banner
+				VStack {
+					Spacer()
+
+					HStack {
+						Link(
+							destination: URL(
+								string: "https://facebook.com/irfcat")!
+						) {
+							Image("facebook")
+								.resizable()
+								.frame(width: 30, height: 30)
+								.foregroundColor(.white)
+								.cornerRadius(5)
+						}
+						.padding(.leading, 15)
+
 						Spacer()
 
-						HStack {
-							Link(destination: URL(string: "https://facebook.com/irfcat")!) {
-								Image("facebook")
-									.resizable()
-									.frame(width: 30, height: 30)
-									.foregroundColor(.white)
-									.cornerRadius(5)
-							}
-							.padding(.leading, 15)
-
-							Spacer()
-
-							Link(destination: URL(string: "https://instagram.com/irfcat")!) {
-								Image("insta")
-									.resizable()
-									.frame(width: 30, height: 30)
-									.foregroundColor(.white)
-									.background(Color.clear)
-									.cornerRadius(5)
-							}
-							.padding(.trailing, 15)
+						Link(
+							destination: URL(
+								string: "https://instagram.com/irfcat")!
+						) {
+							Image("insta")
+								.resizable()
+								.frame(width: 30, height: 30)
+								.foregroundColor(.white)
+								.background(Color.clear)
+								.cornerRadius(5)
 						}
-						.padding(.bottom, 65)
+						.padding(.trailing, 15)
 					}
+					.padding(.bottom, 65)
 				}
-				.onTapGesture {
-					openURL(URL(string: "https://irfc.at")!)
-				}
-
-				websiteLinkView
 			}
-	}
-
-	private var videoPlaceholderView: some View {
-		ZStack {
-			Color.black
-				.aspectRatio(16 / 9, contentMode: .fit)
-
-			// Video play button
-			Button(action: {
-				// This will be implemented when video functionality is added
-			}) {
-				Image(systemName: "play.fill")
-					.resizable()
-					.frame(width: 50, height: 50)
-					.foregroundColor(.yellow)
+			.onTapGesture {
+				openURL(URL(string: "https://irfc.at")!)
 			}
+
+			websiteLinkView
 		}
 	}
 
@@ -91,10 +84,18 @@ struct HomeView: View {
 
 				VStack(spacing: 0) {
 					HStack(spacing: 0) {
-						CountdownItem(value: countdownViewModel.days, label: "DAYS")
-						CountdownItem(value: countdownViewModel.hours, label: "HOURS")
-						CountdownItem(value: countdownViewModel.minutes, label: "MIN.")
-						CountdownItem(value: countdownViewModel.seconds, label: "SEC.")
+						CountdownItem(
+							value: countdownViewModel.days, label: "DAYS"
+						)
+						CountdownItem(
+							value: countdownViewModel.hours, label: "HOURS"
+						)
+						CountdownItem(
+							value: countdownViewModel.minutes, label: "MIN."
+						)
+						CountdownItem(
+							value: countdownViewModel.seconds, label: "SEC."
+						)
 					}
 					.padding(.vertical)
 					.padding(.horizontal, 24)

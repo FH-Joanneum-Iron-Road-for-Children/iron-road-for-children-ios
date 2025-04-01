@@ -77,8 +77,10 @@ class ProgramViewModel: ObservableObject {
     func toggleFavorit(event: Event) {
         if favoriteEventIDs.contains(event.id) {
             favoriteEventIDs.remove(event.id)
+            NotificationManager.shared.cancelNotification(for: event)
         } else {
             favoriteEventIDs.insert(event.id)
+            NotificationManager.shared.scheduleNotification(for: event)
         }
         saveFavoritesToUserDefaults()
     }

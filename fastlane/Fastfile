@@ -187,4 +187,3 @@ platform :ios do
     config.dig(*keys[0..-2])[keys.last] = newVal
   end
 end
-

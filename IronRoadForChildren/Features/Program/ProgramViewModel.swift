@@ -69,7 +69,6 @@ class ProgramViewModel: ObservableObject {
     
     // Prüft, ob ein Event favorisiert ist
     func isFavorite(_ event: Event) -> Bool {
-        // TODO
         return favoriteEventIDs.contains(event.id)
     }
     

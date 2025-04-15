@@ -1,4 +1,4 @@
-// Copyright © 2023 IRFC
+// Copyright © 2024 IRFC
 
 import CoreUI
 import SwiftUI
@@ -35,7 +35,7 @@ struct ProgramView: View {
 
 	func noEventsError() -> some View {
 		ErrorRetryView(
-			title: "Derzeit gibt es noch kein Programm für die IRFC2023.",
+			title: "Derzeit gibt es noch kein Programm für die IRFC2024.",
 			desc: nil,
 			retry: {
 				Task {

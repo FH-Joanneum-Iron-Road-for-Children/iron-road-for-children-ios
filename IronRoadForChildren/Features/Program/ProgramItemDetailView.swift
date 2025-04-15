@@ -15,23 +15,7 @@ struct ProgramItemDetailView: View {
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text(event.title)
-                        .font(.title2)
-                        .padding()
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        viewModel.toggleFavorit(event: event)
-                    }) {
-                        Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
-                            .foregroundColor(.red)
-                    }
-                    .padding()
-                }
-                
-				// eventTitle()
+				eventTitle()
 
 				eventImage()
 
@@ -51,10 +35,23 @@ struct ProgramItemDetailView: View {
 		}
 	}
 
+    @ViewBuilder
 	func eventTitle() -> some View {
-		Text(event.title)
-			.font(.title2)
-			.padding()
+        HStack {
+            Text(event.title)
+                .font(.title2)
+                .padding()
+            
+            Spacer()
+            
+            Button(action: {
+                viewModel.toggleFavorit(event: event)
+            }) {
+                Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
+                    .foregroundColor(.red)
+            }
+            .padding()
+        }
 	}
 
 	@MainActor @ViewBuilder

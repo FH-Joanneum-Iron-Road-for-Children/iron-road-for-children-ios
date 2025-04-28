@@ -1,114 +1,123 @@
-import Foundation
+import SwiftUI
 
-class GalleryViewModel: ObservableObject {
-    @Published var images: [GalleryDTO] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
+struct GalleryImageView: View {
+    let image: GalleryDTO
+    @State private var imageLoaded = false
+    @State private var loadingError = false
     
-    // API URL
-    private let apiUrl = "https://backend.irfc-test.fh-joanneum.at/api/highlights"
+    var body: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                // Placeholder while loading
+                Rectangle()
+                    .fill(Color.gray.opacity(0.1))
+                    .aspectRatio(1.0, contentMode: .fill) // Square aspect ratio
+                    .cornerRadius(12)
+                
+                // Loading indicator
+                if !imageLoaded && !loadingError {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
+                
+                // Error indicator
+                if loadingError {
+                    Image(systemName: "exclamationmark.triangle")
+                        .foregroundColor(.gray)
+                        .font(.largeTitle)
+                }
+                
+                // Actual image
+                if let url = URL(string: image.path) {
+                    AsyncImageView(url: url, onLoaded: { success in
+                        imageLoaded = success
+                        loadingError = !success
+                    })
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .aspectRatio(1.0, contentMode: .fill) // Square aspect ratio
+                    .cornerRadius(12)
+                    .clipped()
+                }
+                
+                // Title overlay - improved with better gradient and positioning
+                VStack(alignment: .leading) {
+                    Spacer()
+                    
+                    HStack {
+                        Text(image.altText)
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .lineLimit(1)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 10)
+                        
+                        Spacer()
+                    }
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [.clear, Color.black.opacity(0.7)]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                }
+                .cornerRadius(12)
+            }
+            .aspectRatio(1.0, contentMode: .fit) // Ensure the container is also square
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .padding(.vertical, 6) // Add vertical padding to separate rows
+        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 1) // Subtle shadow
+    }
+}
+
+// Custom AsyncImage implementation
+struct AsyncImageView: View {
+    let url: URL
+    let onLoaded: (Bool) -> Void
+    @State private var image: UIImage? = nil
     
-    init() {
-        // Configure URLCache with appropriate size
-        let memoryCapacity = 10 * 1024 * 1024 // 10MB
-        let diskCapacity = 50 * 1024 * 1024 // 50MB
-        URLCache.shared = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity)
+    var body: some View {
+        Group {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+            } else {
+                Color.clear
+            }
+        }
+        .onAppear {
+            loadImage()
+        }
     }
     
-    func loadImages(forceRefresh: Bool = false) {
-        isLoading = true
-        errorMessage = nil
-        
-        guard let url = URL(string: apiUrl) else {
-            errorMessage = "Invalid URL"
-            isLoading = false
+    private func loadImage() {
+        // Check cache first
+        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: url))?.data,
+           let cachedImage = UIImage(data: cachedData) {
+            DispatchQueue.main.async {
+                self.image = cachedImage
+                onLoaded(true)
+            }
             return
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        // Set cache policy based on whether we're forcing a refresh
-        request.cachePolicy = forceRefresh ? .reloadIgnoringLocalCacheData : .returnCacheDataElseLoad
-        
-        print("Fetching images from: \(apiUrl)")
-        
-        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let self = self else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil,
+                  let loadedImage = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    onLoaded(false)
+                }
+                return
+            }
             
-            DispatchQueue.main.async(execute: {
-                self.isLoading = false
-                
-                if let error = error {
-                    self.errorMessage = "Network error: \(error.localizedDescription)"
-                    print("Network error: \(error.localizedDescription)")
-                    return
-                }
-                
-                // Überprüfe den HTTP-Statuscode
-                if let httpResponse = response as? HTTPURLResponse {
-                    guard (200...299).contains(httpResponse.statusCode) else {
-                        self.errorMessage = "Server error: \(httpResponse.statusCode)"
-                        print("Server error: \(httpResponse.statusCode)")
-                        return
-                    }
-                }
-                
-                guard let data = data else {
-                    self.errorMessage = "No data received"
-                    print("No data received")
-                    return
-                }
-                
-                // Debugging: Zeige die empfangenen JSON-Daten
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("Received JSON (first 200 chars): \(String(jsonString.prefix(200)))...")
-                }
-                
-                do {
-                    // Dekodiere das JSON-Array in [GalleryDTO]
-                    let decoder = JSONDecoder()
-                    let galleryItems = try decoder.decode([GalleryDTO].self, from: data)
-                    print("Successfully decoded \(galleryItems.count) images")
-                    
-                    // Validiere URLs bevor du sie speicherst
-                    self.images = galleryItems.filter { image in
-                        guard let _ = URL(string: image.path) else {
-                            print("Invalid URL found: \(image.path)")
-                            return false
-                        }
-                        return true
-                    }
-                    
-                    if self.images.isEmpty && !galleryItems.isEmpty {
-                        self.errorMessage = "No valid image URLs found"
-                    }
-                    
-                    print("Processed \(self.images.count) images for display")
-                } catch {
-                    self.errorMessage = "Failed to decode data: \(error.localizedDescription)"
-                    print("Decoding error: \(error)")
-                    
-                    // Ausführliche Debug-Information im Fehlerfall
-                    print("Detailed error: \(error)")
-                    
-                    // Zeige die vollständigen Daten für Debugging-Zwecke
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Full received JSON: \(jsonString)")
-                    }
-                }
-            })
-        }.resume()
-    }
-    
-    // Hilfsmethode zum Neuladen der Daten
-    func refreshData() {
-        loadImages(forceRefresh: true)
-    }
-    
-    // Hilfsmethode um ein einzelnes Bild anhand der ID zu finden
-    func getImage(byId id: Int) -> GalleryDTO? {
-        return images.first { $0.pictureId == id }
+            DispatchQueue.main.async {
+                self.image = loadedImage
+                onLoaded(true)
+            }
+        }
+        task.resume()
     }
 }

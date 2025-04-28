@@ -6,7 +6,7 @@ class GalleryViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     
     // API URL
-    private let apiUrl = "https://backend.irfc-test.fh-joanneum.at/api/highlights"
+    private let apiUrl = "https://backend.irfc-test.fh-joanneum.at/api/gallery"
     
     init() {
         // Configure URLCache with appropriate size

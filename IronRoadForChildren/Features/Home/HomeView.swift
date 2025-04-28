@@ -18,7 +18,6 @@ struct HomeView: View {
 
 			countdownView
 
-			// Main Banner Image with social media icons
 			ZStack {
 				Image("irfcHome")
 					.resizable()

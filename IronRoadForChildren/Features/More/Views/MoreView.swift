@@ -1,127 +1,260 @@
-
-import CoreUI
 import SwiftUI
 
 struct MoreView: View {
-	@Environment(\.openURL) var openURL
+    @Environment(\.openURL) var openURL
+    
+    // IRFC Farben
+    private let irfcRed = Color(red: 239/255, green: 83/255, blue: 80/255)
+    private let irfcYellow = Color(red: 255/255, green: 215/255, blue: 0/255)
+    private let irfcDarkBlue = Color(red: 30/255, green: 40/255, blue: 70/255)
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                // Weißer Bereich mit Text
+                VStack(alignment: .leading, spacing: 0) {
+                    // Text-Inhalte - nur der zweite Absatz wird angezeigt, wie im Screenshot
+                    Text("Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.")
+                        .font(.system(size: 17))
+                        .lineSpacing(4)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 24)
+                }
+                .background(Color.white)
+                
+                // Roter Container mit allen anderen Elementen
+                VStack(spacing: 0) {
+                    // ROCK. RIDE. DONATE! Banner
+                    Text("ROCK. RIDE. DONATE!")
+                        .font(.system(size: 34, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 80)
+                        .padding(.bottom, 60)
+                    
+                    // Spenden-Button
+                    Button(action: {
+                        openURL(URL(string: "https://irfc.at/home/charity/")!)
+                    }) {
+                        HStack {
+                            Image(systemName: "heart.fill")
+                                .font(.title3)
+                            
+                            Text("Spenden")
+                                .font(.system(size: 22, weight: .bold))
+                            
+                            Image(systemName: "heart.fill")
+                                .font(.title3)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(irfcYellow)
+                        .foregroundColor(.black)
+                        .cornerRadius(30)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color.white, lineWidth: 3)
+                        )
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, 30)
+                    
+                    // Zum Gewinnspiel-Button
+                    NavigationLink(destination: EmptyView()) {
+                        HStack {
+                            Image(systemName: "gift.fill")
+                                .foregroundColor(.black)
+                            
+                            Text("Zum Gewinnspiel")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.black)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                    }
+                    .padding(.bottom, 16)
+                    
+                    // Zur Galerie-Button
+                    NavigationLink(destination: GalleryView()) {
+                        HStack {
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .foregroundColor(.black)
+                            
+                            Text("Zur Galerie")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.black)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                    }
+                    
+                    // Abstand zwischen Galerie und Impressum
+                    Spacer()
+                        .frame(height: 60)
+                    
+                    // Info-Links (Impressum, Datenschutz, etc.)
+                    VStack(spacing: 0) {
+                        // Impressum
+                        Link(destination: URL(string: "https://irfc.at/kontakt/impressum/")!) {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                    .foregroundColor(.white)
+                                
+                                Text("Impressum")
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
+                        }
+                        
+                        Divider()
+                            .background(Color.white.opacity(0.3))
+                        
+                        // Datenschutz
+                        Link(destination: URL(string: "https://irfc.at/kontakt/datenschutz/")!) {
+                            HStack {
+                                Image(systemName: "shield")
+                                    .foregroundColor(.white)
+                                
+                                Text("Datenschutz")
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
+                        }
+                        
+                        Divider()
+                            .background(Color.white.opacity(0.3))
+                        
+                        // Acknowledgements (auskommentiert, da nicht im Screenshot zu sehen)
+                        
+                        NavigationLink(destination: EmptyView()) {
+                            HStack {
+                                Image(systemName: "hands.clap")
+                                    .foregroundColor(.white)
+                                
+                                Text("Acknowledgements")
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
+                        }
+                    }
+                    
+                    // Füllraum zum Tabbar
+                    Spacer()
+                        .frame(height: 100)
+                }
+                .frame(maxWidth: .infinity)
+                .background(irfcRed)
+            }
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .background(Color.white)
+        .navigationBarTitleDisplayMode(.inline)
+        .overlay(
+            VStack {
+                Spacer()
+                TabBarView()
+            }
+            .edgesIgnoringSafeArea(.bottom),
+            alignment: .bottom
+        )
+    }
+}
 
-	var body: some View {
-		List {
-			Section(header: Text("Über uns")) {
-				Text(text)
-			}
-
-			Section {
-				HStack {
-					Spacer()
-
-					Button(action: {
-						openURL(URL(string: "https://irfc.at/home/charity/")!)
-					}) {
-						HStack {
-							Image("donate")
-								.imageScale(.medium)
-							Text("Spenden")
-						}
-					}
-					.buttonStyle(IrfcYellowRoundedButton())
-
-					Spacer()
-				}
-
-				HStack {
-					Spacer()
-
-					Button(action: {
-						openURL(URL(string: "https://irfc.at/app/app-gewinnspiel/")!)
-					}) {
-						HStack {
-							Image(systemName: "cube")
-								.imageScale(.medium)
-							Text("Zum Gewinnspiel")
-						}
-					}
-					.buttonStyle(IrfcWhiteRoundedButton())
-
-					Spacer()
-				}
-
-				HStack {
-					Spacer()
-
-					NavigationLink(destination: GalleryView()) {
-						HStack {
-							Image(systemName: "photo.on.rectangle")
-								.imageScale(.medium)
-							Text("Zur Galerie")
-						}
-					}
-					.buttonStyle(IrfcYellowRoundedButton())
-
-					Spacer()
-				}
-			}
-			.listRowBackground(Color.clear)
-			.listRowSeparator(.hidden)
-
-			Section {
-				Link(destination: impressumURL) {
-					Label("Impressum", systemImage: "info.circle")
-				}
-
-				Link(destination: dataPrivacyURL) {
-					Label("Datenschutz", systemImage: "shield")
-				}
-
-				NavigationLink {
-					AcknowView()
-				} label: {
-					Label("Acknowledgements", systemImage: "hands.clap")
-				}
-			}
-
-			Section {
-				VStack {
-					HStack {
-						Spacer()
-
-						Text(creatorText)
-							.font(.caption)
-							.multilineTextAlignment(.center)
-
-						Spacer()
-					}
-
-					Text("Version: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))")
-						.padding()
-						.font(.caption2)
-				}
-			}
-			.listRowBackground(Color.clear)
-		}
-	}
-
-	private let impressumURL = URL(string: "https://irfc.at/kontakt/impressum/")!
-	private let dataPrivacyURL = URL(string: "https://irfc.at/kontakt/datenschutz/")!
-
-	private let text = """
-	Die Iron Road for Children, kurz IRFC, ist Österreichs größtes markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.
-	Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.
-	Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live Konzerten, einem Kinderbereich und einer Tattoo-Area wird den Besuchern auch eine große Austeller- und Streetfood-Area geboten.
-	In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".
-	Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher.
-	"""
-
-	private let creatorText = """
-	Zur Verfügung gestellt vom FH JOANNEUM
-	 Studiengang Mobile Software Development.
-	"""
+// Tab-Bar View
+struct TabBarView: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            Spacer()
+            VStack {
+                Image(systemName: "house.fill")
+                    .font(.system(size: 22))
+                Text("Home")
+                    .font(.caption)
+            }
+            .foregroundColor(Color(red: 150/255, green: 170/255, blue: 200/255))
+            Spacer()
+            
+            VStack {
+                Image(systemName: "calendar")
+                    .font(.system(size: 22))
+                Text("Program")
+                    .font(.caption)
+            }
+            .foregroundColor(Color(red: 150/255, green: 170/255, blue: 200/255))
+            Spacer()
+            
+            VStack {
+                Image(systemName: "hand.thumbsup")
+                    .font(.system(size: 22))
+                Text("Voting")
+                    .font(.caption)
+            }
+            .foregroundColor(Color(red: 150/255, green: 170/255, blue: 200/255))
+            Spacer()
+            
+            VStack {
+                Image(systemName: "map")
+                    .font(.system(size: 22))
+                Text("Karte")
+                    .font(.caption)
+            }
+            .foregroundColor(Color(red: 150/255, green: 170/255, blue: 200/255))
+            Spacer()
+            
+            VStack {
+                Image(systemName: "ellipsis")
+                    .font(.system(size: 22))
+                Text("Mehr")
+                    .font(.caption)
+            }
+            .foregroundColor(.yellow)
+            Spacer()
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 30)
+        .background(Color(red: 30/255, green: 40/255, blue: 70/255))
+    }
 }
 
 struct MoreView_Previews: PreviewProvider {
-	static var previews: some View {
-		NavigationView {
-			MoreView()
-		}
-	}
+    static var previews: some View {
+        NavigationView {
+            MoreView()
+        }
+    }
 }

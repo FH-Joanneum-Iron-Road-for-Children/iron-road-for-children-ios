@@ -59,13 +59,16 @@ struct ProgramView: View {
 				ForEach(Array(viewModel.eventDays.enumerated()), id: \.offset) { index, day in
 					if let filteredCategorie = viewModel.filteredCategorie {
 						DayView(
-							events: day.events.filter {
-								$0.eventCategory.id == filteredCategorie.id
-							}
+                            viewModel: viewModel,
+                            events: filteredCategorie.name == "Favoriten" ?
+                                                day.events.filter { viewModel.favoriteEventIDs.contains($0.id) } :
+                                                day.events.filter { $0.eventCategory.id == filteredCategorie.id }
 						)
 						.tag(index)
 					} else {
-						DayView(events: day.events)
+						DayView(
+                            viewModel: viewModel,
+                            events: day.events)
 							.tag(index)
 					}
 				}

@@ -2,14 +2,14 @@
 import SwiftUI
 
 struct ImageDetailView: View {
-	let images: [GalleryImage]
-	let selectedImage: GalleryImage
+	let images: [GalleryDTO]
+	let selectedImage: GalleryDTO
 	@Binding var isPresented: Bool
 	let navbarBackgroundColor = Color("irfcBlue")
 	@State private var currentIndex: Int
 	@State private var isZoomed: Bool = false
 
-	init(images: [GalleryImage], selectedImage: GalleryImage, isPresented: Binding<Bool>) {
+	init(images: [GalleryDTO], selectedImage: GalleryDTO, isPresented: Binding<Bool>) {
 		self.images = images
 		self.selectedImage = selectedImage
 		_isPresented = isPresented
@@ -41,7 +41,7 @@ struct ImageDetailView: View {
 			TabView(selection: $currentIndex) {
 				ForEach(0 ..< images.count, id: \.self) { index in
 					ZoomableImageView(
-						imageURL: images[index].downloadURL,
+                        imageURL: images[index].path,
 						backgroundColor: navbarBackgroundColor,
 						isZoomed: $isZoomed
 					)

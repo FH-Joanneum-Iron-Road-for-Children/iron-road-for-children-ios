@@ -3,7 +3,7 @@ import SwiftUI
 
 struct GalleryView: View {
 	@StateObject private var viewModel = GalleryViewModel()
-	@State private var selectedImage: GalleryImage?
+	@State private var selectedImage: GalleryDTO?
 	@State private var isDetailViewPresented = false
 	@State private var lastViewedID: String? = nil
 
@@ -38,7 +38,7 @@ struct GalleryView: View {
 						LazyVGrid(columns: columns, spacing: 10) {
 							ForEach(viewModel.images) { image in
 								// Use your existing GalleryImageView but with fixed dimensions
-								GalleryImageView(image: image)
+                                GalleryDTO(image: image)
 									.id(image.id)
 									// Don't set any additional frame here since your GalleryImageView
 									// already sets its own frame constraints

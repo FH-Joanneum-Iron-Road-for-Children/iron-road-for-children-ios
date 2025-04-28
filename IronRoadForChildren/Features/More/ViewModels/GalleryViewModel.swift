@@ -5,8 +5,10 @@ class GalleryViewModel: ObservableObject {
 	@Published var isLoading: Bool = false
 	@Published var errorMessage: String? = nil
 
-	// API URL
-	private let apiUrl = "https://backend.irfc-test.fh-joanneum.at/api/gallery"
+	// Option 1: Zurück zur direkten URL (temporär)
+	// private let apiUrl = "https://backend.irfc-test.fh-joanneum.at/api/gallery"
+
+	private let apiPath = "/api/gallery"
 
 	init() {
 		// Configure URLCache with appropriate size
@@ -19,11 +21,18 @@ class GalleryViewModel: ObservableObject {
 		isLoading = true
 		errorMessage = nil
 
-		guard let url = URL(string: apiUrl) else {
-			errorMessage = "Invalid URL"
-			isLoading = false
-			return
+		let worldUrl = world.serverUrlWith(path: apiPath)
+
+		// Überprüfe, ob wir in der Test-Umgebung sind
+		let url: URL
+		if worldUrl.host?.contains("test") == true {
+			// Wir sind bereits in der Test-Umgebung, verwende worldUrl
+			url = worldUrl
+		} else {
+			// Wir sind nicht in der Test-Umgebung, verwende explizit die Test-URL
+			url = URL(string: "https://backend.irfc-test.fh-joanneum.at/api/gallery")!
 		}
+		print("Fetching images from: \(url.absoluteString)")
 
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
@@ -32,7 +41,7 @@ class GalleryViewModel: ObservableObject {
 		// Set cache policy based on whether we're forcing a refresh
 		request.cachePolicy = forceRefresh ? .reloadIgnoringLocalCacheData : .returnCacheDataElseLoad
 
-		print("Fetching images from: \(apiUrl)")
+		print("Fetching images from: \(url.absoluteString)")
 
 		URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 			guard let self = self else { return }

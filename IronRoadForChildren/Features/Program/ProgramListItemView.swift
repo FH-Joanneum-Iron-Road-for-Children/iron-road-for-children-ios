@@ -5,7 +5,7 @@ import SwiftUI
 
 struct ProgramListItemView: View {
 	let event: Event
-    @ObservedObject var viewModel: ProgramViewModel
+	@ObservedObject var viewModel: ProgramViewModel
 
 	private let rowHeight: CGFloat = 100
 
@@ -32,7 +32,7 @@ struct ProgramListItemView: View {
 				}
 			}
 
-            // Titel und Location
+			// Titel und Location
 			VStack(alignment: .leading, spacing: 5) {
 				Text(event.title)
 					.font(.headline)
@@ -42,33 +42,33 @@ struct ProgramListItemView: View {
 			}
 
 			Spacer()
-            
-            ZStack {
-                VStack {
-                    Spacer()
-                    Text("\(world.localTimeHourMinute(of: event.startDateTimeInUTC)) - \(world.localTimeHourMinute(of: event.endDateTimeInUTC))")
-                        .font(.body)
-                        .lineLimit(1)
-                        .fixedSize(horizontal: true, vertical: false)
-                    Spacer()
-                }
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            viewModel.toggleFavorit(event: event)
-                        }) {
-                            Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
-                                .foregroundColor(.red)
-                        }
-                        // Minimaler Abstand zum Rand
-                        .padding(.top, 8)
-                        .padding(.trailing, 6)
-                    }
-                    Spacer()
-                }
-            }
-        }
+
+			ZStack {
+				VStack {
+					Spacer()
+					Text("\(world.localTimeHourMinute(of: event.startDateTimeInUTC)) - \(world.localTimeHourMinute(of: event.endDateTimeInUTC))")
+						.font(.body)
+						.lineLimit(1)
+						.fixedSize(horizontal: true, vertical: false)
+					Spacer()
+				}
+				VStack {
+					HStack {
+						Spacer()
+						Button(action: {
+							viewModel.toggleFavorit(event: event)
+						}) {
+							Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
+								.foregroundColor(.red)
+						}
+						// Minimaler Abstand zum Rand
+						.padding(.top, 8)
+						.padding(.trailing, 6)
+					}
+					Spacer()
+				}
+			}
+		}
 		.foregroundColor(.primary)
 		.background(.background)
 		.overlay(
@@ -83,9 +83,10 @@ struct ProgramListItemView: View {
 
 struct ProgramItemView_Previews: PreviewProvider {
 	static var previews: some View {
-        let mockViewModel = ProgramViewModel(
-            eventMocks: [Mocks.event],
-            eventCategoriesMocks: [Mocks.eventCategory])
-        ProgramListItemView(event: Mocks.event, viewModel: mockViewModel)
+		let mockViewModel = ProgramViewModel(
+			eventMocks: [Mocks.event],
+			eventCategoriesMocks: [Mocks.eventCategory]
+		)
+		ProgramListItemView(event: Mocks.event, viewModel: mockViewModel)
 	}
 }

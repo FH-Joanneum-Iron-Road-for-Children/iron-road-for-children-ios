@@ -64,11 +64,11 @@ struct MoreView: View {
 				} label: {
 					Label("Acknowledgements", systemImage: "hands.clap")
 				}
-                NavigationLink {
-                    PlaylistView()
-                } label: {
-                    Label("Playlist", systemImage: "music.note.list")
-                }
+				NavigationLink {
+					PlaylistView()
+				} label: {
+					Label("Playlist", systemImage: "music.note.list")
+				}
 			}
 
 			Section {

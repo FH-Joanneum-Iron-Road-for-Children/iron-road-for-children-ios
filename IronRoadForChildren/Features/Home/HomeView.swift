@@ -9,52 +9,52 @@ struct HomeView: View {
 	@Environment(\.openURL) var openURL
 
 	var body: some View {
-			VStack(spacing: 4) {
-				videoPlaceholderView
+		VStack(spacing: 4) {
+			videoPlaceholderView
 
-				countdownView
+			countdownView
 
-				// Main Banner Image with social media icons
-				ZStack {
-					Image("irfcHome")
-						.resizable()
-                        .aspectRatio(contentMode: .fill)
+			// Main Banner Image with social media icons
+			ZStack {
+				Image("irfcHome")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
 
-					// Social media icons overlaid on the banner
-					VStack {
+				// Social media icons overlaid on the banner
+				VStack {
+					Spacer()
+
+					HStack {
+						Link(destination: URL(string: "https://facebook.com/irfcat")!) {
+							Image("facebook")
+								.resizable()
+								.frame(width: 30, height: 30)
+								.foregroundColor(.white)
+								.cornerRadius(5)
+						}
+						.padding(.leading, 15)
+
 						Spacer()
 
-						HStack {
-							Link(destination: URL(string: "https://facebook.com/irfcat")!) {
-								Image("facebook")
-									.resizable()
-									.frame(width: 30, height: 30)
-									.foregroundColor(.white)
-									.cornerRadius(5)
-							}
-							.padding(.leading, 15)
-
-							Spacer()
-
-							Link(destination: URL(string: "https://instagram.com/irfcat")!) {
-								Image("insta")
-									.resizable()
-									.frame(width: 30, height: 30)
-									.foregroundColor(.white)
-									.background(Color.clear)
-									.cornerRadius(5)
-							}
-							.padding(.trailing, 15)
+						Link(destination: URL(string: "https://instagram.com/irfcat")!) {
+							Image("insta")
+								.resizable()
+								.frame(width: 30, height: 30)
+								.foregroundColor(.white)
+								.background(Color.clear)
+								.cornerRadius(5)
 						}
-						.padding(.bottom, 65)
+						.padding(.trailing, 15)
 					}
+					.padding(.bottom, 65)
 				}
-				.onTapGesture {
-					openURL(URL(string: "https://irfc.at")!)
-				}
-
-				websiteLinkView
 			}
+			.onTapGesture {
+				openURL(URL(string: "https://irfc.at")!)
+			}
+
+			websiteLinkView
+		}
 	}
 
 	private var videoPlaceholderView: some View {

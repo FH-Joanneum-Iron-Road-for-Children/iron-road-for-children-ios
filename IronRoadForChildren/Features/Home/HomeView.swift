@@ -11,13 +11,9 @@ struct HomeView: View {
 	var body: some View {
 		VStack(spacing: 4) {
 			VideoPlayerView(
-				videoURL: URL(
-					string:
-					"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-				)!)
-
+				apiEndpoint: world.serverUrlWith(path: "/api/intro-video")
+			)
 			countdownView
-
 			ZStack {
 				Image("irfcHome")
 					.resizable()

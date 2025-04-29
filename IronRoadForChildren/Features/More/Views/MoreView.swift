@@ -104,6 +104,29 @@ struct MoreView: View {
 						.cornerRadius(12)
 						.padding(.horizontal, 20)
 					}
+                    .padding(.bottom, 16)
+                    
+                    // Zur Playlist-Button
+                    NavigationLink(destination: PlaylistView()) {
+                        HStack {
+                            Image(systemName: "music.note.list")
+                                .foregroundColor(.black)
+
+                            Text("Zur Playlist")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.black)
+
+                            Spacer()
+
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.black)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                    }
 
 					// Abstand zwischen Galerie und Impressum
 					Spacer()

@@ -51,6 +51,11 @@ struct MoreView: View {
 			.listRowSeparator(.hidden)
 
 			Section {
+                NavigationLink {
+                    GalleryView()
+                } label: {
+                    Label("Galerie", systemImage: "photo.on.rectangle.angled")
+                }
 				Link(destination: impressumURL) {
 					Label("Impressum", systemImage: "info.circle")
 				}

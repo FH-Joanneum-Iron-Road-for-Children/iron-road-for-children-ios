@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct DayView: View {
-	@ObservedObject var viewModel: ProgramViewModel
+    @ObservedObject var viewModel: ProgramViewModel
 	var events: [Event] = []
 
 	var body: some View {
@@ -15,13 +15,12 @@ struct DayView: View {
 						.padding()
 				} else {
 					ForEach(events) { event in
-						NavigationLink(destination: ProgramItemDetailView(event: event, viewModel: viewModel)) {
-							ProgramListItemView(
-								event: event,
-								viewModel: viewModel
-							)
-							.padding(.top, 8)
-							.padding(.horizontal, 16)
+                        NavigationLink(destination: ProgramItemDetailView(event: event, viewModel: viewModel)) {
+                            ProgramListItemView(
+                                event: event,
+                                viewModel: viewModel)
+								.padding(.top, 8)
+								.padding(.horizontal, 16)
 						}
 						.buttonStyle(.plain)
 					}
@@ -34,13 +33,11 @@ struct DayView: View {
 
 struct DayView_Previews: PreviewProvider {
 	static var previews: some View {
-		let viewModelInstance = ProgramViewModel(
-			eventMocks: Mocks.events,
-			eventCategoriesMocks: [Mocks.eventCategory]
-		)
-		return DayView(
-			viewModel: viewModelInstance,
-			events: Mocks.events
-		)
+        let viewModelInstance = ProgramViewModel(
+            eventMocks: Mocks.events,
+            eventCategoriesMocks: [Mocks.eventCategory])
+        return DayView(
+            viewModel: viewModelInstance,
+            events: Mocks.events)
 	}
 }

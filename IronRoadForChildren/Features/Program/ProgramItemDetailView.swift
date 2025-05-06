@@ -10,27 +10,27 @@ import SwiftUI
 
 struct ProgramItemDetailView: View {
 	let event: Event
-	@ObservedObject var viewModel: ProgramViewModel
+    @ObservedObject var viewModel: ProgramViewModel
 
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 8) {
-				HStack {
-					Text(event.title)
-						.font(.title2)
-						.padding()
-
-					Spacer()
-
-					Button(action: {
-						viewModel.toggleFavorit(event: event)
-					}) {
-						Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
-							.foregroundColor(.red)
-					}
-					.padding()
-				}
-
+                HStack {
+                    Text(event.title)
+                        .font(.title2)
+                        .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        viewModel.toggleFavorit(event: event)
+                    }) {
+                        Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
+                            .foregroundColor(.red)
+                    }
+                    .padding()
+                }
+                
 				// eventTitle()
 
 				eventImage()
@@ -173,11 +173,11 @@ struct ProgramItemDetailView: View {
 
 struct ProgrammItemDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		let mockViewModel = ProgramViewModel(
-			eventMocks: [Mocks.event],
-			eventCategoriesMocks: [Mocks.eventCategory]
-		)
-		ProgramItemDetailView(event: Mocks.event, viewModel: mockViewModel)
+        let mockViewModel = ProgramViewModel(
+            eventMocks: [Mocks.event],
+            eventCategoriesMocks: [Mocks.eventCategory]
+        )
+        ProgramItemDetailView(event: Mocks.event, viewModel: mockViewModel)
 			.padding()
 	}
 }

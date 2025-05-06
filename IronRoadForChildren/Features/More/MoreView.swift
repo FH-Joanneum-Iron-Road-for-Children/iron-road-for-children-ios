@@ -5,6 +5,7 @@ import SwiftUI
 
 struct MoreView: View {
 	@Environment(\.openURL) var openURL
+    @State private var showPlaylist = false
 
 	var body: some View {
 		List {
@@ -51,6 +52,11 @@ struct MoreView: View {
 			.listRowSeparator(.hidden)
 
 			Section {
+                NavigationLink {
+                    PlaylistView()
+                } label: {
+                    Label("Playlist", systemImage: "music.note.list")
+                }
 				Link(destination: impressumURL) {
 					Label("Impressum", systemImage: "info.circle")
 				}

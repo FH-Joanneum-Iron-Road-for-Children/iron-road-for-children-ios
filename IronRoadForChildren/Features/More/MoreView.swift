@@ -52,11 +52,18 @@ struct MoreView: View {
 			.listRowSeparator(.hidden)
 
 			Section {
-                NavigationLink {
-                    PlaylistView()
-                } label: {
-                    Label("Playlist", systemImage: "music.note.list")
-                }
+        NavigationLink {
+            GalleryView()
+        } label: {
+            Label("Galerie", systemImage: "photo.on.rectangle.angled")
+        }
+
+        NavigationLink {
+            PlaylistView()
+        } label: {
+            Label("Playlist", systemImage: "music.note.list")
+        }
+        
 				Link(destination: impressumURL) {
 					Label("Impressum", systemImage: "info.circle")
 				}

@@ -35,7 +35,7 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY_GITHUB }}
 
       - name: Setup xcodegen and init xcode project
-        uses: xavierLowmiller/xcodegen-action@1.1.2
+        uses: xavierLowmiller/xcodegen-action@1.2.4
         with:
           spec: project.yml
           use-cache: true
@@ -75,7 +75,7 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY_GITHUB }}
 
       - name: Setup xcodegen and init xcode project
-        uses: xavierLowmiller/xcodegen-action@1.1.2
+        uses: xavierLowmiller/xcodegen-action@1.2.4
         with:
           spec: project.yml
           use-cache: true

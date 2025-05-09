@@ -66,46 +66,45 @@ class ProgramViewModel: ObservableObject {
 			}
 		}
 	}
+    
+  func isFavorite(_ event: Event) -> Bool {
+      return favoriteEventIDs.contains(event.id)
+  }
 
-	// Prüft, ob ein Event favorisiert ist
-	func isFavorite(_ event: Event) -> Bool {
-		// TODO:
-		return favoriteEventIDs.contains(event.id)
-	}
+  func toggleFavorit(event: Event) {
+      if favoriteEventIDs.contains(event.id) {
+          favoriteEventIDs.remove(event.id)
+          NotificationManager.shared.cancelNotification(for: event)
+      } else {
+          favoriteEventIDs.insert(event.id)
+          NotificationManager.shared.scheduleNotification(for: event)
+      }
+      saveFavoritesToUserDefaults()
+  }
 
-	// Setzt ein Event auf Favorit oder entfernt es daraus
-	func toggleFavorit(event: Event) {
-		if favoriteEventIDs.contains(event.id) {
-			favoriteEventIDs.remove(event.id)
-		} else {
-			favoriteEventIDs.insert(event.id)
-		}
-		saveFavoritesToUserDefaults()
-	}
+  // load favorites from UserDefaults
+  func loadFavoritesFromUserDefaults() {
+      let key = "favoriteEventIDs"
+      guard let data = UserDefaults.standard.data(forKey: key) else { return }
 
-	// lädt Favoriten aus UserDefaults
-	func loadFavoritesFromUserDefaults() {
-		let key = "favoriteEventIDs"
-		guard let data = UserDefaults.standard.data(forKey: key) else { return }
+      do {
+          let decoded = try JSONDecoder().decode(Set<Int>.self, from: data)
+          favoriteEventIDs = decoded
+      } catch {
+          print("Fehler beim decodieren der Favoriten: \(error)")
+      }
+  }
 
-		do {
-			let decoded = try JSONDecoder().decode(Set<Int>.self, from: data)
-			favoriteEventIDs = decoded
-		} catch {
-			print("Fehler beim decodieren der Favoriten: \(error)")
-		}
-	}
-
-	// speichert Favoriten in UserDefaults
-	func saveFavoritesToUserDefaults() {
-		let key = "favoriteEventIDs"
-		do {
-			let data = try JSONEncoder().encode(favoriteEventIDs)
-			UserDefaults.standard.set(data, forKey: key)
-		} catch {
-			print("Fehler beim Codieren der Favoriten: \(error)")
-		}
-	}
+  // save Favorites to FavoritesDefault
+  func saveFavoritesToUserDefaults() {
+      let key = "favoriteEventIDs"
+      do {
+          let data = try JSONEncoder().encode(favoriteEventIDs)
+          UserDefaults.standard.set(data, forKey: key)
+      } catch {
+          print("Fehler beim Codieren der Favoriten: \(error)")
+      }
+  }
 
 	@MainActor
 	private func fetchEvents() async throws {

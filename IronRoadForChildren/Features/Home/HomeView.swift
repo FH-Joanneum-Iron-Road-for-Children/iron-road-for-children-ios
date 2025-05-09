@@ -11,14 +11,9 @@ struct HomeView: View {
 	var body: some View {
 		VStack(spacing: 4) {
 			VideoPlayerView(
-				videoURL: URL(
-					string:
-					"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-				)!)
-
+				apiEndpoint: world.serverUrlWith(path: "/api/intro-video")
+			)
 			countdownView
-
-			// Main Banner Image with social media icons
 			ZStack {
 				Image("irfcHome")
 					.resizable()
@@ -62,8 +57,6 @@ struct HomeView: View {
 			.onTapGesture {
 				openURL(URL(string: "https://irfc.at")!)
 			}
-
-			websiteLinkView
 		}
 	}
 
@@ -124,38 +117,24 @@ struct HomeView: View {
 		}
 	}
 
-	private var websiteLinkView: some View {
-		ZStack {
-			Color(red: 0.9, green: 0.3, blue: 0.3) // Approximate red color from mockup
+	struct CountdownItem: View {
+		var value: Int
+		var label: String
 
-			Link(destination: URL(string: "https://irfc.at")!) {
-				Image(systemName: "house.fill")
-					.resizable()
-					.frame(width: 40, height: 40)
-					.foregroundColor(.white)
+		var body: some View {
+			VStack(spacing: 8) {
+				Text("\(value)")
+					.font(.system(size: 50, weight: .bold, design: .rounded))
+					.foregroundColor(.yellow)
+					.minimumScaleFactor(0.5)
+
+				Text(label)
+					.font(.system(size: 20, weight: .bold))
+					.foregroundColor(.yellow)
+					.minimumScaleFactor(0.7)
 			}
+			.frame(maxWidth: .infinity)
 		}
-		.frame(height: 60)
-	}
-}
-
-struct CountdownItem: View {
-	var value: Int
-	var label: String
-
-	var body: some View {
-		VStack(spacing: 8) {
-			Text("\(value)")
-				.font(.system(size: 50, weight: .bold, design: .rounded))
-				.foregroundColor(.yellow)
-				.minimumScaleFactor(0.5)
-
-			Text(label)
-				.font(.system(size: 20, weight: .bold))
-				.foregroundColor(.yellow)
-				.minimumScaleFactor(0.7)
-		}
-		.frame(maxWidth: .infinity)
 	}
 }
 

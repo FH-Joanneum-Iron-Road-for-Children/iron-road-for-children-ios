@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProgramItemDetailView: View {
 	let event: Event
-    @ObservedObject var viewModel: ProgramViewModel
+	@ObservedObject var viewModel: ProgramViewModel
 
 	var body: some View {
 		ScrollView {
@@ -170,11 +170,11 @@ struct ProgramItemDetailView: View {
 
 struct ProgrammItemDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-        let mockViewModel = ProgramViewModel(
-            eventMocks: [Mocks.event],
-            eventCategoriesMocks: [Mocks.eventCategory]
-        )
-        ProgramItemDetailView(event: Mocks.event, viewModel: mockViewModel)
+		let mockViewModel = ProgramViewModel(
+			eventMocks: [Mocks.event],
+			eventCategoriesMocks: [Mocks.eventCategory]
+		)
+		ProgramItemDetailView(event: Mocks.event, viewModel: mockViewModel)
 			.padding()
 	}
 }

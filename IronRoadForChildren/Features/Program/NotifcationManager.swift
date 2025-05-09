@@ -21,20 +21,19 @@ class NotificationManager {
     
     func scheduleNotification(for event: Event) {
         let startDate = event.startDateTimeInUTC
-        // let startDate = Date().addingTimeInterval(2 * 60) // for testing
         
-        let calculatedNotificationDate = Calendar.current.date(byAdding: .minute, value: -15, to: startDate) // 15 Minuten vor Start auslösen
+        let calculatedNotificationDate = Calendar.current.date(byAdding: .minute, value: -15, to: startDate) // 15 min before start
         
         let notificationDate: Date
         if let calcDate = calculatedNotificationDate, calcDate > Date() {
             notificationDate = calcDate
         } else {
-            notificationDate = Date().addingTimeInterval(1) // wenn < 15 min, sofort auslösen
+            notificationDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
         }
         
         let content = UNMutableNotificationContent()
         content.title = "Bald geht's los: \(event.title)"
-        content.body = "Dein favorisiertes Event \(event.title) startet bald. Ort: \(event.eventLocation)."
+        content.body = "Dein favorisiertes Event \(event.title) startet bald. Ort: \(event.eventLocation.name)."
         content.sound = .default
         
         let trigger: UNNotificationTrigger

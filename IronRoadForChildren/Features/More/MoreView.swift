@@ -18,7 +18,7 @@ struct MoreView: View {
 					Spacer()
 
 					Button(action: {
-						openURL(URL(string: "https://irfc.at/home/charity/")!)
+						openURL(URL(string: "https://irfc.at/#spenden")!)
 					}) {
 						HStack {
 							Image("donate")

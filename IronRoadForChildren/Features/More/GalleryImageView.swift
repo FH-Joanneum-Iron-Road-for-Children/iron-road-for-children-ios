@@ -1,6 +1,5 @@
 // Copyright © 2025 IRFC
 
-
 import SwiftUI
 
 struct GalleryImageView: View {
@@ -15,7 +14,7 @@ struct GalleryImageView: View {
 					.fill(Color.gray.opacity(0.1))
 					.aspectRatio(1.0, contentMode: .fill)
 					.cornerRadius(12)
-                
+
 				if !imageLoaded && !loadingError {
 					ProgressView()
 						.progressViewStyle(CircularProgressViewStyle())

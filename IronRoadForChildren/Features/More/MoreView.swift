@@ -46,10 +46,9 @@ struct MoreView: View {
 
 					Spacer()
 				}
-                
+
                 HStack {
-                    Divider()
-                        .padding(.horizontal)
+                    Spacer()
 
                     Text(donateText)
                             .font(.footnote)

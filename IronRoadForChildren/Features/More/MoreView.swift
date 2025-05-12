@@ -14,6 +14,22 @@ struct MoreView: View {
 			}
 
 			Section {
+                VStack(spacing: 20) {
+                        Image("LIDLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .accessibilityLabel("LID Logo")
+                        
+                        Image("SHSLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .accessibilityLabel("SHS Logo")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+                
 				HStack {
 					Spacer()
 
@@ -30,6 +46,17 @@ struct MoreView: View {
 
 					Spacer()
 				}
+
+                HStack {
+                    Spacer()
+
+                    Text(donateText)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+
+                    Spacer()
+                }
 
 				HStack {
 					Spacer()
@@ -64,9 +91,21 @@ struct MoreView: View {
             Label("Playlist", systemImage: "music.note.list")
         }
 
-				Link(destination: impressumURL) {
-					Label("Impressum", systemImage: "info.circle")
-				}
+        Link(destination: donateChildrenURL) {
+            Label("Spendenkinder", systemImage: "heart.circle")
+        }
+
+        Link(destination: onlineShopURL) {
+            Label("Online-Shop", systemImage: "cart")
+        }
+
+        Link(destination: raffleURL) {
+            Label("Verlosung", systemImage: "ticket")
+        }
+
+        Link(destination: impressumURL) {
+            Label("Impressum", systemImage: "info.circle")
+        }
 
 				Link(destination: dataPrivacyURL) {
 					Label("Datenschutz", systemImage: "shield")
@@ -102,24 +141,33 @@ struct MoreView: View {
 
 	private let impressumURL = URL(string: "https://irfc.at/kontakt/impressum/")!
 	private let dataPrivacyURL = URL(string: "https://irfc.at/kontakt/datenschutz/")!
+  private let donateChildrenURL = URL(string: "https://irfc.at/home/spendenkinderprojekte/")!
+  private let onlineShopURL = URL(string: "https://irfc.at/shop/")!
+  private let raffleURL = URL(string: "https://irfc.at/am-event/#verlosung")!
 
-    private let text =
-        "Die Iron Road for Children, kurz IRFC, ist Österreichs größtes " +
-        "markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.\n" +
-        "Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, " +
-        "stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", " +
-        "Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.\n" +
-        "Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live-Konzerten, einem Kinderbereich " +
-        "und einer Tattoo-Area wird den Besuchern auch eine große Aussteller- und Streetfood-Area " +
-        "geboten.\n" +
-        "In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC " +
-        "ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".\n" +
-        "Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher."
+  private let text =
+    "Die Iron Road for Children, kurz IRFC, ist Österreichs größtes " +
+    "markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.\n" +
+    "Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, " +
+    "stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", " +
+    "Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.\n" +
+    "Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live-Konzerten, einem Kinderbereich " +
+    "und einer Tattoo-Area wird den Besuchern auch eine große Aussteller- und Streetfood-Area " +
+    "geboten.\n" +
+    "In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC " +
+    "ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".\n" +
+    "Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher."
 
 	private let creatorText = """
 	Zur Verfügung gestellt vom FH JOANNEUM
 	 Studiengang Mobile Software Development.
 	"""
+
+    private let donateText = """
+    Alle IRFC-Spenden werden notariell geprüft und ohne Abzüge an die Spendenvereine weitergeleitet.
+    Dank unserer Sponsor-Partnern bleibt der Eintritt für unsere Besucher kostenlos.
+    Bitte unterstützt unsere IRFC-Spendenkinder!
+    """
 }
 
 struct MoreView_Previews: PreviewProvider {

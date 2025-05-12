@@ -41,15 +41,15 @@ struct ProgramItemDetailView: View {
             Text(event.title)
                 .font(.title2)
                 .padding()
-            
+
             Spacer()
-            
+
             Button(action: {
                 viewModel.toggleFavorit(event: event)
-            }) {
+            }, label: {
                 Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
                     .foregroundColor(.red)
-            }
+            })
             .padding()
         }
 	}

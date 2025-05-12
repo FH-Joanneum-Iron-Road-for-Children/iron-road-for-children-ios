@@ -32,7 +32,7 @@ struct ProgramListItemView: View {
 				}
 			}
 
-			// Titel und Location
+			// Titel and Location
 			VStack(alignment: .leading, spacing: 5) {
 				Text(event.title)
 					.font(.headline)
@@ -57,11 +57,10 @@ struct ProgramListItemView: View {
 						Spacer()
 						Button(action: {
 							viewModel.toggleFavorit(event: event)
-						}) {
+                        }, label: {
 							Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
 								.foregroundColor(.red)
-						}
-						// Minimaler Abstand zum Rand
+						})
 						.padding(.top, 8)
 						.padding(.trailing, 6)
 					}

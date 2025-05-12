@@ -31,7 +31,7 @@ extension World {
 		let weekday = calendar.component(.weekday, from: date)
 
 		let formatterWithLocale = DateFormatter()
-		formatterWithLocale.locale = Locale(identifier: "de_DE") // TODO: change when moving to localizable
+		formatterWithLocale.locale = Locale(identifier: "de_DE")
 		let weekdayName = formatterWithLocale.weekdaySymbols[weekday - 1]
 
 		return weekdayName

@@ -8,7 +8,7 @@ struct VideoPlayerView: View {
 	@State private var player: AVPlayer
 	@State private var isLoading = true
 	@State private var altText: String = ""
-	@State private var errorMessage: String? = nil
+	@State private var errorMessage: String?
 	private let apiEndpoint: URL
 
 	init(apiEndpoint: URL) {
@@ -37,6 +37,7 @@ struct VideoPlayerView: View {
 						player.pause()
 						isPlaying = false
 						// Remove observers
+                        // swiftlint:disable:next notification_center_detachment
 						NotificationCenter.default.removeObserver(self)
 					}
 
@@ -46,15 +47,15 @@ struct VideoPlayerView: View {
 				}
 				// Show the play button overlay when video is not playing and not loading
 				else if !isPlaying {
-					Button(action: {
-						player.play()
-						isPlaying = true
-					}) {
-						Image(systemName: "play.fill")
-							.resizable()
-							.frame(width: 50, height: 50)
-							.foregroundColor(.yellow)
-					}
+                    Button(action: {
+                        player.play()
+                        isPlaying = true
+                    }, label: {
+                        Image(systemName: "play.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.yellow)
+                    })
 				}
 			}
 		}
@@ -72,8 +73,7 @@ struct VideoPlayerView: View {
 
 				// Check HTTP status code
 				if let httpResponse = response as? HTTPURLResponse,
-				   !(200 ... 299).contains(httpResponse.statusCode)
-				{
+				   !(200 ... 299).contains(httpResponse.statusCode) {
 					throw NSError(domain: "HTTP Error", code: httpResponse.statusCode, userInfo: nil)
 				}
 

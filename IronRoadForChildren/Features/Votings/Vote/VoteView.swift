@@ -7,7 +7,7 @@ struct VoteView: View {
 	@EnvironmentObject private var votesViewModel: VotesViewModel
 	@StateObject private var viewModel: VoteViewModel
 
-	@State private var selectedEvent: Event? = nil
+	@State private var selectedEvent: Event?
 	@State private var presentConfirmation = false
 
 	init(voting: Voting) {
@@ -61,7 +61,7 @@ struct VoteView: View {
 	func voteButton() -> some View {
 		Button(action: {
 			presentConfirmation = true
-		}) {
+        }, label: {
 			if viewModel.isLoading {
 				ProgressView()
 					.padding(6)
@@ -69,7 +69,7 @@ struct VoteView: View {
 				Text("Stimme abgeben")
 					.padding(6)
 			}
-		}
+		})
 		.disabled(selectedEvent == nil || viewModel.isLoading)
 		.buttonStyle(IrfcYellowRoundedButton())
 		.padding()
@@ -114,8 +114,7 @@ struct VoteView: View {
 
 	func isChoosenEvent(_ event: Event?) -> Bool {
 		if let eventId = viewModel.votedFor?.eventId,
-		   event?.id == eventId
-		{
+		   event?.id == eventId {
 			return true
 		}
 

@@ -19,13 +19,13 @@ struct MoreView: View {
 
 					Button(action: {
 						openURL(URL(string: "https://irfc.at/#spenden")!)
-					}) {
+                    }, label: {
 						HStack {
 							Image("donate")
 								.imageScale(.medium)
 							Text("Spenden")
 						}
-					}
+					})
 					.buttonStyle(IrfcYellowRoundedButton())
 
 					Spacer()
@@ -36,13 +36,13 @@ struct MoreView: View {
 
 					Button(action: {
 						openURL(URL(string: "https://irfc.at/app/app-gewinnspiel/")!)
-					}) {
+                    }, label: {
 						HStack {
 							Image(systemName: "cube")
 								.imageScale(.medium)
 							Text("Zum Gewinnspiel")
 						}
-					}
+					})
 					.buttonStyle(IrfcWhiteRoundedButton())
 
 					Spacer()
@@ -63,7 +63,7 @@ struct MoreView: View {
         } label: {
             Label("Playlist", systemImage: "music.note.list")
         }
-        
+
 				Link(destination: impressumURL) {
 					Label("Impressum", systemImage: "info.circle")
 				}
@@ -103,13 +103,18 @@ struct MoreView: View {
 	private let impressumURL = URL(string: "https://irfc.at/kontakt/impressum/")!
 	private let dataPrivacyURL = URL(string: "https://irfc.at/kontakt/datenschutz/")!
 
-	private let text = """
-	Die Iron Road for Children, kurz IRFC, ist Österreichs größtes markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.
-	Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.
-	Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live Konzerten, einem Kinderbereich und einer Tattoo-Area wird den Besuchern auch eine große Austeller- und Streetfood-Area geboten.
-	In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".
-	Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher.
-	"""
+    private let text =
+        "Die Iron Road for Children, kurz IRFC, ist Österreichs größtes " +
+        "markenoffenes Festival-Weekend für Bikes, Vespas und US-Cars.\n" +
+        "Der Eintritt für das komplette Event-Weekend ist für Besucher kostenlos, " +
+        "stattdessen werden unter dem Motto \"Ein Herz für Kinder - Benzin im Blut\", " +
+        "Spendengelder für erkrankte Kinder aus ganz Österreich gesammelt.\n" +
+        "Neben Ausfahrten mit den Fahrzeugen, zahlreichen Live-Konzerten, einem Kinderbereich " +
+        "und einer Tattoo-Area wird den Besuchern auch eine große Aussteller- und Streetfood-Area " +
+        "geboten.\n" +
+        "In diesem Jahr wird das Programm auch um eine Custom Bike Area erweitert und die IRFC " +
+        "ist Host der \"Internationalen Österreichischen Custom Bike Staatsmeisterschaft\".\n" +
+        "Die IRFC ist ein Event für die ganze Familie und zählt mittlerweile über 40.000 Besucher."
 
 	private let creatorText = """
 	Zur Verfügung gestellt vom FH JOANNEUM

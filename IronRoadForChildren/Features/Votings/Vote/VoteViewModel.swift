@@ -5,9 +5,9 @@ import SwiftUI
 
 class VoteViewModel: ObservableObject {
 	@Published private(set) var voting: Voting
-	@Published private(set) var votedFor: VoteEvent? = nil
+	@Published private(set) var votedFor: VoteEvent?
 	@Published private(set) var isLoading: Bool = false
-	@Published private(set) var voteError: String? = nil
+	@Published private(set) var voteError: String?
 
 	private var votesViewModel: VotesViewModel?
 

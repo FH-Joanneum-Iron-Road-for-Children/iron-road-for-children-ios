@@ -1,6 +1,5 @@
 // Copyright © 2025 IRFC
 
-
 import SwiftUI
 
 struct GalleryImageView: View {
@@ -15,7 +14,7 @@ struct GalleryImageView: View {
 					.fill(Color.gray.opacity(0.1))
 					.aspectRatio(1.0, contentMode: .fill)
 					.cornerRadius(12)
-                
+
 				if !imageLoaded && !loadingError {
 					ProgressView()
 						.progressViewStyle(CircularProgressViewStyle())
@@ -74,7 +73,7 @@ struct GalleryImageView: View {
 struct AsyncImageView: View {
 	let url: URL
 	let onLoaded: (Bool) -> Void
-	@State private var image: UIImage? = nil
+	@State private var image: UIImage?
 
 	var body: some View {
 		Group {
@@ -92,8 +91,7 @@ struct AsyncImageView: View {
 
 	private func loadImage() {
 		if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: url))?.data,
-		   let cachedImage = UIImage(data: cachedData)
-		{
+		   let cachedImage = UIImage(data: cachedData) {
 			DispatchQueue.main.async {
 				self.image = cachedImage
 				onLoaded(true)

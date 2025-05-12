@@ -3,8 +3,6 @@
 import SwiftUI
 import WebKit
 
-
-
 struct SpotifyPlaylistWebView: UIViewRepresentable {
     let playlistID: String
 

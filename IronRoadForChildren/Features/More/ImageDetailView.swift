@@ -143,7 +143,7 @@ struct ZoomableImageView: View {
 struct AsyncZoomableImage: View {
 	let url: URL?
 	@Binding var isLoaded: Bool
-	@State private var image: UIImage? = nil
+	@State private var image: UIImage?
 
 	var body: some View {
 		Group {

@@ -5,9 +5,9 @@ import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
                 print("Notifications erlaubt")
@@ -15,17 +15,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 print("Fehler bei der Anfrage: \(error.localizedDescription)")
             }
         }
-        
         return true
     }
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.list, .banner, .badge, .sound])
     }
 }
-
 
 @main
 struct IronRoadForChildrenApp: App {
@@ -46,7 +43,7 @@ struct IronRoadForChildrenApp: App {
 		tabBar.tintColor = irfcYellow
 		tabBar.standardAppearance = tabBarAppearance
 		tabBar.scrollEdgeAppearance = tabBarAppearance
-        
+
         NotificationManager.shared.requestAuthorization()
 	}
 

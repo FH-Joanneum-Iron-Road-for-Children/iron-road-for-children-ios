@@ -14,20 +14,18 @@ class ProgramViewModel: ObservableObject {
 	@Published var eventDays: [EventDay] = []
 
 	@Published var eventCategories: [EventCategory] = []
-	@Published var filteredCategorie: EventCategory? = nil
+	@Published var filteredCategorie: EventCategory?
 
-	@Published var errorMessage: String? = nil
+	@Published var errorMessage: String?
 
 	@Published var favoriteEventIDs = Set<Int>()
 
 	init(eventMocks: [Event]? = nil,
-	     eventCategoriesMocks: [EventCategory]? = nil)
-	{
+	     eventCategoriesMocks: [EventCategory]? = nil) {
 		loadFavoritesFromUserDefaults()
 
 		if let eventMocks = eventMocks,
-		   let eventCategoriesMocks = eventCategoriesMocks
-		{
+		   let eventCategoriesMocks = eventCategoriesMocks {
 			allEvents = eventMocks
 			eventCategories = eventCategoriesMocks
 			isLoadingEvents = false
@@ -66,7 +64,7 @@ class ProgramViewModel: ObservableObject {
 			}
 		}
 	}
-    
+
   func isFavorite(_ event: Event) -> Bool {
       return favoriteEventIDs.contains(event.id)
   }

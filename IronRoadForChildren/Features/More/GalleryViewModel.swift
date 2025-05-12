@@ -7,8 +7,8 @@ import SwiftUI
 class GalleryViewModel: ObservableObject {
     @Published var items: [GalleryDTO] = []
     @Published var isLoading: Bool = false
-    @Published var selected: GalleryDTO? = nil
-    @Published var errorMessage: String? = nil
+    @Published var selected: GalleryDTO?
+    @Published var errorMessage: String?
 
     init() {
         let memoryCapacity = 10 * 1024 * 1024 // 10MB

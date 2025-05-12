@@ -21,8 +21,8 @@ struct Playlist: Codable, Identifiable {
 struct PlaylistView: View {
     @State private var playlistID: String = ""
     @State var playlist: [Playlist] = []
-    @State private var errorMessage: String? = nil
-    
+    @State private var errorMessage: String?
+
     var body: some View {
         VStack {
             SpotifyPlaylistWebView(playlistID: playlistID)
@@ -36,7 +36,7 @@ struct PlaylistView: View {
                 .navigationTitle("Playlist")
         }
     }
-    
+
     @MainActor
     private func loadPlaylistID() async {
         let url = world.serverUrlWith(path: "/api/playlist")

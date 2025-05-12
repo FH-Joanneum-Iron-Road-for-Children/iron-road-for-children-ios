@@ -106,15 +106,15 @@ struct HomeView: View {
 	}
 
 	private var mainBannerView: some View {
-		Button(action: {
-			openURL(URL(string: "https://irfc.at")!)
-		}) {
-			if let image = UIImage(named: "irfcHome") {
-				Image(uiImage: image)
-					.resizable()
-					.scaledToFit()
-			}
-		}
+        Button(action: {
+            openURL(URL(string: "https://irfc.at")!)
+        }, label: {
+            if let image = UIImage(named: "irfcHome") {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+            }
+        })
 	}
 
 	struct CountdownItem: View {

@@ -6,8 +6,8 @@ import SwiftUI
 
 struct ErrorRetryView: View {
 	var title: String = "Es ist ein Fehler aufgetreten."
-	var desc: String? = nil
-	var retry: (() -> Void)? = nil
+	var desc: String?
+	var retry: (() -> Void)?
 
 	var body: some View {
 		VStack {

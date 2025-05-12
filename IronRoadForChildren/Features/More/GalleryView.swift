@@ -4,7 +4,7 @@ struct GalleryView: View {
     @StateObject private var viewModel = GalleryViewModel()
     @State private var selectedImage: GalleryDTO?
     @State private var isDetailViewPresented = false
-    @State private var lastViewedID: Int? = nil
+    @State private var lastViewedID: Int?
 
     private let columns = [
         GridItem(.flexible(), spacing: 12),

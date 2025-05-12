@@ -5,9 +5,9 @@ import Foundation
 
 class NotificationManager {
     static let shared = NotificationManager()
-    
+
     private init() {}
-    
+
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
@@ -18,24 +18,24 @@ class NotificationManager {
             }
         }
     }
-    
+
     func scheduleNotification(for event: Event) {
         let startDate = event.startDateTimeInUTC
-        
+
         let calculatedNotificationDate = Calendar.current.date(byAdding: .minute, value: -15, to: startDate) // 15 min before start
-        
+
         let notificationDate: Date
         if let calcDate = calculatedNotificationDate, calcDate > Date() {
             notificationDate = calcDate
         } else {
             notificationDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
         }
-        
+
         let content = UNMutableNotificationContent()
         content.title = "Bald geht's los: \(event.title)"
         content.body = "Dein favorisiertes Event \(event.title) startet bald. Ort: \(event.eventLocation.name)."
         content.sound = .default
-        
+
         let trigger: UNNotificationTrigger
         if notificationDate > Date() {
             let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: notificationDate)
@@ -43,10 +43,10 @@ class NotificationManager {
         } else {
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         }
-        
+
         let identifier = "eventNotification_\(event.id)"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
+
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Fehler beim Planen der Notification: \(error.localizedDescription)")

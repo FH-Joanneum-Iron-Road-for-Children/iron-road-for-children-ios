@@ -35,23 +35,23 @@ struct ProgramItemDetailView: View {
 		}
 	}
 
-    @ViewBuilder
+	@ViewBuilder
 	func eventTitle() -> some View {
-        HStack {
-            Text(event.title)
-                .font(.title2)
-                .padding()
-            
-            Spacer()
-            
-            Button(action: {
-                viewModel.toggleFavorit(event: event)
-            }) {
-                Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
-                    .foregroundColor(.red)
-            }
-            .padding()
-        }
+		HStack {
+			Text(event.title)
+				.font(.title2)
+				.padding()
+
+			Spacer()
+
+			Button(action: {
+				viewModel.toggleFavorit(event: event)
+			}) {
+				Image(systemName: viewModel.isFavorite(event) ? "heart.fill" : "heart")
+					.foregroundColor(.red)
+			}
+			.padding()
+		}
 	}
 
 	@MainActor @ViewBuilder

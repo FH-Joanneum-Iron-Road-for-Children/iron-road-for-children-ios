@@ -62,12 +62,12 @@ struct MoreView: View {
 					Spacer()
 
 					Button(action: {
-						openURL(URL(string: "https://irfc.at/app/app-gewinnspiel/")!)
+						openURL(URL(string: "https://www.oebb.at/de/regionale-angebote/steiermark/freizeit-ticket-steiermark")!)
 					}) {
 						HStack {
-							Image(systemName: "cube")
+							Image(systemName: "lightbulb")
 								.imageScale(.medium)
-							Text("Zum Gewinnspiel")
+							Text("IRFC Tipp")
 						}
 					}
 					.buttonStyle(IrfcWhiteRoundedButton())

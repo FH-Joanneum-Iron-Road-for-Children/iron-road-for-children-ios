@@ -4,29 +4,49 @@ import Combine
 import Foundation
 
 class CountdownViewModel: ObservableObject {
-	@Published var days: Int = 9
-	@Published var hours: Int = 21
-	@Published var minutes: Int = 34
-	@Published var seconds: Int = 12
+	@Published var days: Int = 0
+	@Published var hours: Int = 0
+	@Published var minutes: Int = 0
+	@Published var seconds: Int = 0
 
-	private var cancellable: AnyCancellable?
+	private var timerCancellable: AnyCancellable?
+	private var fetchCancellable: AnyCancellable?
+	private var targetDate: Date?
 
 	init() {
 		// Target date - June 19, 2025
-		let targetDate = Calendar.current.date(from: DateComponents(year: 2025, month: 6, day: 19)) ?? Date()
-
-		// Update timer every second
-		cancellable = Timer.publish(every: 1, on: .main, in: .common)
-			.autoconnect()
-			.sink { [weak self] _ in
-				self?.updateCountdown(to: targetDate)
-			}
-
-		// Initial update
-		updateCountdown(to: targetDate)
+		fetchCountdown()
 	}
 
-	private func updateCountdown(to targetDate: Date) {
+	private func fetchCountdown() {
+		let url = world.serverUrlWith(path: "/api/countdowns")
+		fetchCancellable = URLSession.shared.dataTaskPublisher(for: url)
+			.map { $0.data }
+			.decode(type: [CountdownResponse].self, decoder: JSONDecoder())
+			.receive(on: DispatchQueue.main)
+			.sink(receiveCompletion: { _ in
+				// Handle error if needed
+			}, receiveValue: { [weak self] countdowns in
+				guard let self = self, let countdown = countdowns.first else { return }
+				// Convert milliseconds to seconds
+				let endDate = Date(timeIntervalSince1970: TimeInterval(countdown.endDateTimeInUTC / 1000))
+				self.targetDate = endDate
+				self.startTimer()
+			})
+	}
+
+	private func startTimer() {
+		timerCancellable?.cancel()
+		timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
+			.autoconnect()
+			.sink { [weak self] _ in
+				self?.updateCountdown()
+			}
+		updateCountdown()
+	}
+
+	private func updateCountdown() {
+		guard let targetDate = targetDate else { return }
 		let calendar = Calendar.current
 		let now = Date()
 
@@ -46,4 +66,9 @@ class CountdownViewModel: ObservableObject {
 		minutes = components.minute ?? 0
 		seconds = components.second ?? 0
 	}
+}
+
+private struct CountdownResponse: Decodable {
+	let countdownId: Int
+	let endDateTimeInUTC: Int64
 }

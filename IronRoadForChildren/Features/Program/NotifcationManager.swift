@@ -21,15 +21,15 @@ class NotificationManager {
 
 	func scheduleNotification(for event: Event) {
 		let startDate = event.startDateTimeInUTC
-        
-        guard startDate > Date() else {
-            return
-        }
+
+		guard startDate > Date() else {
+			return
+		}
 
 		let calculatedNotificationDate = Calendar.current.date(byAdding: .minute, value: -15, to: startDate) // 15 min before start
 
 		let notificationDate: Date
-        
+
 		if let calcDate = calculatedNotificationDate, calcDate > Date() {
 			notificationDate = calcDate
 		} else {

@@ -149,8 +149,8 @@ targetTemplates:
         #fi
     settings:
       base:
-        CURRENT_PROJECT_VERSION: 51
-        MARKETING_VERSION: 2.0.2
+        CURRENT_PROJECT_VERSION: 52
+        MARKETING_VERSION: 2.0.3
         IPHONEOS_DEPLOYMENT_TARGET: '15.0'
         INFOPLIST_FILE: IronRoadForChildren/SupportingFiles/Info.plist
         ENABLE_PREVIEWS: true

@@ -17,37 +17,41 @@ struct SocialMediaView: View {
     @Environment(\.openURL) var openURL
     
     init() {
-        fetchSocialMediaLinks()
     }
     
     private func fetchSocialMediaLinks() {
-        let url = world.serverUrlWith(path: "/api/socialMedias")
-        
-        fetchCancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: [SocialMedia].self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("Error fetching social media links: \(error)")
-                case .finished:
-                    break
-                }
-            }, receiveValue: { socialMedias in
-                // Extract Instagram and Facebook links
-                for socialMedia in socialMedias {
-                    switch socialMedia.title.lowercased() {
-                    case "instagram":
-                        self.instagramLink = socialMedia.link
-                    case "facebook":
-                        self.facebookLink = socialMedia.link
-                    default:
-                        break
-                    }
-                }
-            })
-    }
+         let url = world.serverUrlWith(path: "/api/socialMedias")
+         
+         fetchCancellable = URLSession.shared.dataTaskPublisher(for: url)
+             .map { $0.data }
+             .decode(type: [SocialMedia].self, decoder: JSONDecoder())
+             .receive(on: DispatchQueue.main)
+             .sink(receiveCompletion: { completion in
+                 switch completion {
+                 case .failure(let error):
+                     print("Error fetching social media links: \(error)")
+                 case .finished:
+                     break
+                 }
+             }, receiveValue: { socialMedias in
+                 print("Fetched social medias: \(socialMedias)")
+                 
+                 // Extract Instagram and Facebook links
+                 for socialMedia in socialMedias {
+                     print("Processing: \(socialMedia.title) - \(socialMedia.link)")
+                     
+                     switch socialMedia.title.lowercased() {
+                     case "instagram":
+                         self.instagramLink = socialMedia.link
+                     case "facebook":
+                         self.facebookLink = socialMedia.link
+                     default:
+                         print("Unknown social media type: \(socialMedia.title)")
+                         break
+                     }
+                 }
+             })
+     }
     
     var body: some View {
         ZStack {
@@ -92,6 +96,8 @@ struct SocialMediaView: View {
         }
         .onTapGesture {
             openURL(URL(string: "https://irfc.at")!)
+        }.onAppear{
+            fetchSocialMediaLinks()
         }
     }
 }

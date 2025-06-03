@@ -6,7 +6,7 @@ import SwiftUI
 
 struct HomeView: View {
 	@StateObject private var countdownViewModel = CountdownViewModel()
-	@Environment(\.openURL) var openURL
+	
 
 	var body: some View {
 		VStack(spacing: 4) {
@@ -14,49 +14,7 @@ struct HomeView: View {
 				apiEndpoint: world.serverUrlWith(path: "/api/intro-video")
 			)
 			countdownView
-			ZStack {
-				Image("irfcHome")
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-
-				// Social media icons overlaid on the banner
-				VStack {
-					Spacer()
-
-					HStack {
-						Link(
-							destination: URL(
-								string: "https://facebook.com/irfcat")!
-						) {
-							Image("facebook")
-								.resizable()
-								.frame(width: 30, height: 30)
-								.foregroundColor(.white)
-								.cornerRadius(5)
-						}
-						.padding(.leading, 15)
-
-						Spacer()
-
-						Link(
-							destination: URL(
-								string: "https://instagram.com/irfcat")!
-						) {
-							Image("insta")
-								.resizable()
-								.frame(width: 30, height: 30)
-								.foregroundColor(.white)
-								.background(Color.clear)
-								.cornerRadius(5)
-						}
-						.padding(.trailing, 15)
-					}
-					.padding(.bottom, 65)
-				}
-			}
-			.onTapGesture {
-				openURL(URL(string: "https://irfc.at")!)
-			}
+			SocialMediaView()
 		}
 	}
 
@@ -101,18 +59,6 @@ struct HomeView: View {
 						alignment: .center
 					)
 				}
-			}
-		}
-	}
-
-	private var mainBannerView: some View {
-		Button(action: {
-			openURL(URL(string: "https://irfc.at")!)
-		}) {
-			if let image = UIImage(named: "irfcHome") {
-				Image(uiImage: image)
-					.resizable()
-					.scaledToFit()
 			}
 		}
 	}

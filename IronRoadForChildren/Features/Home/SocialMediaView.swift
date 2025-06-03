@@ -3,7 +3,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-// Define the correct data model for your API response
+// Define correct data model for API response
 struct SocialMedia: Codable {
     let socialMediaId: Int
     let title: String
@@ -14,44 +14,45 @@ struct SocialMediaView: View {
     @State private var instagramLink: String?
     @State private var facebookLink: String?
     @State private var fetchCancellable: AnyCancellable?
+    @State private var isLoading = false
     @Environment(\.openURL) var openURL
     
-    init() {
-    }
-    
     private func fetchSocialMediaLinks() {
-         let url = world.serverUrlWith(path: "/api/socialMedias")
-         
-         fetchCancellable = URLSession.shared.dataTaskPublisher(for: url)
-             .map { $0.data }
-             .decode(type: [SocialMedia].self, decoder: JSONDecoder())
-             .receive(on: DispatchQueue.main)
-             .sink(receiveCompletion: { completion in
-                 switch completion {
-                 case .failure(let error):
-                     print("Error fetching social media links: \(error)")
-                 case .finished:
-                     break
-                 }
-             }, receiveValue: { socialMedias in
-                 print("Fetched social medias: \(socialMedias)")
-                 
-                 // Extract Instagram and Facebook links
-                 for socialMedia in socialMedias {
-                     print("Processing: \(socialMedia.title) - \(socialMedia.link)")
-                     
-                     switch socialMedia.title.lowercased() {
-                     case "instagram":
-                         self.instagramLink = socialMedia.link
-                     case "facebook":
-                         self.facebookLink = socialMedia.link
-                     default:
-                         print("Unknown social media type: \(socialMedia.title)")
-                         break
-                     }
-                 }
-             })
-     }
+        guard !isLoading else {
+            return
+        }
+        
+        isLoading = true
+        let url = world.serverUrlWith(path: "/api/socialMedias")
+        
+        fetchCancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: [SocialMedia].self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                self.isLoading = false
+                switch completion {
+                case .failure(let error):
+                    print("❌ SocialMediaView: Error fetching social media links from backend: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { socialMedias in
+                // Extract Instagram and Facebook links
+                for socialMedia in socialMedias {
+                    switch socialMedia.title.lowercased() {
+                    case "instagram":
+                        self.instagramLink = socialMedia.link
+                        print("✅ SocialMediaView: Using Instagram link from backend: \(socialMedia.link)")
+                    case "facebook":
+                        self.facebookLink = socialMedia.link
+                        print("✅ SocialMediaView: Using Facebook link from backend: \(socialMedia.link)")
+                    default:
+                        break
+                    }
+                }
+            })
+    }
     
     var body: some View {
         ZStack {
@@ -96,8 +97,12 @@ struct SocialMediaView: View {
         }
         .onTapGesture {
             openURL(URL(string: "https://irfc.at")!)
-        }.onAppear{
-            fetchSocialMediaLinks()
+        }
+        .onAppear {
+            // Only fetch if we don't already have the data and we're not already loading
+            if (instagramLink == nil || facebookLink == nil) && !isLoading {
+                fetchSocialMediaLinks()
+            }
         }
     }
 }

@@ -123,13 +123,13 @@ struct ProgramItemDetailView: View {
 		if let attributedString = event.eventInfo.infoText.attributedMarkdownString {
 			Text(attributedString)
 				.font(.body)
-				.lineLimit(4)
+				.lineLimit(20)
 				.padding(.horizontal)
 				.padding(.top)
 		} else {
 			Text(event.eventInfo.infoText)
 				.font(.body)
-				.lineLimit(4)
+				.lineLimit(20)
 				.padding(.horizontal)
 				.padding(.top)
 		}
